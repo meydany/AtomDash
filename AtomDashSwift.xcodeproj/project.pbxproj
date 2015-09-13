@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		0995A2781BA5C83F00E81D4A /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995A2771BA5C83F00E81D4A /* UILabelExtension.swift */; };
+=======
+>>>>>>> b75af6ca6311293b1ed51434b3db5290c1be9a6a
 		8641A9321BA4E9F6001B89EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9311BA4E9F6001B89EB /* AppDelegate.swift */; };
 		8641A9341BA4E9F6001B89EB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8641A9331BA4E9F6001B89EB /* GameScene.sks */; };
 		8641A9361BA4E9F6001B89EB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9351BA4E9F6001B89EB /* GameScene.swift */; };
@@ -32,7 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		0995A2771BA5C83F00E81D4A /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> b75af6ca6311293b1ed51434b3db5290c1be9a6a
 		8641A92C1BA4E9F6001B89EB /* AtomDashSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtomDashSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8641A9301BA4E9F6001B89EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8641A9311BA4E9F6001B89EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,11 +98,14 @@
 				8641A9351BA4E9F6001B89EB /* GameScene.swift */,
 				8641A9571BA4ED04001B89EB /* Player.swift */,
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
+<<<<<<< HEAD
 				0995A2771BA5C83F00E81D4A /* UILabelExtension.swift */,
+=======
+>>>>>>> b75af6ca6311293b1ed51434b3db5290c1be9a6a
 				8641A9551BA4EC69001B89EB /* SKNodeExtension.swift */,
+				8641A9371BA4E9F6001B89EB /* GameViewController.swift */,
 				8641A9311BA4E9F6001B89EB /* AppDelegate.swift */,
 				8641A9331BA4E9F6001B89EB /* GameScene.sks */,
-				8641A9371BA4E9F6001B89EB /* GameViewController.swift */,
 				8641A9391BA4E9F6001B89EB /* Main.storyboard */,
 				8641A93C1BA4E9F6001B89EB /* Images.xcassets */,
 				8641A93E1BA4E9F6001B89EB /* LaunchScreen.xib */,
@@ -236,7 +245,10 @@
 				8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */,
 				8641A9561BA4EC69001B89EB /* SKNodeExtension.swift in Sources */,
 				8641A9581BA4ED04001B89EB /* Player.swift in Sources */,
+<<<<<<< HEAD
 				0995A2781BA5C83F00E81D4A /* UILabelExtension.swift in Sources */,
+=======
+>>>>>>> b75af6ca6311293b1ed51434b3db5290c1be9a6a
 				8641A9321BA4E9F6001B89EB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

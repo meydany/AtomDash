@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemy: Enemy?
     
     override func didMoveToView(view: SKView) {
+        
         self.physicsWorld.contactDelegate = self
         
         self.scaleMode = .AspectFill
@@ -29,9 +30,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = Player()
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("addEnemy"), userInfo: nil, repeats: true)
+        
         self.addChild(player!)
 
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("addEnemy"), userInfo: nil, repeats: true)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

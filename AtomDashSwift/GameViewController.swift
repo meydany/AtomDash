@@ -25,6 +25,20 @@ extension SKNode {
     }
 }
 
+extension UILabel {
+    
+    func startCountdown(seconds: Int){
+        self.text = String(seconds)
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("countdown"), userInfo: nil, repeats: true)
+    }
+    
+    func countdown() {
+        if (self.text!.toInt()! > 0){
+            self.text = String(self.text!.toInt()!-1)
+        }
+    }
+}
+
 class GameViewController: UIViewController {
             
     var timeLabel: UILabel?
