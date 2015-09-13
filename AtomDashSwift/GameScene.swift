@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import Darwin
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -28,11 +29,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = Player()
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
-        enemy = Enemy(side: SpawnSide.Left)
-        enemy!.position = CGPoint(x: self.frame.midX * CGFloat(1.5), y: self.frame.midY)
-        
         self.addChild(player!)
-        self.addChild(enemy!)
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("addEnemy"), userInfo: nil, repeats: true)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -53,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             println("wall and player")
         case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
             println("player and enemy")
+            contact.bodyB.node?.removeFromParent()
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             println("player and target")
         default:
@@ -63,4 +62,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
+    func addEnemy(){
+        var spawnSide: SpawnSide
+        var moveAction: SKAction?
+        
+        enemy = Enemy(side: SpawnSide.Right)
+        
+        if (arc4random_uniform(2) == 1){
+            spawnSide = SpawnSide.Right
+            enemy!.position = CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
+            moveAction = SKAction.moveTo(CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
+        }
+        else{
+            spawnSide = SpawnSide.Left
+            enemy!.position = CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
+            moveAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
+        }
+        
+        enemy!.runAction(moveAction!)
+        self.addChild(enemy!)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
