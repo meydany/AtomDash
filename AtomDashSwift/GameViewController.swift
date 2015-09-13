@@ -25,8 +25,26 @@ extension SKNode {
     }
 }
 
-class GameViewController: UIViewController {
+extension UILabel {
     
+    func startCountdown(seconds: Int){
+        self.text = String(seconds)
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("countdown"), userInfo: nil, repeats: true)
+    }
+    
+    func countdown() {
+        if (self.text!.toInt()! > 0){
+            self.text = String(self.text!.toInt()!-1)
+        }
+    }
+}
+
+class GameViewController: UIViewController {
+<<<<<<< HEAD
+    
+=======
+            
+>>>>>>> 56013eb34488774d4597860074789f42cee234d1
     var timeLabel: UILabel?
     var scoreLabel: UILabel?
     
@@ -45,13 +63,18 @@ class GameViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             
+<<<<<<< HEAD
             // Creating the TimeLabel
+=======
+            // Creating a TimeLabel
+>>>>>>> 56013eb34488774d4597860074789f42cee234d1
             timeLabel = UILabel(frame: CGRectMake(0, 0, skView.frame.width/4, skView.frame.height/10))
             timeLabel!.textAlignment = NSTextAlignment.Center
             timeLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
             timeLabel!.textColor = UIColor.blackColor()
             self.view.addSubview(timeLabel!)
             timeLabel!.startCountdown(10)
+<<<<<<< HEAD
             
             // Creating the ScoreLabel
             scoreLabel = UILabel(frame: CGRectMake(100, 0, skView.frame.width/4, skView.frame.height/10))
@@ -61,9 +84,27 @@ class GameViewController: UIViewController {
             scoreLabel!.textColor = UIColor.blackColor()
             self.view.addSubview(scoreLabel!)
             
+=======
+            
+            // Creating a ScoreLabel
+            scoreLabel = UILabel(frame: CGRectMake(100, 0, skView.frame.width/4, skView.frame.height/10))
+            scoreLabel!.text = "0"
+            scoreLabel!.textAlignment = NSTextAlignment.Center
+            scoreLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+            scoreLabel!.textColor = UIColor.blackColor()
+            self.view.addSubview(scoreLabel!)
+>>>>>>> 56013eb34488774d4597860074789f42cee234d1
             
             skView.presentScene(scene)
         }
+    }
+    
+    func addScore(points: Int){
+       scoreLabel!.addScore(points)
+    }
+    
+    func removeScore(points: Int){
+        scoreLabel!.removeScore(points)
     }
 
     func addScore (points: Int){
