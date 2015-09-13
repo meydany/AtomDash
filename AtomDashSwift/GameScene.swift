@@ -64,18 +64,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addEnemy(){
-        var spawnSide: SpawnSide
         var moveAction: SKAction?
         
         enemy = Enemy(side: SpawnSide.Right)
         
         if (arc4random_uniform(2) == 1){
-            spawnSide = SpawnSide.Right
             enemy!.position = CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
             moveAction = SKAction.moveTo(CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
         }
         else{
-            spawnSide = SpawnSide.Left
             enemy!.position = CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
             moveAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
         }
