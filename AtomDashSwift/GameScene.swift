@@ -11,8 +11,8 @@ import Darwin
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var player: SKNode?
-    var enemy: SKNode?
+    var player: Player?
+    var enemy: Enemy?
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self

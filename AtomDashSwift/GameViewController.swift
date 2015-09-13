@@ -9,8 +9,6 @@
 import UIKit
 import SpriteKit
 
-
-
 extension SKNode {
     class func unarchiveFromFile(file : String) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
@@ -28,12 +26,13 @@ extension SKNode {
 }
 
 class GameViewController: UIViewController {
-    
-    @IBOutlet weak var timeLabel: TimeLabel!
+            
+    @IBOutlet weak var timeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        timeLabel.changeText()
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
             let skView = self.view as! SKView
@@ -45,11 +44,9 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
-                        
-            skView.presentScene(scene)
             
+            skView.presentScene(scene)
         }
-
     }
 
     override func shouldAutorotate() -> Bool {
