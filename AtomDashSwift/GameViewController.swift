@@ -26,8 +26,9 @@ extension SKNode {
 }
 
 class GameViewController: UIViewController {
-            
-    //@IBOutlet weak var timeLabel: UILabel!
+    
+    var timeLabel: UILabel?
+    var scoreLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,20 +45,35 @@ class GameViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             
-            var timeLabel: UILabel
+            // Creating the TimeLabel
             timeLabel = UILabel(frame: CGRectMake(0, 0, skView.frame.width/4, skView.frame.height/10))
+            timeLabel!.textAlignment = NSTextAlignment.Center
+            timeLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+            timeLabel!.textColor = UIColor.blackColor()
+            self.view.addSubview(timeLabel!)
+            timeLabel!.startCountdown(10)
             
-            //(frame: CGRectMake(0, 0, skView.frame.width/4, skView.frame.height/10))
-            timeLabel.textAlignment = NSTextAlignment.Center
-            timeLabel.font = UIFont(name: "HelveticaNeue", size: 50)
-            timeLabel.textColor = UIColor.blackColor()
-            self.view.addSubview(timeLabel)
-            timeLabel.startCountdown(10)
+            // Creating the ScoreLabel
+            scoreLabel = UILabel(frame: CGRectMake(100, 0, skView.frame.width/4, skView.frame.height/10))
+            scoreLabel!.text = "0"
+            scoreLabel!.textAlignment = NSTextAlignment.Center
+            scoreLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+            scoreLabel!.textColor = UIColor.blackColor()
+            self.view.addSubview(scoreLabel!)
+            
             
             skView.presentScene(scene)
         }
     }
 
+    func addScore (points: Int){
+        scoreLabel!.addScore(points)
+    }
+    
+    func removeScore (points: Int){
+        scoreLabel!.removeScore(points)
+    }
+    
     override func shouldAutorotate() -> Bool {
         return false
     }
