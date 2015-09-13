@@ -11,6 +11,7 @@ import UIKit
 
 extension UILabel {
     
+    // For TimerLabel
     func startCountdown(seconds: Int){
         self.text = String(seconds)
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("countdown"), userInfo: nil, repeats: true)
@@ -20,5 +21,14 @@ extension UILabel {
         if (self.text!.toInt()! > 0){
             self.text = String(self.text!.toInt()!-1)
         }
+    }
+    
+    // For ScoreLabel
+    func addScore(points: Int){
+        self.text = String(self.text!.toInt()! + points)
+    }
+    
+    func removeScore(points: Int){
+        self.text = String(self.text!.toInt()! - points)
     }
 }
