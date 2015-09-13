@@ -15,6 +15,8 @@ class Player : SKShapeNode {
         
         super.init()
         
+        self.name = "Player"
+        
         var mutablePath: CGMutablePathRef = CGPathCreateMutable()
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath

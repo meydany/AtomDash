@@ -50,15 +50,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         switch contactMask {
-        case ColliderObject.wallCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            println("wall and player")
-        case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            println("player and enemy")
-            contact.bodyB.node?.removeFromParent()
-        case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            println("player and target")
-        default:
-            println("default collision")
+            
+            case ColliderObject.wallCollider.rawValue | ColliderObject.playerCollider.rawValue:
+                println("wall and player")
+            
+            case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
+                println("player and enemy")
+                if(contact.bodyA.node!.name == "Enemy"){
+                    contact.bodyA.node!.removeFromParent()
+                }else if(contact.bodyB.node!.name == "Enemy") { //This is an else-if just in case there's another node present
+                    contact.bodyB.node!.removeFromParent()
+                }
+            
+            case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
+                println("player and target")
+            
+            default:
+                println("default collision")
         }
     }
    

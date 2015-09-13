@@ -22,6 +22,8 @@ class Enemy: SKShapeNode {
         
         super.init()
         
+        self.name = "Enemy"
+        
         self.side = side
         
         var mutablePath: CGMutablePathRef = CGPathCreateMutable()
