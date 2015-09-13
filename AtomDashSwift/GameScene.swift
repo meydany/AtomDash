@@ -67,7 +67,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addEnemy(){
-        println("gameOver is \(gameOver)")
         var moveAction: SKAction?
         
         enemy = Enemy(side: SpawnSide.Right)

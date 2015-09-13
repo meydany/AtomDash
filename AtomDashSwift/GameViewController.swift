@@ -66,7 +66,7 @@ class GameViewController: UIViewController {
             timeLabel.font = UIFont(name: "HelveticaNeue", size: 50)
             timeLabel.textColor = UIColor.blackColor()
             self.view.addSubview(timeLabel)
-            timeLabel.startCountdown(3)
+            timeLabel.startCountdown(10)
             
             skView.presentScene(scene)
         }
