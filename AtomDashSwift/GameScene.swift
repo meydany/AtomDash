@@ -28,6 +28,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = Player()
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
+        enemy = Enemy(side: SpawnSide.Left)
+        enemy!.position = CGPoint(x: self.frame.midX * CGFloat(1.5), y: self.frame.midY)
+        
         self.addChild(player!)
         self.addChild(enemy!)
     }

@@ -33,7 +33,7 @@ class Enemy: SKShapeNode {
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
         self.physicsBody!.affectedByGravity = false
         self.physicsBody!.usesPreciseCollisionDetection = false
-        self.physicsBody!.dynamic = true
+        self.physicsBody!.dynamic = false
         
         self.physicsBody!.categoryBitMask = ColliderObject.enemyCollider.rawValue
         self.physicsBody!.contactTestBitMask = ColliderObject.playerCollider.rawValue
