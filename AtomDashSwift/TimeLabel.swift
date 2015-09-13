@@ -22,13 +22,14 @@ class TimeLabel: UILabel {
     }
     
     func startCountdown(seconds: Int){
-        self.text = "2"
-        //self.time = seconds
-        //updateLabel()
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateLabel"), userInfo: nil, repeats: true)
+        self.time = seconds
+        updateLabel()
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateLabel"), userInfo: nil, repeats: true)
+
     }
     
     func updateLabel(){
-        self.text = String(self.time!--)
+        self.text = String("Hello")
+        println("Updating time") //for testing purposes
     }
 }
