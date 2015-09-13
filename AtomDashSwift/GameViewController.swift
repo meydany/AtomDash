@@ -25,6 +25,20 @@ extension SKNode {
     }
 }
 
+extension UILabel {
+    
+    func startCountdown(seconds: Int){
+        self.text = String(seconds)
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("countdown"), userInfo: nil, repeats: true)
+    }
+    
+    func countdown() {
+        if (self.text!.toInt()! > 0){
+            self.text = String(self.text!.toInt()!-1)
+        }
+    }
+}
+
 class GameViewController: UIViewController {
             
     //@IBOutlet weak var timeLabel: UILabel!
@@ -52,7 +66,7 @@ class GameViewController: UIViewController {
             timeLabel.font = UIFont(name: "HelveticaNeue", size: 50)
             timeLabel.textColor = UIColor.blackColor()
             self.view.addSubview(timeLabel)
-            timeLabel.startCountdown(10)
+            timeLabel.startCountdown(3)
             
             skView.presentScene(scene)
         }
