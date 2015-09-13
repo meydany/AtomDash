@@ -14,8 +14,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player: SKNode?
     var enemy: SKNode?
     
-    var timeLabel: TimeLabel?
-    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -30,9 +28,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player = Player()
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-        
-        timeLabel = TimeLabel(frame: self.frame)
-        timeLabel!.startCountdown(10)
         
         self.addChild(player!)
 
