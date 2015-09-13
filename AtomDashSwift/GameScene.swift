@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
-        self.backgroundColor = UIColor(red: 0.44, green: 0.44, blue: 0.44, alpha: 1)
+        self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: view.frame)
         self.physicsBody!.categoryBitMask = ColliderObject.wallCollider.rawValue

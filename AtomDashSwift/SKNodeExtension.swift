@@ -34,7 +34,7 @@ extension SKNode {
             self.physicsBody?.velocity = CGVector(dx: xDifference, dy: yDifference)
         }else {
             var newPos = position
-            var directMoveAction = SKAction.moveTo(newPos, duration: NSTimeInterval.abs(0.5))
+            var directMoveAction = SKAction.moveTo(newPos, duration: NSTimeInterval(0.7))
             
             self.runAction(directMoveAction)
         }
