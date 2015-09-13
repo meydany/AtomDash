@@ -27,12 +27,11 @@ extension SKNode {
 
 class GameViewController: UIViewController {
             
-    @IBOutlet weak var timeLabel: UILabel!
+    //@IBOutlet weak var timeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        timeLabel.changeText()
+        
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
             let skView = self.view as! SKView
@@ -44,6 +43,16 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
+            
+            var timeLabel: UILabel
+            timeLabel = UILabel(frame: CGRectMake(0, 0, skView.frame.width/4, skView.frame.height/10))
+            
+            //(frame: CGRectMake(0, 0, skView.frame.width/4, skView.frame.height/10))
+            timeLabel.textAlignment = NSTextAlignment.Center
+            timeLabel.font = UIFont(name: "HelveticaNeue", size: 50)
+            timeLabel.textColor = UIColor.blackColor()
+            self.view.addSubview(timeLabel)
+            timeLabel.startCountdown(10)
             
             skView.presentScene(scene)
         }
