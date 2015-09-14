@@ -13,6 +13,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player: Player?
     var enemy: Enemy?
+    var target: Target?
+    
+    var gameViewControllerObject: GameViewController?
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -29,7 +32,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = Player()
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
+        target = Target()
+        target!.position = getRandomPosition(self.frame)
+        
         self.addChild(player!)
+        self.addChild(target!)
 
         NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("addEnemy"), userInfo: nil, repeats: true)
     }
@@ -47,16 +54,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-        switch contactMask {
-        case ColliderObject.wallCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            println("wall and player")
-        case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            println("player and enemy")
-            contact.bodyB.node?.removeFromParent()
-        case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            println("player and target")
-        default:
-            println("default collision")
+        if(contactMask == (ColliderObject.playerCollider.rawValue | ColliderObject.enemyCollider.rawValue)) {
+            if(contact.bodyA.node!.name == "Enemy") {
+                contact.bodyA.node!.removeFromParent()
+                gameViewControllerObject!.addScore(-1)
+            }else if(contact.bodyB.node!.name == "Enemy") {
+                contact.bodyB.node?.removeFromParent()
+                gameViewControllerObject!.addScore(-1)
+            }
+        }
+        if(contactMask == (ColliderObject.playerCollider.rawValue | ColliderObject.targetCollider.rawValue)) {
+            createNewTarget()
         }
     }
    
@@ -80,6 +88,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         enemy!.runAction(moveAction!)
         self.addChild(enemy!)
+    }
+    
+    func createNewTarget() {
+        target!.moveToRandomPosition(self.frame)
+        gameViewControllerObject!.addScore(1)
     }
 }
 

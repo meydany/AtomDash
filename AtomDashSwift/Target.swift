@@ -1,43 +1,35 @@
 //
-//  Enemy.swift
+//  Target.swift
 //  AtomDashSwift
 //
-//  Created by Yoli Meydan on 9/12/15.
+//  Created by Yoli Meydan on 9/14/15.
 //  Copyright (c) 2015 MilkyShakeMobile. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-enum SpawnSide {
-    case Left
-    case Right
-}
 
-class Enemy: SKShapeNode {
+class Target: SKShapeNode {
     
-    var side: SpawnSide?
-    
-    init(side: SpawnSide) {
+    override init() {
         
         super.init()
         
-        self.name = "Enemy"
-        
-        self.side = side
+        self.name = "Target"
         
         var mutablePath: CGMutablePathRef = CGPathCreateMutable()
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
         self.lineWidth = 8;
-        self.strokeColor = UIColor.redColor()
+        self.strokeColor = UIColor.yellowColor()
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
         self.physicsBody!.affectedByGravity = false
         self.physicsBody!.usesPreciseCollisionDetection = true
         self.physicsBody!.dynamic = false
         
-        self.physicsBody!.categoryBitMask = ColliderObject.enemyCollider.rawValue
+        self.physicsBody!.categoryBitMask = ColliderObject.targetCollider.rawValue
         self.physicsBody!.contactTestBitMask = ColliderObject.playerCollider.rawValue
         //No need for collisionBitMask, we don't want the nodes to actually collide!
     }

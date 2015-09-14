@@ -15,16 +15,17 @@ class Player : SKShapeNode {
         
         super.init()
         
+        self.name = "Player"
+        
         var mutablePath: CGMutablePathRef = CGPathCreateMutable()
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
         self.lineWidth = 8;
-        self.strokeColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1)
-
+        self.strokeColor = UIColor.blackColor()
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
         self.physicsBody!.affectedByGravity = false
-        self.physicsBody!.usesPreciseCollisionDetection = false
+        self.physicsBody!.usesPreciseCollisionDetection = true
         self.physicsBody!.dynamic = true
         
         self.physicsBody!.categoryBitMask = ColliderObject.playerCollider.rawValue

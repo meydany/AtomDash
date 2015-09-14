@@ -34,6 +34,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
+            scene.gameViewControllerObject = self //lets GameScene create an object of this class
+            
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
@@ -54,13 +56,12 @@ class GameViewController: UIViewController {
             timeLabel!.startCountdown(10)
             
             // Creating the ScoreLabel
-            scoreLabel = UILabel(frame: CGRectMake(100, 0, skView.frame.width/4, skView.frame.height/10))
+            scoreLabel = UILabel(frame: CGRectMake(0, 0, skView.frame.width * 2 - (skView.frame.width/4), skView.frame.height/10))
             scoreLabel!.text = "0"
             scoreLabel!.textAlignment = NSTextAlignment.Center
             scoreLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
             scoreLabel!.textColor = UIColor.blackColor()
             self.view.addSubview(scoreLabel!)
-            
             
             skView.presentScene(scene)
         }
