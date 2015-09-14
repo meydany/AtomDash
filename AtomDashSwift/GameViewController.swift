@@ -53,7 +53,7 @@ class GameViewController: UIViewController {
             timeLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
             timeLabel!.textColor = UIColor.blackColor()
             self.view.addSubview(timeLabel!)
-            timeLabel!.startCountdown(10)
+            timeLabel!.startCountdown(20)
             
             // Creating the ScoreLabel
             scoreLabel = UILabel(frame: CGRectMake(0, 0, skView.frame.width * 2 - (skView.frame.width/4), skView.frame.height/10))

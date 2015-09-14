@@ -66,8 +66,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node!.removeFromParent()
             gameViewControllerObject!.removeScore(1)
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            contact.bodyB.node!.removeFromParent()
-            createNewTarget()
+            contact.bodyB.node!.position = CGPointMake(getRandomPosition(self.frame).x, getRandomPosition(self.frame).y)
+            contact.bodyB.node!.physicsBody = contact.bodyB.node!.physicsBody
         default:
             println("Default collision")
         }
@@ -96,12 +96,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createNewTarget() {
-        target = Target()
-        target!.moveToRandomPosition(self.frame)
+        target!.moveToPosition(SKNode().getRandomPosition(self.frame), moveType: MoveType.Direct)
         
-        gameViewControllerObject!.addScore(1)
-        
-        self.addChild(target!)
     }
 }
 
