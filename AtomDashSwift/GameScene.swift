@@ -22,6 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemy: Enemy?
     var target: Target?
     
+    var newTarget: Bool?
+    
     var gameViewControllerObject: GameViewController?
     
     override func didMoveToView(view: SKView) {
@@ -41,6 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         target = Target()
         target!.moveToRandomPosition(self.frame)
+        
+        newTarget = false
         
         self.addChild(player!)
         self.addChild(target!)
@@ -66,15 +70,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node!.removeFromParent()
             gameViewControllerObject!.removeScore(1)
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            contact.bodyB.node!.position = CGPointMake(getRandomPosition(self.frame).x, getRandomPosition(self.frame).y)
-            contact.bodyB.node!.physicsBody = contact.bodyB.node!.physicsBody
+            newTarget = true
         default:
             println("Default collision")
         }
     }
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        if(newTarget!) {
+            createNewTarget()
+            gameViewControllerObject!.addScore(1)
+            
+            newTarget = false
+        }
     }
     
     func addEnemy(){
@@ -96,8 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createNewTarget() {
-        target!.moveToPosition(SKNode().getRandomPosition(self.frame), moveType: MoveType.Direct)
-        
+        target!.moveToRandomPosition(self.frame)
     }
 }
 
