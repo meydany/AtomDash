@@ -1,17 +1,21 @@
 //
-//  TimeText.swift
+//  ScoreLabel.swift
 //  AtomDashSwift
 //
-//  Created by Oran Luzon on 9/13/15.
+//  Created by Oran Luzon on 9/14/15.
 //  Copyright (c) 2015 MilkyShakeMobile. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-extension UILabel {
+class TimeLabel: UILabel{
     
-    // For TimerLabel
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    //class func
     func startCountdown(seconds: Int){
         self.text = String(seconds)
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("countdown"), userInfo: nil, repeats: true)
@@ -21,14 +25,12 @@ extension UILabel {
         if (self.text!.toInt()! > 0){
             self.text = String(self.text!.toInt()!-1)
         }
+        else{
+            println("Time's up")
+        }
     }
     
-    // For ScoreLabel
-    func addScore(points: Int){
-        self.text = String(self.text!.toInt()! + points)
-    }
-    
-    func removeScore(points: Int){
-        self.text = String(self.text!.toInt()! - points)
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
