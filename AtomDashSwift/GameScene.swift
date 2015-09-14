@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         target = Target()
-        target!.position = getRandomPosition(self.frame)
+        target!.moveToRandomPosition(view.frame)
         
         self.addChild(player!)
         self.addChild(target!)
@@ -91,7 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createNewTarget() {
-        target!.moveToRandomPosition(self.frame)
+        target!.moveToRandomPosition(view!.frame)
         gameViewControllerObject!.addScore(1)
     }
 }
