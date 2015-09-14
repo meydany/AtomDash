@@ -99,6 +99,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         target = Target()
         target!.moveToRandomPosition(self.frame)
         
+        gameViewControllerObject!.addScore(1)
+        
         self.addChild(target!)
     }
 }
