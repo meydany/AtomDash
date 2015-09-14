@@ -9,6 +9,13 @@
 import SpriteKit
 import Darwin
 
+enum ColliderObject: UInt32 {
+    case wallCollider = 1
+    case playerCollider = 2
+    case targetCollider = 4
+    case enemyCollider = 8
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player: Player?
@@ -33,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         target = Target()
-        target!.moveToRandomPosition(view.frame)
+        target!.moveToRandomPosition(self.frame)
         
         self.addChild(player!)
         self.addChild(target!)
@@ -54,17 +61,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-        if(contactMask == (ColliderObject.playerCollider.rawValue | ColliderObject.enemyCollider.rawValue)) {
-            if(contact.bodyA.node!.name == "Enemy") {
-                contact.bodyA.node!.removeFromParent()
-                gameViewControllerObject!.addScore(-1)
-            }else if(contact.bodyB.node!.name == "Enemy") {
-                contact.bodyB.node?.removeFromParent()
-                gameViewControllerObject!.addScore(-1)
-            }
-        }
-        if(contactMask == (ColliderObject.playerCollider.rawValue | ColliderObject.targetCollider.rawValue)) {
+        switch contactMask {
+        case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
+            contact.bodyB.node!.removeFromParent()
+            gameViewControllerObject!.removeScore(1)
+        case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
+            contact.bodyB.node!.removeFromParent()
             createNewTarget()
+        default:
+            println("Default collision")
         }
     }
    
@@ -91,8 +96,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createNewTarget() {
-        target!.moveToRandomPosition(view!.frame)
-        gameViewControllerObject!.addScore(1)
+        target = Target()
+        target!.moveToRandomPosition(self.frame)
+        
+        self.addChild(target!)
     }
 }
 

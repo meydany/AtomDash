@@ -11,13 +11,6 @@ import SpriteKit
 
 extension SKNode {
     
-    enum ColliderObject: UInt32 {
-        case wallCollider = 1
-        case playerCollider = 2
-        case targetCollider = 4
-        case enemyCollider = 6
-    }
-    
     enum MoveType {
         case Smooth
         case Direct
