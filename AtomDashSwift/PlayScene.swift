@@ -58,24 +58,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         // Creating the TimeLabel
         timeLabel = TimeLabel()
-        timeLabel!.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        timeLabel!.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         timeLabel!.position = CGPoint(x: labelBuffer, y: self.frame.maxY - labelBuffer)
-        timeLabel!.fontName = "HelveticaNeue-light"
-        timeLabel!.fontSize = 50
-        timeLabel!.fontColor = UIColor.blackColor()
-        timeLabel!.startCountdown(30)
+        timeLabel!.startCountdown(5)
         
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
-        scoreLabel!.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
-        scoreLabel!.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         scoreLabel!.position = CGPoint(x: self.frame.maxX - labelBuffer, y: self.frame.maxY - labelBuffer)
-        scoreLabel!.text = "0"
-        scoreLabel!.fontName =  "HelveticaNeue-light"
-        scoreLabel!.fontSize = 50
-        scoreLabel!.fontColor = UIColor.blackColor()
-        
+
         self.addChild(player!)
         self.addChild(target!)
         self.addChild(timeLabel!)
@@ -115,7 +104,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (timeLabel!.isTimeUp){
-            //gameViewControllerObject?.presentGameOverViewController()
+            var gameOverScene = GameOverScene(score: scoreLabel!.text, size: self.scene!.size)
+            self.scene!.view?.presentScene(gameOverScene)
         }
     }
     

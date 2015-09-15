@@ -13,6 +13,21 @@ class TimeLabel: SKLabelNode{
     
     var isTimeUp: Bool = false
     
+    override init() {
+        super.init()
+        
+        self.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        self.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
+        self.fontName = "HelveticaNeue-light"
+        self.fontSize = 50
+        self.fontColor = UIColor.blackColor()
+        
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //class func
     func startCountdown(seconds: Int){
         isTimeUp = false
