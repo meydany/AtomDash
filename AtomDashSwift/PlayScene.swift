@@ -29,6 +29,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var timer: NSTimer?
     
+    var pauseButton: SKNode?
+    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -50,6 +52,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         target!.moveToRandomPosition(self.frame)
         newTarget = false
         
+        // Creating enemies
         runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.5),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
@@ -64,6 +67,16 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = ScoreLabel()
         scoreLabel!.position = CGPoint(x: self.frame.maxX - labelBuffer, y: self.frame.maxY - labelBuffer)
 
+        // Creating a pause button
+        pauseButton = SKSpriteNode(imageNamed: "PauseButton")
+        pauseButton?.xScale = 0.1
+        pauseButton?.yScale = 0.1
+        pauseButton?.position.x = self.frame.minX + (pauseButton!.frame.width/2)
+        pauseButton?.position.y = self.frame.minY + (pauseButton!.frame.height/2)
+        pauseButton?.name = "PauseButton"
+        pauseButton?.userInteractionEnabled = false
+        
+        self.addChild(pauseButton!)
         self.addChild(player!)
         self.addChild(target!)
         self.addChild(timeLabel!)
@@ -76,7 +89,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         for touch in (touches as! Set<UITouch>) {
             let location = touch.locationInNode(self)
 
-            player!.moveToPosition(location, moveType: MoveType.Smooth)
+            player!.moveToPosition(location, moveType: MoveType.Direct)
+            
+            if (self.nodeAtPoint(location).name == "PauseButton"){
+                scene!.paused = !scene!.paused
+            }
             //scene!.paused = !scene!.paused
         }
     }

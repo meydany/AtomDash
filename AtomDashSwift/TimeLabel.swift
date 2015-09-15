@@ -41,7 +41,7 @@ class TimeLabel: SKLabelNode{
             self.text = String(self.text.toInt()!-1)
             
             redValue = redValue! + CGFloat(1.0/CGFloat(self.text.toInt()!))
-            println(redValue)
+            //println(redValue)
             
             self.fontColor = UIColor(red: redValue!, green: 0, blue: 0, alpha: 1)
         }
