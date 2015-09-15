@@ -32,7 +32,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var pauseButton: SKNode?
     var pauseMenu: SKShapeNode?
     
-    var blurEffect: UIVisualEffectView?
+    var blurNode: SKEffectNode?
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -69,7 +69,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
         scoreLabel!.position = CGPoint(x: self.frame.maxX - labelBuffer, y: self.frame.maxY - labelBuffer)
-
+        
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
         pauseButton?.xScale = 0.1
@@ -103,18 +103,15 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             
             if (self.nodeAtPoint(location).name == "PauseButton"){
                 if(!scene!.paused) {
+                    blurScene()
+                    
                     scene!.paused = true
-                    
-                    blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
-                    blurEffect!.frame = self.view!.bounds
-                    
-                    scene!.view?.addSubview(blurEffect!)
-                    scene!.addChild(pauseMenu!)
-
+                    self.addChild(pauseMenu!)
                 }else {
+                    removeBlur()
+                    
                     scene!.paused = false
                     pauseMenu!.removeFromParent()
-                    blurEffect!.removeFromSuperview()
                 }
             }
             //scene!.paused = !scene!.paused
@@ -174,6 +171,34 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         target!.moveToRandomPosition(self.frame)
         
         self.addChild(target!)
+    }
+    
+    func blurScene() {
+        blurNode = SKEffectNode()
+        let blur = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 15.0])
+        blurNode!.filter = blur
+        self.shouldEnableEffects = true
+        
+        for node in self.children {
+            node.removeFromParent()
+            blurNode!.addChild(node as! SKNode)
+        }
+        self.addChild(blurNode!)
+    }
+    
+    func removeBlur() {
+        var blurredNodes = [SKNode]()
+        
+        for node in blurNode!.children {
+            blurredNodes.append(node as! SKNode)
+            node.removeFromParent()
+        }
+        
+        for node in blurredNodes {
+            self.addChild(node as SKNode)
+        }
+        self.shouldEnableEffects = false
+        blurNode!.removeFromParent()
     }
 }
 
