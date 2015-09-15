@@ -11,7 +11,7 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    var scene: PlayScene?
+    var playScene: PlayScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +23,17 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.multipleTouchEnabled = false
         
-        scene = PlayScene(size: skView.bounds.size)
-        scene!.gameViewControllerObject = self //lets GameScene create an object of this class
+        playScene = PlayScene(size: skView.bounds.size)
+        playScene!.gameViewControllerObject = self //lets GameScene create an object of this class
         
         /* Set the scale mode to scale to fit the window */
-        scene!.scaleMode = .AspectFill
+        playScene!.scaleMode = .AspectFill
         
-        skView.presentScene(scene)
+        skView.presentScene(playScene)
+    }
+    
+    func presentPlayScene(){
+        
     }
     
     override func shouldAutorotate() -> Bool {
