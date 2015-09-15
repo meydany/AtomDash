@@ -7,15 +7,11 @@
 //
 
 import Foundation
-import UIKit
+import SpriteKit
 
-class TimeLabel: UILabel{
+class TimeLabel: SKLabelNode{
     
     var isTimeUp: Bool = false
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
     
     //class func
     func startCountdown(seconds: Int){
@@ -25,15 +21,11 @@ class TimeLabel: UILabel{
     }
     
     func countdown() {
-        if (self.text!.toInt()! > 0){
-            self.text = String(self.text!.toInt()!-1)
+        if (self.text.toInt()! > 0){
+            self.text = String(self.text.toInt()!-1)
         }
         else {
             isTimeUp = true
         }
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

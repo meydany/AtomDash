@@ -9,74 +9,27 @@
 import UIKit
 import SpriteKit
 
-extension SKNode {
-    class func unarchiveFromFile(file : String) -> SKNode? {
-        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
-            
-            archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! GameScene
-            archiver.finishDecoding()
-            return scene
-        } else {
-            return nil
-        }
-    }
-}
-
 class GameViewController: UIViewController {
     
-    var timeLabel: TimeLabel?
-    var scoreLabel: ScoreLabel?
+    var scene: PlayScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
-            scene.gameViewControllerObject = self //lets GameScene create an object of this class
-            
-            // Configure the view.
-            let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            
-            // Creating the TimeLabel
-            timeLabel = TimeLabel(frame: CGRectMake(0, 0, skView.frame.width/4, skView.frame.height/10))
-            timeLabel!.textAlignment = NSTextAlignment.Center
-            timeLabel!.font = UIFont(name: "HelveticaNeue-light", size: 50)
-            timeLabel!.textColor = UIColor.blackColor()
-            self.view.addSubview(timeLabel!)
-            timeLabel!.startCountdown(30)
-            
-            // Creating the ScoreLabel
-            scoreLabel = ScoreLabel(frame: CGRectMake(0, 0, skView.frame.width * 2 - (skView.frame.width/4), skView.frame.height/10))
-            scoreLabel!.text = "0"
-            scoreLabel!.textAlignment = NSTextAlignment.Center
-            scoreLabel!.font = UIFont(name: "HelveticaNeue-light", size: 50)
-            scoreLabel!.textColor = UIColor.blackColor()
-            self.view.addSubview(scoreLabel!)
-            
-            skView.presentScene(scene)
-        }
-    }
-
-    func addScore (points: Int){
-        scoreLabel!.addScore(points)
-    }
-    
-    func removeScore (points: Int){
-        scoreLabel!.removeScore(points)
-    }
-    
-    func isTimeUp() -> Bool{
-        return timeLabel!.isTimeUp
+        // Configure the view.
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.multipleTouchEnabled = false
+        
+        scene = PlayScene(size: skView.bounds.size)
+        scene!.gameViewControllerObject = self //lets GameScene create an object of this class
+        
+        /* Set the scale mode to scale to fit the window */
+        scene!.scaleMode = .AspectFill
+        
+        skView.presentScene(scene)
     }
     
     override func shouldAutorotate() -> Bool {
@@ -99,4 +52,21 @@ class GameViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+//    extension SKNode {
+//        class func unarchiveFromFile(file : String) -> SKNode? {
+//            if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
+//                var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
+//                var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+//                
+//                archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+//                let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! GameScene
+//                archiver.finishDecoding()
+//                return scene
+//            } else {
+//                return nil
+//            }
+//        }
+//    }
+
 }

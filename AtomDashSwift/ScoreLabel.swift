@@ -7,26 +7,18 @@
 //
 
 import Foundation
-import UIKit
+import SpriteKit
 
-class ScoreLabel: UILabel {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+class ScoreLabel: SKLabelNode {
 
     func addScore(points: Int){
-        self.text = String(self.text!.toInt()! + points)
+        self.text = String(self.text.toInt()! + points)
     }
     
     func removeScore(points: Int){
-        if (self.text?.toInt()! > 0){
-            self.text = String(self.text!.toInt()! - points)
+        if (self.text.toInt()! > 0){
+            self.text = String(self.text.toInt()! - points)
         }
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }
