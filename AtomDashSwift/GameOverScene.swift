@@ -32,7 +32,7 @@ class GameOverScene: SKScene {
         
         gameOverLabel = SKLabelNode()
         gameOverLabel!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-        gameOverLabel!.text = "Score: \(gameScore)"
+        gameOverLabel!.text = "Score: \(gameScore!)"
         gameOverLabel!.fontName =  "HelveticaNeue-light"
         gameOverLabel!.fontSize = 30
         gameOverLabel!.fontColor = UIColor.blackColor()
