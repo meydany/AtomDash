@@ -36,8 +36,8 @@ class GameOverScene: SKScene {
         gameOverLabel = SKLabelNode()
         gameOverLabel!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         gameOverLabel!.text = "Score: \(gameScore!)"
-        gameOverLabel!.fontName =  "HelveticaNeue-light"
-        gameOverLabel!.fontSize = 30
+        gameOverLabel!.fontName = "DINCondensed-Bold"
+        gameOverLabel!.fontSize = 75
         gameOverLabel!.fontColor = UIColor.blackColor()
         
         restartButton = SKSpriteNode(imageNamed: "button")

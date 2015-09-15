@@ -24,7 +24,6 @@ class GameViewController: UIViewController {
         skView.multipleTouchEnabled = false
         
         playScene = PlayScene(size: skView.bounds.size)
-        playScene!.gameViewControllerObject = self //lets GameScene create an object of this class
         
         /* Set the scale mode to scale to fit the window */
         playScene!.scaleMode = .AspectFill

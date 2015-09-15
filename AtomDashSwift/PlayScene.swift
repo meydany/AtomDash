@@ -27,7 +27,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var newTarget: Bool?
     
-    var gameViewControllerObject: GameViewController?
+    var timer: NSTimer?
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -50,8 +50,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         target!.moveToRandomPosition(self.frame)
         newTarget = false
         
-        //Enemy instantiation
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("addEnemy"), userInfo: nil, repeats: true)
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.5),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
@@ -59,7 +58,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         // Creating the TimeLabel
         timeLabel = TimeLabel()
         timeLabel!.position = CGPoint(x: labelBuffer, y: self.frame.maxY - labelBuffer)
-        timeLabel!.startCountdown(5)
+        timeLabel!.startCountdown(10)
         
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
@@ -77,7 +76,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         for touch in (touches as! Set<UITouch>) {
             let location = touch.locationInNode(self)
 
-            player!.moveToPosition(location, moveType: MoveType.Direct)
+            player!.moveToPosition(location, moveType: MoveType.Smooth)
+            //scene!.paused = !scene!.paused
         }
     }
     
@@ -89,6 +89,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node!.removeFromParent()
             scoreLabel!.removeScore(1)
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
+            contact.bodyB.node!.removeFromParent()
             newTarget = true
         default:
             println("Default collision")
@@ -129,7 +130,10 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createNewTarget() {
+        target = Target()
         target!.moveToRandomPosition(self.frame)
+        
+        self.addChild(target!)
     }
 }
 

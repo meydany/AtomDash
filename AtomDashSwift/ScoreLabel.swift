@@ -19,8 +19,8 @@ class ScoreLabel: SKLabelNode {
         self.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         
         self.text = "0"
-        self.fontName =  "HelveticaNeue-light"
-        self.fontSize = 50
+        self.fontName = "DINCondensed-Bold"
+        self.fontSize = 75
         self.fontColor = UIColor.blackColor()
     }
     
