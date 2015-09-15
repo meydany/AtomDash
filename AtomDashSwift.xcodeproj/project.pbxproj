@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		090E55BD1BA781ED001B0982 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55BC1BA781ED001B0982 /* GameOverViewController.swift */; };
+		090E55BD1BA781ED001B0982 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55BC1BA781ED001B0982 /* GameOverScene.swift */; };
 		090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55BE1BA787EC001B0982 /* TimeLabel.swift */; };
 		0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958C8871BA623AD00DFF781 /* ScoreLabel.swift */; };
 		8641A9321BA4E9F6001B89EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9311BA4E9F6001B89EB /* AppDelegate.swift */; };
@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		090E55BC1BA781ED001B0982 /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
+		090E55BC1BA781ED001B0982 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		090E55BE1BA787EC001B0982 /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		0958C8871BA623AD00DFF781 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		8641A92C1BA4E9F6001B89EB /* AtomDashSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtomDashSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				8641A9351BA4E9F6001B89EB /* GameScene.swift */,
-				090E55BC1BA781ED001B0982 /* GameOverViewController.swift */,
+				090E55BC1BA781ED001B0982 /* GameOverScene.swift */,
 				8641A9571BA4ED04001B89EB /* Player.swift */,
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
 				86DDC8CD1BA686C700F444FB /* Target.swift */,
@@ -248,7 +248,7 @@
 				0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */,
 				8641A9581BA4ED04001B89EB /* Player.swift in Sources */,
 				86DDC8CE1BA686C700F444FB /* Target.swift in Sources */,
-				090E55BD1BA781ED001B0982 /* GameOverViewController.swift in Sources */,
+				090E55BD1BA781ED001B0982 /* GameOverScene.swift in Sources */,
 				8641A9321BA4E9F6001B89EB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

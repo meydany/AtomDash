@@ -11,12 +11,15 @@ import UIKit
 
 class TimeLabel: UILabel{
     
+    var isTimeUp: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
     //class func
     func startCountdown(seconds: Int){
+        isTimeUp = false
         self.text = String(seconds)
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("countdown"), userInfo: nil, repeats: true)
     }
@@ -25,8 +28,8 @@ class TimeLabel: UILabel{
         if (self.text!.toInt()! > 0){
             self.text = String(self.text!.toInt()!-1)
         }
-        else{
-            println("Time's up")
+        else {
+            isTimeUp = true
         }
     }
     

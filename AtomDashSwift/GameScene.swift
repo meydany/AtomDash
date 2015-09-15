@@ -83,6 +83,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             newTarget = false
         }
+        
+        if (gameViewControllerObject!.isTimeUp()){
+            //gameViewControllerObject?.presentGameOverViewController()
+        }
     }
     
     func addEnemy(){
