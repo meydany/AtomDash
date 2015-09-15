@@ -16,16 +16,13 @@ class TimeLabel: SKLabelNode{
     override init() {
         super.init()
         
+        //Sets the origin of the node to be the top left corner, makes it easier to position it
         self.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         self.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
+        
         self.fontName = "HelveticaNeue-light"
         self.fontSize = 50
         self.fontColor = UIColor.blackColor()
-        
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     //class func
@@ -42,5 +39,9 @@ class TimeLabel: SKLabelNode{
         else {
             isTimeUp = true
         }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -14,16 +14,14 @@ class ScoreLabel: SKLabelNode {
     override init() {
         super.init()
         
+        //Sets the origin of the node to be the top right corner, makes it easier to position it
         self.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
         self.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
+        
         self.text = "0"
         self.fontName =  "HelveticaNeue-light"
         self.fontSize = 50
         self.fontColor = UIColor.blackColor()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func addScore(points: Int){
@@ -34,6 +32,10 @@ class ScoreLabel: SKLabelNode {
         if (self.text.toInt()! > 0){
             self.text = String(self.text.toInt()! - points)
         }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
