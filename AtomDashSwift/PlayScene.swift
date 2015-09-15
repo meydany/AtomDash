@@ -179,9 +179,15 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         blurNode!.filter = blur
         self.shouldEnableEffects = true
         
+        var unblurredNodes = [SKNode]()
+        
         for node in self.children {
+            unblurredNodes.append(node as! SKNode)
             node.removeFromParent()
-            blurNode!.addChild(node as! SKNode)
+        }
+        
+        for node in unblurredNodes {
+            blurNode!.addChild(node as SKNode)
         }
         self.addChild(blurNode!)
     }
