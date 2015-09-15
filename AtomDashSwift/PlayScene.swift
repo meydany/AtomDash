@@ -30,6 +30,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var timer: NSTimer?
     
     var pauseButton: SKNode?
+    var pauseMenu: SKShapeNode?
+    
+    var blurEffect: UIVisualEffectView?
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -76,6 +79,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         pauseButton?.name = "PauseButton"
         pauseButton?.userInteractionEnabled = false
         
+        pauseMenu = SKShapeNode(rect: CGRect(x: 0,y: 0, width: self.frame.width/2, height: 400), cornerRadius: 10)
+        pauseMenu!.position = CGPoint(x: self.frame.midX - (pauseMenu!.frame.width/2), y: self.frame.midY - (pauseMenu!.frame.height/2))
+        pauseMenu!.strokeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        pauseMenu!.fillColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        pauseMenu!.lineWidth = 4;
+        pauseMenu!.zPosition = 1
+        
         self.addChild(pauseButton!)
         self.addChild(player!)
         self.addChild(target!)
@@ -92,7 +102,20 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             player!.moveToPosition(location, moveType: MoveType.Direct)
             
             if (self.nodeAtPoint(location).name == "PauseButton"){
-                scene!.paused = !scene!.paused
+                if(!scene!.paused) {
+                    scene!.paused = true
+                    
+                    blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+                    blurEffect!.frame = self.view!.bounds
+                    
+                    scene!.view?.addSubview(blurEffect!)
+                    scene!.addChild(pauseMenu!)
+
+                }else {
+                    scene!.paused = false
+                    pauseMenu!.removeFromParent()
+                    blurEffect!.removeFromSuperview()
+                }
             }
             //scene!.paused = !scene!.paused
         }
