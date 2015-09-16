@@ -103,14 +103,15 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             
             if (self.nodeAtPoint(location).name == "PauseButton"){
                 if(!scene!.paused) {
-                    blurScene()
-                    
                     scene!.paused = true
-                    self.addChild(pauseMenu!)
-                }else {
-                    removeBlur()
                     
+                    blurScene()
+                    self.addChild(pauseMenu!)
+
+                }else {
                     scene!.paused = false
+                    
+                    removeBlur()
                     pauseMenu!.removeFromParent()
                 }
             }
@@ -174,11 +175,15 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func blurScene() {
-        blurNode = SKEffectNode()
-        let blur = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 15.0])
-        blurNode!.filter = blur
-        self.shouldEnableEffects = true
+        self.shouldRasterize = true
         
+        let blur = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 15.0])
+        
+        blurNode = SKEffectNode()
+        blurNode!.filter = blur
+        blurNode!.shouldEnableEffects = true
+        blurNode!.shouldRasterize = true
+
         var unblurredNodes = [SKNode]()
         
         for node in self.children {
@@ -203,7 +208,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         for node in blurredNodes {
             self.addChild(node as SKNode)
         }
-        self.shouldEnableEffects = false
         blurNode!.removeFromParent()
     }
 }
