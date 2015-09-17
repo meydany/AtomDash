@@ -22,13 +22,13 @@ class ButtonTemplate: SKShapeNode {
         self.position.y = position.y - self.frame.height/2
         self.zPosition = 2
         self.fillColor = color
-        
+        self.alpha = 0.3
         
         var buttonLabel = SKLabelNode(text: labelName)
         buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/4)
         buttonLabel.fontName = "DINCondensed-Bold"
         buttonLabel.fontSize = 35
-        buttonLabel.color = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        buttonLabel.color = UIColor.clearColor()
         buttonLabel.name = name
         self.addChild(buttonLabel)        
     }

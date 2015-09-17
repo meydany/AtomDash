@@ -35,6 +35,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var exitButton: ButtonTemplate?
     var restartButton: ButtonTemplate?
     
+    var animateMenu: Bool?
+    
     var backgroundFilterNode: SKSpriteNode?
     
     override func didMoveToView(view: SKView) {
@@ -87,6 +89,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/5), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
+        animateMenu = false
         
         self.addChild(pauseButton!)
         self.addChild(player!)
@@ -113,6 +116,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                         self.addChild(resumeButton!)
                         self.addChild(exitButton!)
                         self.addChild(restartButton!)
+                        
+                        animateMenu! = true
                     }
                     break
                 case "ResumeButton":
@@ -170,6 +175,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             var gameOverScene = GameOverScene(score: scoreLabel!.text, size: self.scene!.size)
             self.scene!.view?.presentScene(gameOverScene)
         }
+        
+        if(animateMenu!) {
+            animateButtons()
+            animateMenu! = false
+        }
     }
     
     
@@ -210,6 +220,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     func removeFilter() {
         backgroundFilterNode!.removeFromParent()
     }
+    
+    func animateButtons() {
+        resumeButton!.runAction(SKAction.fadeInWithDuration(0.2))
+        restartButton!.runAction(SKAction.fadeInWithDuration(0.4))
+        exitButton!.runAction(SKAction.fadeInWithDuration(0.6))
+    }
+
 }
 
 

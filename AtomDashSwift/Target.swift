@@ -22,7 +22,7 @@ class Target: SKShapeNode {
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
         self.lineWidth = 8;
-        self.strokeColor = UIColor.yellowColor()
+        self.strokeColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
         self.physicsBody!.affectedByGravity = false
