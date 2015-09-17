@@ -31,14 +31,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var pauseButton: SKNode?
     
-    var resumeButton: SKShapeNode?
-    var resumeLabel: SKLabelNode?
-    
-    var exitButton: SKShapeNode?
-    var exitLabel: SKLabelNode?
-    
-    var restartButton: SKShapeNode?
-    var restartLabel: SKLabelNode?
+    var resumeButton: ButtonTemplate?
+    var exitButton: ButtonTemplate?
+    var restartButton: ButtonTemplate?
     
     var backgroundFilterNode: SKSpriteNode?
     
@@ -85,49 +80,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         pauseButton?.position.x = self.frame.minX + (pauseButton!.frame.width/2)
         pauseButton?.position.y = self.frame.minY + (pauseButton!.frame.height/2)
         pauseButton?.name = "PauseButton"
-        pauseButton?.userInteractionEnabled = false
         
-        resumeButton = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), cornerRadius: CGFloat(10))
-        resumeButton!.position = CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5)
-        resumeButton!.zPosition = 2
-        resumeButton!.fillColor = UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1)
-        resumeButton!.name = "ResumeButton"
+        resumeButton = ButtonTemplate(name: "ResumeButton",labelName: "Resume",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
         
-        resumeLabel = SKLabelNode(text: "Resume")
-        resumeLabel!.position = CGPoint(x: 0, y: -resumeButton!.frame.height/4)
-        resumeLabel!.fontName = "DINCondensed-Bold"
-        resumeLabel!.fontSize = 35
-        resumeLabel!.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
-        resumeLabel!.name = "ResumeButton"
-        resumeButton!.addChild(resumeLabel!)
+        exitButton = ButtonTemplate(name: "ExitButton", labelName: "Exit", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         
-        exitButton = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), cornerRadius: CGFloat(10))
-        exitButton!.position = CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5)
-        exitButton!.zPosition = 2
-        exitButton!.fillColor = UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1)
-        exitButton!.name = "ExitButton"
+        restartButton = ButtonTemplate(name: "RestartButton", labelName: "Restart", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/5), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
-        exitLabel = SKLabelNode(text: "Exit")
-        exitLabel!.position = CGPoint(x: 0, y: -resumeButton!.frame.height/4)
-        exitLabel!.fontName = "DINCondensed-Bold"
-        exitLabel!.fontSize = 35
-        exitLabel!.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
-        exitLabel!.name = "ExitButton"
-        exitButton!.addChild(exitLabel!)
-        
-        restartButton = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), cornerRadius: CGFloat(10))
-        restartButton!.position = CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/5)
-        restartButton!.zPosition = 2
-        restartButton!.fillColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
-        restartButton!.name = "RestartButton"
-        
-        restartLabel = SKLabelNode(text: "Restart")
-        restartLabel!.position = CGPoint(x: 0, y: -resumeButton!.frame.height/4)
-        restartLabel!.fontName = "DINCondensed-Bold"
-        restartLabel!.fontSize = 35
-        restartLabel!.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
-        restartLabel!.name = "RestartButton"
-        restartButton!.addChild(restartLabel!)
         
         self.addChild(pauseButton!)
         self.addChild(player!)
@@ -144,31 +103,41 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
 
             player!.moveToPosition(location, moveType: MoveType.Direct)
             
-            if (self.nodeAtPoint(location).name == "PauseButton"){
-                if(!scene!.paused) {
-                    scene!.paused = true
+            if let name = self.nodeAtPoint(location).name{
+                switch name {
+                case "PauseButton":
+                    if(!scene!.paused) {
+                        scene!.paused = true
                     
-                    applyFilter()
-                    self.addChild(resumeButton!)
-                    self.addChild(exitButton!)
-                    self.addChild(restartButton!)
-                }
-            }else if (self.nodeAtPoint(location).name == "ResumeButton"){
-                if(scene!.paused) {
-                    scene!.paused = false
+                        applyFilter()
+                        self.addChild(resumeButton!)
+                        self.addChild(exitButton!)
+                        self.addChild(restartButton!)
+                    }
+                    break
+                case "ResumeButton":
+                    if(scene!.paused) {
+                        scene!.paused = false
                     
-                    removeFilter()
-                    resumeButton!.removeFromParent()
-                }
-            }else if (self.nodeAtPoint(location).name == "ExitButton"){
-                if(scene!.paused) {
-                    var menuScene = MenuScene(size: self.scene!.size)
-                    self.scene!.view?.presentScene(menuScene)
-                }
-            }else if (self.nodeAtPoint(location).name == "RestartButton"){
-                if(scene!.paused) {
-                    var playScene = PlayScene(size: self.scene!.size)
-                    self.scene!.view?.presentScene(playScene)
+                        removeFilter()
+                        resumeButton!.removeFromParent()
+                        exitButton!.removeFromParent()
+                        restartButton!.removeFromParent()
+                    }
+                    break
+                case "ExitButton":
+                    if(scene!.paused) {
+                        var menuScene = MenuScene(size: self.scene!.size)
+                        self.scene!.view?.presentScene(menuScene)
+                    }
+                    break
+                case "RestartButton":
+                    if(scene!.paused) {
+                        var playScene = PlayScene(size: self.scene!.size)
+                        self.scene!.view?.presentScene(playScene)
+                    }
+                default:
+                    break
                 }
             }
         }

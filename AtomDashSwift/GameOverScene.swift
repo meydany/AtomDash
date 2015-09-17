@@ -68,9 +68,6 @@ class GameOverScene: SKScene {
         let touchedNode = self.nodeAtPoint(positionInScene)
         
         if let name = touchedNode.name{
-            if name == "RestartButton"{
-                
-            }
             
             switch name{
             case "RestartButton":
