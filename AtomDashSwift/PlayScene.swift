@@ -30,9 +30,17 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var timer: NSTimer?
     
     var pauseButton: SKNode?
-    var pauseMenu: SKShapeNode?
     
-    var blurNode: SKEffectNode?
+    var resumeButton: SKShapeNode?
+    var resumeLabel: SKLabelNode?
+    
+    var exitButton: SKShapeNode?
+    var exitLabel: SKLabelNode?
+    
+    var restartButton: SKShapeNode?
+    var restartLabel: SKLabelNode?
+    
+    var backgroundFilterNode: SKSpriteNode?
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -72,19 +80,54 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
-        pauseButton?.xScale = 0.1
-        pauseButton?.yScale = 0.1
+        pauseButton?.xScale = 1
+        pauseButton?.yScale = 1
         pauseButton?.position.x = self.frame.minX + (pauseButton!.frame.width/2)
         pauseButton?.position.y = self.frame.minY + (pauseButton!.frame.height/2)
         pauseButton?.name = "PauseButton"
         pauseButton?.userInteractionEnabled = false
         
-        pauseMenu = SKShapeNode(rect: CGRect(x: 0,y: 0, width: self.frame.width/2, height: 400), cornerRadius: 10)
-        pauseMenu!.position = CGPoint(x: self.frame.midX - (pauseMenu!.frame.width/2), y: self.frame.midY - (pauseMenu!.frame.height/2))
-        pauseMenu!.strokeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        pauseMenu!.fillColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        pauseMenu!.lineWidth = 4;
-        pauseMenu!.zPosition = 1
+        resumeButton = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), cornerRadius: CGFloat(10))
+        resumeButton!.position = CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5)
+        resumeButton!.zPosition = 2
+        resumeButton!.fillColor = UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1)
+        resumeButton!.name = "ResumeButton"
+        
+        resumeLabel = SKLabelNode(text: "Resume")
+        resumeLabel!.position = CGPoint(x: 0, y: -resumeButton!.frame.height/4)
+        resumeLabel!.fontName = "DINCondensed-Bold"
+        resumeLabel!.fontSize = 35
+        resumeLabel!.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+        resumeLabel!.name = "ResumeButton"
+        resumeButton!.addChild(resumeLabel!)
+        
+        exitButton = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), cornerRadius: CGFloat(10))
+        exitButton!.position = CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5)
+        exitButton!.zPosition = 2
+        exitButton!.fillColor = UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1)
+        exitButton!.name = "ExitButton"
+        
+        exitLabel = SKLabelNode(text: "Exit")
+        exitLabel!.position = CGPoint(x: 0, y: -resumeButton!.frame.height/4)
+        exitLabel!.fontName = "DINCondensed-Bold"
+        exitLabel!.fontSize = 35
+        exitLabel!.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+        exitLabel!.name = "ExitButton"
+        exitButton!.addChild(exitLabel!)
+        
+        restartButton = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), cornerRadius: CGFloat(10))
+        restartButton!.position = CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/5)
+        restartButton!.zPosition = 2
+        restartButton!.fillColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
+        restartButton!.name = "RestartButton"
+        
+        restartLabel = SKLabelNode(text: "Restart")
+        restartLabel!.position = CGPoint(x: 0, y: -resumeButton!.frame.height/4)
+        restartLabel!.fontName = "DINCondensed-Bold"
+        restartLabel!.fontSize = 35
+        restartLabel!.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+        restartLabel!.name = "RestartButton"
+        restartButton!.addChild(restartLabel!)
         
         self.addChild(pauseButton!)
         self.addChild(player!)
@@ -105,17 +148,29 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                 if(!scene!.paused) {
                     scene!.paused = true
                     
-                    blurScene()
-                    self.addChild(pauseMenu!)
-
-                }else {
+                    applyFilter()
+                    self.addChild(resumeButton!)
+                    self.addChild(exitButton!)
+                    self.addChild(restartButton!)
+                }
+            }else if (self.nodeAtPoint(location).name == "ResumeButton"){
+                if(scene!.paused) {
                     scene!.paused = false
                     
-                    removeBlur()
-                    pauseMenu!.removeFromParent()
+                    removeFilter()
+                    resumeButton!.removeFromParent()
+                }
+            }else if (self.nodeAtPoint(location).name == "ExitButton"){
+                if(scene!.paused) {
+                    var menuScene = MenuScene(size: self.scene!.size)
+                    self.scene!.view?.presentScene(menuScene)
+                }
+            }else if (self.nodeAtPoint(location).name == "RestartButton"){
+                if(scene!.paused) {
+                    var playScene = PlayScene(size: self.scene!.size)
+                    self.scene!.view?.presentScene(playScene)
                 }
             }
-            //scene!.paused = !scene!.paused
         }
     }
     
@@ -174,41 +229,17 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(target!)
     }
     
-    func blurScene() {
-        self.shouldRasterize = true
+    func applyFilter() {
+        backgroundFilterNode = SKSpriteNode(color: UIColor.whiteColor(), size: self.view!.frame.size)
+        backgroundFilterNode!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        backgroundFilterNode!.zPosition = self.scene!.zPosition + 1
+        backgroundFilterNode!.alpha = 0.75
         
-        let blur = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 15.0])
-        
-        blurNode = SKEffectNode()
-        blurNode!.filter = blur
-        blurNode!.shouldEnableEffects = true
-        blurNode!.shouldRasterize = true
-
-        var unblurredNodes = [SKNode]()
-        
-        for node in self.children {
-            unblurredNodes.append(node as! SKNode)
-            node.removeFromParent()
-        }
-        
-        for node in unblurredNodes {
-            blurNode!.addChild(node as SKNode)
-        }
-        self.addChild(blurNode!)
+        self.addChild(backgroundFilterNode!)
     }
     
-    func removeBlur() {
-        var blurredNodes = [SKNode]()
-        
-        for node in blurNode!.children {
-            blurredNodes.append(node as! SKNode)
-            node.removeFromParent()
-        }
-        
-        for node in blurredNodes {
-            self.addChild(node as SKNode)
-        }
-        blurNode!.removeFromParent()
+    func removeFilter() {
+        backgroundFilterNode!.removeFromParent()
     }
 }
 
