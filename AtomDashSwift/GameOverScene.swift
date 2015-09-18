@@ -28,10 +28,7 @@ class GameOverScene: SKScene {
     
     init(score: Int, size: CGSize) {
         super.init(size: size)
-        
-        userDefaults = NSUserDefaults()
-        userDefaults?.setInteger(0, forKey: "highScore")
-        
+            
         gameScore = score
         highScore = getHighScore(score)
     }
@@ -116,14 +113,14 @@ class GameOverScene: SKScene {
     }
     
     func getHighScore(score: Int) -> Int {
-        var currentHighScore = userDefaults?.integerForKey("highScore")
+        var currentHighScore = NSUserDefaults().integerForKey("highScore")
         var newHighScore = currentHighScore
         
         if(score > currentHighScore) {
-            userDefaults?.setInteger(score, forKey: "highScore")
+            NSUserDefaults().setInteger(score, forKey: "highScore")
             newHighScore = score
         }
         
-        return newHighScore!
+        return newHighScore
     }
 }
