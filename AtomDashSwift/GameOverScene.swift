@@ -29,6 +29,9 @@ class GameOverScene: SKScene {
     init(score: Int, size: CGSize) {
         super.init(size: size)
         
+        userDefaults = NSUserDefaults()
+        userDefaults?.setInteger(0, forKey: "highScore")
+        
         gameScore = score
         highScore = getHighScore(score)
     }
@@ -38,9 +41,6 @@ class GameOverScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
-        
-        userDefaults = NSUserDefaults()
-        userDefaults?.setInteger(0, forKey: "highScore")
         
         playerNode = Player()
         playerNode!.position = CGPoint(x: self.frame.width/4, y: (4*self.frame.height)/5)
