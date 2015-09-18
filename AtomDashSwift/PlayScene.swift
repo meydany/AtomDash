@@ -69,7 +69,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         // Creating the TimeLabel
         timeLabel = TimeLabel()
         timeLabel!.position = CGPoint(x: labelBuffer, y: self.frame.maxY - labelBuffer)
-        timeLabel!.startCountdown(10)
+        timeLabel!.startCountdown(30)
         
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
@@ -87,7 +87,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         exitButton = ButtonTemplate(name: "ExitButton", labelName: "EXIT", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         
-        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
+        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
         self.addChild(pauseButton!)
         self.addChild(player!)
@@ -155,7 +155,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel!.removeScore(1)
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeFromParent()
-            scoreLabel!.addScore(1)
+            scoreLabel!.addScore(2)
             newTarget = true
         default:
             print("Default collision")

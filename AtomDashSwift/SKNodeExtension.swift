@@ -29,7 +29,7 @@ extension SKNode {
         }
         else {
             newPos = position
-            let directMoveAction = SKAction.moveTo(newPos, duration: NSTimeInterval(0.7))
+            let directMoveAction = SKAction.moveTo(newPos, duration: NSTimeInterval(0.5))
             
             self.runAction(directMoveAction)
         }
