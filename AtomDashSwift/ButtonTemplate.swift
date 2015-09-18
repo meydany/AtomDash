@@ -22,7 +22,7 @@ class ButtonTemplate: SKShapeNode {
         self.position.y = position.y - self.frame.height/2
         self.zPosition = 2
         self.fillColor = color
-        self.alpha = 0.3
+        self.alpha = 1
         
         var buttonLabel = SKLabelNode(text: labelName)
         buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/4)
