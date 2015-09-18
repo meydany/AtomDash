@@ -24,6 +24,7 @@
 		8641A9561BA4EC69001B89EB /* SKNodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9551BA4EC69001B89EB /* SKNodeExtension.swift */; };
 		8641A9581BA4ED04001B89EB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9571BA4ED04001B89EB /* Player.swift */; };
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
+		866ECA5C1BABB49E00D2EB65 /* InstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */; };
 		86DDC8CE1BA686C700F444FB /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DDC8CD1BA686C700F444FB /* Target.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		8641A9551BA4EC69001B89EB /* SKNodeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtension.swift; sourceTree = "<group>"; };
 		8641A9571BA4ED04001B89EB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8641A9591BA4F5C8001B89EB /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsScene.swift; sourceTree = "<group>"; };
 		86DDC8CD1BA686C700F444FB /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 				090E55C01BA7B52F001B0982 /* MenuScene.swift */,
 				8641A9351BA4E9F6001B89EB /* PlayScene.swift */,
 				090E55BC1BA781ED001B0982 /* GameOverScene.swift */,
+				866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */,
 				8641A9571BA4ED04001B89EB /* Player.swift */,
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
 				86DDC8CD1BA686C700F444FB /* Target.swift */,
@@ -255,6 +258,7 @@
 				8641A9381BA4E9F6001B89EB /* GameViewController.swift in Sources */,
 				090E55C11BA7B52F001B0982 /* MenuScene.swift in Sources */,
 				8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */,
+				866ECA5C1BABB49E00D2EB65 /* InstructionsScene.swift in Sources */,
 				090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */,
 				8641A9561BA4EC69001B89EB /* SKNodeExtension.swift in Sources */,
 				0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */,
