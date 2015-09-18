@@ -87,7 +87,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         exitButton = ButtonTemplate(name: "ExitButton", labelName: "EXIT", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         
-        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/5), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
+        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
         self.addChild(pauseButton!)
         self.addChild(player!)
@@ -170,7 +170,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (timeLabel!.isTimeUp){
-            var gameOverScene = GameOverScene(score: scoreLabel!.text, size: self.scene!.size)
+            var gameOverScene = GameOverScene(score: scoreLabel!.text.toInt()!, size: self.scene!.size)
             self.scene!.view?.presentScene(gameOverScene)
         }
     }
