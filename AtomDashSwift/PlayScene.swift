@@ -27,6 +27,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var newTarget: Bool?
     
+    var moveEnemyAction: SKAction?
+    
     var timer: NSTimer?
     
     var pauseButton: SKNode?
@@ -148,10 +150,12 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         switch contactMask {
         case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.2), completion: {contact.bodyB.node!.removeFromParent()})
+            contact.bodyB.node!.removeActionForKey("moveEnemy")
+            contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
             scoreLabel!.removeScore(1)
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeFromParent()
+            scoreLabel!.addScore(1)
             newTarget = true
         default:
             println("Default collision")
@@ -161,7 +165,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: CFTimeInterval) {
         if(newTarget!) {
             createNewTarget()
-            scoreLabel!.addScore(1)
             
             newTarget = false
         }
@@ -174,20 +177,18 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     
     func addEnemy(){
-        var moveAction: SKAction?
-        
         enemy = Enemy(side: SpawnSide.Right)
         
         if (arc4random_uniform(2) == 1){
             enemy!.position = CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
-            moveAction = SKAction.moveTo(CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
         }
         else{
             enemy!.position = CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
-            moveAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
         }
         
-        enemy!.runAction(moveAction!)
+        enemy!.runAction(moveEnemyAction!, withKey: "moveEnemy")
         self.addChild(enemy!)
     }
     
