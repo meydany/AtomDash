@@ -68,8 +68,14 @@ class MenuScene: SKScene {
             if let name = self.nodeAtPoint(location).name{
                 switch name {
                 case "PlayButton":
-                    let playScene = PlayScene(size: self.scene!.size)
-                    self.scene!.view?.presentScene(playScene)
+                    if(NSUserDefaults().boolForKey("instructionsScene")) {
+                        let playScene = PlayScene(size: self.scene!.size)
+                        self.scene!.view?.presentScene(playScene)
+                    }else {
+                        NSUserDefaults().setBool(false, forKey: "instructionsScene")
+                        let instructionsScene = InstructionsScene(size: self.scene!.size)
+                        self.scene!.view?.presentScene(instructionsScene)
+                    }
                 case "LeaderboardsButton":
                     print("Make this scene!", terminator: "")
                     //Make leaderbaords menu

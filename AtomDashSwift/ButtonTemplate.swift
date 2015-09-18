@@ -33,7 +33,7 @@ class ButtonTemplate: SKShapeNode {
         buttonLabel.color = UIColor.clearColor()
         buttonLabel.name = name
         
-        let scalingFactor = min(self.frame.width / buttonLabel.frame.width, self.frame.height / buttonLabel.frame.height)
+        let scalingFactor = min(self.frame.width / buttonLabel.frame.width, self.frame.height / buttonLabel.frame.height)/1.5
         
         // Change the fontSize.
         buttonLabel.fontSize *= scalingFactor
