@@ -37,10 +37,10 @@ class TimeLabel: SKLabelNode{
     }
     
     func countdown() {
-        if (self.text.toInt()! > 0){
-            self.text = String(self.text.toInt()!-1)
+        if (Int(self.text!)! > 0){
+            self.text = String(Int(self.text!)!-1)
             
-            redValue = redValue! + CGFloat(1.0/CGFloat(self.text.toInt()!))
+            redValue = redValue! + CGFloat(1.0/CGFloat(Int(self.text!)!))
             //println(redValue)
             
             self.fontColor = UIColor(red: redValue!, green: 0, blue: 0, alpha: 1)

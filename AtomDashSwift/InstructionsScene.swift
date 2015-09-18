@@ -66,20 +66,20 @@ class InstructionsScene: SKScene {
         self.addChild(menuButton!)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
-        for touch in (touches as! Set<UITouch>) {
+        for touch in (touches as Set<UITouch>) {
             let location = touch.locationInNode(self)
             
             if(self.nodeAtPoint(location).name == "MenuButton") {
-                var menuScene = MenuScene(size: self.scene!.size)
+                let menuScene = MenuScene(size: self.scene!.size)
                 self.scene!.view?.presentScene(menuScene)
             }
         }
     }
     func makeLabel(text: String, position: CGPoint, color: UIColor) -> SKLabelNode{
-        var newLabel = SKLabelNode(text: text)
+        let newLabel = SKLabelNode(text: text)
         newLabel.position = position
         newLabel.fontName = "DINCondensed-Bold"
         newLabel.fontSize = 50

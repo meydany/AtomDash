@@ -18,7 +18,7 @@ class Target: SKShapeNode {
         
         self.name = "Target"
         
-        var mutablePath: CGMutablePathRef = CGPathCreateMutable()
+        let mutablePath: CGMutablePathRef = CGPathCreateMutable()
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
         self.lineWidth = 8;

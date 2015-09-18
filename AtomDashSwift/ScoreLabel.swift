@@ -25,12 +25,12 @@ class ScoreLabel: SKLabelNode {
     }
     
     func addScore(points: Int){
-        self.text = String(self.text.toInt()! + points)
+        self.text = String(Int(self.text!)! + points)
     }
     
     func removeScore(points: Int){
-        if (self.text.toInt()! > 0){
-            self.text = String(self.text.toInt()! - points)
+        if (Int(self.text!)! > 0){
+            self.text = String(Int(self.text!)! - points)
         }
     }
     

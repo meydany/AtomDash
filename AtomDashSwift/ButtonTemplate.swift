@@ -14,7 +14,7 @@ class ButtonTemplate: SKShapeNode {
     init(name: String, labelName: String, size: CGSize, position: CGPoint, color: UIColor) {
         super.init()
         
-        var rect = CGRect(origin: CGPointZero, size: size)
+        let rect = CGRect(origin: CGPointZero, size: size)
         self.path = CGPathCreateWithRoundedRect(rect, CGFloat(10), CGFloat(10), nil)
         
         self.name = name
@@ -24,7 +24,7 @@ class ButtonTemplate: SKShapeNode {
         self.fillColor = color
         self.alpha = 1
         
-        var buttonLabel = SKLabelNode(text: labelName)
+        let buttonLabel = SKLabelNode(text: labelName)
         buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/4)
         buttonLabel.fontName = "DINCondensed-Bold"
         buttonLabel.fontSize = 35

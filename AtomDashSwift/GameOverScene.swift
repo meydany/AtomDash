@@ -90,8 +90,8 @@ class GameOverScene: SKScene {
         self.addChild(enemyNode!)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch:UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch:UITouch! = touches.first as UITouch?
         let positionInScene = touch.locationInNode(self)
         let touchedNode = self.nodeAtPoint(positionInScene)
         
@@ -99,11 +99,11 @@ class GameOverScene: SKScene {
             
             switch name{
             case "RestartButton":
-                var playScene = PlayScene(size: self.scene!.size)
+                let playScene = PlayScene(size: self.scene!.size)
                 self.scene!.view?.presentScene(playScene)
                 break
             case "MainMenuButton":
-                var menuScene = MenuScene(size: self.scene!.size)
+                let menuScene = MenuScene(size: self.scene!.size)
                 self.scene!.view?.presentScene(menuScene)
                 break
             default:
@@ -113,14 +113,13 @@ class GameOverScene: SKScene {
     }
     
     func getHighScore(score: Int) -> Int {
-        var currentHighScore = NSUserDefaults().integerForKey("highScore")
-        var newHighScore = currentHighScore
+        var highScore = NSUserDefaults().integerForKey("highScore")
         
-        if(score > currentHighScore) {
+        if(score > highScore) {
             NSUserDefaults().setInteger(score, forKey: "highScore")
-            newHighScore = score
+            highScore = score
         }
         
-        return newHighScore
+        return highScore
     }
 }

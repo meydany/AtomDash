@@ -96,10 +96,10 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreLabel!)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         /* Called when a touch begins */
         
-        for touch in (touches as! Set<UITouch>) {
+        for touch in (touches) {
             let location = touch.locationInNode(self)
 
             player!.moveToPosition(location, moveType: MoveType.Direct)
@@ -129,13 +129,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                     break
                 case "ExitButton":
                     if(scene!.paused) {
-                        var menuScene = MenuScene(size: self.scene!.size)
+                        let menuScene = MenuScene(size: self.scene!.size)
                         self.scene!.view?.presentScene(menuScene)
                     }
                     break
                 case "RestartButton":
                     if(scene!.paused) {
-                        var playScene = PlayScene(size: self.scene!.size)
+                        let playScene = PlayScene(size: self.scene!.size)
                         self.scene!.view?.presentScene(playScene)
                     }
                 default:
@@ -158,7 +158,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel!.addScore(1)
             newTarget = true
         default:
-            println("Default collision")
+            print("Default collision")
         }
     }
    
@@ -170,7 +170,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (timeLabel!.isTimeUp){
-            var gameOverScene = GameOverScene(score: scoreLabel!.text.toInt()!, size: self.scene!.size)
+            let gameOverScene = GameOverScene(score: Int(scoreLabel!.text!)!, size: self.scene!.size)
             self.scene!.view?.presentScene(gameOverScene)
         }
     }

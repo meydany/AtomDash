@@ -17,17 +17,19 @@ extension SKNode {
     }
     
     func moveToPosition(position: CGPoint, moveType: MoveType?) {
+        var newPos: CGPoint
         if(moveType == MoveType.Smooth) {
-            var currentPos = self.position
-            var newPos = position
+            let currentPos = self.position
+            let newPos = position
             
-            var xDifference = CGFloat(newPos.x - currentPos.x)
-            var yDifference = CGFloat(newPos.y - currentPos.y)
+            let xDifference = CGFloat(newPos.x - currentPos.x)
+            let yDifference = CGFloat(newPos.y - currentPos.y)
             
             self.physicsBody?.velocity = CGVector(dx: xDifference, dy: yDifference)
-        }else {
-            var newPos = position
-            var directMoveAction = SKAction.moveTo(newPos, duration: NSTimeInterval(0.7))
+        }
+        else {
+            newPos = position
+            let directMoveAction = SKAction.moveTo(newPos, duration: NSTimeInterval(0.7))
             
             self.runAction(directMoveAction)
         }
@@ -38,16 +40,16 @@ extension SKNode {
     }
     
     func getRandomPosition(frame: CGRect) -> CGPoint {
-        var maxX = CGRectGetMaxX(frame)
-        var maxY = CGRectGetMaxY(frame)
+        let maxX = CGRectGetMaxX(frame)
+        let maxY = CGRectGetMaxY(frame)
         
-        var xOffset = self.frame.width/2
-        var yOffset = self.frame.height/2
+        let xOffset = self.frame.width/2
+        let yOffset = self.frame.height/2
         
-        var randomX = CGFloat(Int(arc4random_uniform(UInt32(maxX - (2 * xOffset)))) + Int(xOffset))
-        var randomY = CGFloat(Int(arc4random_uniform(UInt32(maxY - (2 * yOffset)))) + Int(yOffset))
+        let randomX = CGFloat(Int(arc4random_uniform(UInt32(maxX - (2 * xOffset)))) + Int(xOffset))
+        let randomY = CGFloat(Int(arc4random_uniform(UInt32(maxY - (2 * yOffset)))) + Int(yOffset))
         
-        var randomPos = CGPoint(x: randomX, y: randomY)
+        let randomPos = CGPoint(x: randomX, y: randomY)
         
         return randomPos
     }

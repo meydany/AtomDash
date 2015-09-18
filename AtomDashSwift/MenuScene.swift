@@ -58,22 +58,22 @@ class MenuScene: SKScene {
         self.addChild(gameName)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
-        for touch in (touches as! Set<UITouch>) {
+        for touch in (touches as Set<UITouch>) {
             let location = touch.locationInNode(self)
             
             if let name = self.nodeAtPoint(location).name{
                 switch name {
                 case "PlayButton":
-                    var playScene = PlayScene(size: self.scene!.size)
+                    let playScene = PlayScene(size: self.scene!.size)
                     self.scene!.view?.presentScene(playScene)
                 case "LeaderboardsButton":
-                    println("Make this scene!")
+                    print("Make this scene!")
                     //Make leaderbaords menu
                 case "InstructionsButton":
-                    var instructionsScene = InstructionsScene(size: self.scene!.size)
+                    let instructionsScene = InstructionsScene(size: self.scene!.size)
                     self.scene!.view?.presentScene(instructionsScene)
                 default:
                     break

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AtomDashSwift/GameViewController.swift"
-            timestampString = "463977456.339945"
+            timestampString = "464304016.500569"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "prefersStatusBarHidden()"
             landmarkType = "5">
          </BreakpointContent>
