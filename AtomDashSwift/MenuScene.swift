@@ -71,7 +71,7 @@ class MenuScene: SKScene {
                     let playScene = PlayScene(size: self.scene!.size)
                     self.scene!.view?.presentScene(playScene)
                 case "LeaderboardsButton":
-                    print("Make this scene!")
+                    print("Make this scene!", terminator: "")
                     //Make leaderbaords menu
                 case "InstructionsButton":
                     let instructionsScene = InstructionsScene(size: self.scene!.size)

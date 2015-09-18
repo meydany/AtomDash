@@ -158,7 +158,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel!.addScore(2)
             newTarget = true
         default:
-            print("Default collision")
+            print("Default collision", terminator: "")
         }
     }
    

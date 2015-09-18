@@ -195,6 +195,8 @@
 		8641A9241BA4E9F6001B89EB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = MilkyShakeMobile;
 				TargetAttributes = {
