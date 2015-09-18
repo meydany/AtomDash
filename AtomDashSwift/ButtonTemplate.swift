@@ -25,11 +25,18 @@ class ButtonTemplate: SKShapeNode {
         self.alpha = 1
         
         let buttonLabel = SKLabelNode(text: labelName)
-        buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/4)
+        buttonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        buttonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        
+        buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         buttonLabel.fontName = "DINCondensed-Bold"
-        buttonLabel.fontSize = 35
         buttonLabel.color = UIColor.clearColor()
         buttonLabel.name = name
+        
+        let scalingFactor = min(self.frame.width / buttonLabel.frame.width, self.frame.height / buttonLabel.frame.height)
+        
+        // Change the fontSize.
+        buttonLabel.fontSize *= scalingFactor
         self.addChild(buttonLabel)        
     }
 
