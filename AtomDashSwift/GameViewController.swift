@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.multipleTouchEnabled = false
         
-        menuScene = MenuScene(size: skView.bounds.size)
+        menuScene = FirstTimeInstructionsScene(size: skView.bounds.size)
         
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill
