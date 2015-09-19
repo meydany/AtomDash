@@ -11,7 +11,7 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    var menuScene: MenuScene?
+    var menuScene: SKScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
