@@ -71,7 +71,8 @@ class MenuScene: SKScene {
                     if(NSUserDefaults().boolForKey("instructionsScene")) {
                         let playScene = PlayScene(size: self.scene!.size)
                         self.scene!.view?.presentScene(playScene)
-                    }else {
+                    }
+                    else {
                         NSUserDefaults().setBool(true, forKey: "instructionsScene")
                         let instructionsScene = InstructionsScene(size: self.scene!.size)
                         self.scene!.view?.presentScene(instructionsScene)
