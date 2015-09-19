@@ -28,7 +28,7 @@ class ButtonTemplate: SKShapeNode {
         buttonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         buttonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
-        buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        buttonLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.15)
         buttonLabel.fontName = "DINCondensed-Bold"
         buttonLabel.color = UIColor.clearColor()
         buttonLabel.name = name

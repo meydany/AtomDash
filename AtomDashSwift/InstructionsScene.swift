@@ -48,7 +48,7 @@ class InstructionsScene: SKScene {
         lineThreePartTwo = makeLabel("GREEN", position: CGPoint(x: lineOnePartOne!.position.x + (lineOnePartTwo!.frame.width * 1.25), y: (2*self.frame.height)/5), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
 
         
-        menuButton = ButtonTemplate(name: "MenuButton",labelName: "MENU",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (self.frame.height)/5), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
+        menuButton = ButtonTemplate(name: "MenuButton",labelName: "GOT IT",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (self.frame.height)/5), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
         self.addChild(playerNode!)
         self.addChild(targetNode!)
