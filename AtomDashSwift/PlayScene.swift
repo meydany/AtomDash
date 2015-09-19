@@ -69,7 +69,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         // Creating the TimeLabel
         timeLabel = TimeLabel()
         timeLabel!.position = CGPoint(x: labelBuffer, y: self.frame.maxY - labelBuffer)
-        timeLabel!.startCountdown(30)
+        timeLabel!.startCountdown(10)
         
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
@@ -77,10 +77,10 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
-        pauseButton?.xScale = 1
-        pauseButton?.yScale = 1
-        pauseButton?.position.x = self.frame.minX + (pauseButton!.frame.width/2)
-        pauseButton?.position.y = self.frame.minY + (pauseButton!.frame.height/2)
+        pauseButton?.xScale = 0.9
+        pauseButton?.yScale = 0.9
+        pauseButton?.position.x = self.frame.minX + (pauseButton!.frame.width * 0.75)
+        pauseButton?.position.y = self.frame.minY + (pauseButton!.frame.height * 0.75)
         pauseButton?.name = "PauseButton"
         
         resumeButton = ButtonTemplate(name: "ResumeButton",labelName: "RESUME",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
