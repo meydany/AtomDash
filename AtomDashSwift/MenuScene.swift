@@ -87,12 +87,8 @@ class MenuScene: SKScene {
                     let instructionsScene = InstructionsScene(size: self.scene!.size)
                     self.scene!.view?.presentScene(instructionsScene)
                 case "MultiplayerButton":
-                    print("multiplayer")
-                    let GOTEE = SKLabelNode(text: "GOTEE...I'm working on it")
-                    GOTEE.fontSize = 25
-                    GOTEE.fontColor = UIColor.blackColor()
-                    GOTEE.position = CGPoint(x: gameName.position.x, y: gameName.position.y - (2 * GOTEE.frame.height))
-                    self.addChild(GOTEE)
+                    let chooseConnectionType = ChooseMultiplayerConnectionType(size: self.scene!.size)
+                    self.scene!.view?.presentScene(chooseConnectionType)
                 default:
                     break
                 }

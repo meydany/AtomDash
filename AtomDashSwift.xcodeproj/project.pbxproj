@@ -12,6 +12,8 @@
 		090E55C11BA7B52F001B0982 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55C01BA7B52F001B0982 /* MenuScene.swift */; };
 		093480381BAE1A49003D04CB /* MPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093480371BAE1A49003D04CB /* MPCHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958C8871BA623AD00DFF781 /* ScoreLabel.swift */; };
+		09BA685E1BAE5A77003FBE8D /* SessionConnectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		09BA68601BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */; settings = {ASSET_TAGS = (); }; };
 		861E59741BAA4B340055B334 /* ButtonTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861E59731BAA4B340055B334 /* ButtonTemplate.swift */; };
 		8641A9321BA4E9F6001B89EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9311BA4E9F6001B89EB /* AppDelegate.swift */; };
 		8641A9341BA4E9F6001B89EB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8641A9331BA4E9F6001B89EB /* GameScene.sks */; };
@@ -45,6 +47,8 @@
 		090E55C01BA7B52F001B0982 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		093480371BAE1A49003D04CB /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MPCHandler.swift; path = ../MPCHandler.swift; sourceTree = "<group>"; };
 		0958C8871BA623AD00DFF781 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
+		09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConnectingViewController.swift; sourceTree = "<group>"; };
+		09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseMultiplayerConnectionType.swift; sourceTree = "<group>"; };
 		861E59731BAA4B340055B334 /* ButtonTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTemplate.swift; sourceTree = "<group>"; };
 		8641A92C1BA4E9F6001B89EB /* AtomDashSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtomDashSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8641A9301BA4E9F6001B89EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,13 +114,15 @@
 				090E55BC1BA781ED001B0982 /* GameOverScene.swift */,
 				866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */,
 				864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */,
-				093480371BAE1A49003D04CB /* MPCHandler.swift */,
 				8641A9571BA4ED04001B89EB /* Player.swift */,
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
 				86DDC8CD1BA686C700F444FB /* Target.swift */,
 				0958C8871BA623AD00DFF781 /* ScoreLabel.swift */,
 				090E55BE1BA787EC001B0982 /* TimeLabel.swift */,
 				861E59731BAA4B340055B334 /* ButtonTemplate.swift */,
+				093480371BAE1A49003D04CB /* MPCHandler.swift */,
+				09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */,
+				09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */,
 				8641A9371BA4E9F6001B89EB /* GameViewController.swift */,
 				8641A9551BA4EC69001B89EB /* SKNodeExtension.swift */,
 				8641A9311BA4E9F6001B89EB /* AppDelegate.swift */,
@@ -273,7 +279,9 @@
 				090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */,
 				8641A9561BA4EC69001B89EB /* SKNodeExtension.swift in Sources */,
 				864705381BAD03BB00222756 /* FirstTimeInstructionsScene.swift in Sources */,
+				09BA68601BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift in Sources */,
 				0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */,
+				09BA685E1BAE5A77003FBE8D /* SessionConnectingViewController.swift in Sources */,
 				8641A9581BA4ED04001B89EB /* Player.swift in Sources */,
 				86DDC8CE1BA686C700F444FB /* Target.swift in Sources */,
 				090E55BD1BA781ED001B0982 /* GameOverScene.swift in Sources */,

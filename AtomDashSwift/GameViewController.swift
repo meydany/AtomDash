@@ -9,12 +9,14 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController{
     
     var menuScene: SKScene!
+    var connectButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Configure the view.
         let skView = self.view as! SKView
@@ -24,15 +26,11 @@ class GameViewController: UIViewController {
         skView.multipleTouchEnabled = false
         
         menuScene = MenuScene(size: skView.bounds.size)
-        
+
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill
-        
+
         skView.presentScene(menuScene!)
-    }
-    
-    func presentPlayScene(){
-        
     }
     
     override func shouldAutorotate() -> Bool {
