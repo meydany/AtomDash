@@ -27,13 +27,12 @@ class MPCHandler: NSObject, MCSessionDelegate {
     }
     
     func setupBrowser(){
-        browser = MCBrowserViewController(serviceType: "my-game", session: session)
-        
+        browser = MCBrowserViewController(serviceType: "Atom-Dash", session: session)
     }
     
     func advertiseSelf(advertise:Bool){
         if advertise{
-            advertiser = MCAdvertiserAssistant(serviceType: "my-game", discoveryInfo: nil, session: session)
+            advertiser = MCAdvertiserAssistant(serviceType: "Atom-Dash", discoveryInfo: nil, session: session)
             advertiser!.start()
         }
         else{

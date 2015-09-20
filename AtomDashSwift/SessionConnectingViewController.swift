@@ -8,17 +8,18 @@
 
 import UIKit
 import MultipeerConnectivity
+import SpriteKit
+import CoreBluetooth
 
-
-class SessionConnectingViewController: UIViewController, MCBrowserViewControllerDelegate{
+class SessionConnectingViewController: UIViewController, MCBrowserViewControllerDelegate {
     
     var appDelegate: AppDelegate!
-    var connectButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         
+        /*
         connectButton = UIButton(type: UIButtonType.RoundedRect)
         connectButton.backgroundColor = UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1)
         connectButton.bounds = CGRect(x: 0, y: 0, width: view.frame.width/2.5, height: view.frame.height/8)
@@ -26,6 +27,19 @@ class SessionConnectingViewController: UIViewController, MCBrowserViewController
         connectButton.setTitle("CONNECT", forState: UIControlState.Normal)
         connectButton.titleLabel?.font = UIFont(name: "DIN-Condensed-Bold", size: 50)
         connectButton.addTarget(self, action: Selector("connectToPlayer"), forControlEvents: UIControlEvents.TouchUpInside)
+        */
+
+        self.title = "SessionConnectingViewController"
+        
+        // Configure the view.
+        let skView = SKView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.multipleTouchEnabled = false
+        view.addSubview(skView)
+        
+        let chooseConnectionType = ChooseMultiplayerConnectionType(size: skView.frame.size)
         
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.mpcHandler.setupPeerWithDisplayName(UIDevice.currentDevice().name)
@@ -36,7 +50,9 @@ class SessionConnectingViewController: UIViewController, MCBrowserViewController
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleRecievedDataWithNotification:", name: "MPC_DidReceiveDataNotification", object: nil)
         
-        self.view.addSubview(connectButton)
+        skView.presentScene(chooseConnectionType)
+        chooseConnectionType.addBluetoothConnectButton()
+        //self.view.addSubview(connectButton)
     }
     
     func connectToPlayer() {
@@ -54,15 +70,21 @@ class SessionConnectingViewController: UIViewController, MCBrowserViewController
         let state = userInfo.objectForKey("state") as! Int
         
         if state != MCSessionState.Connecting.rawValue{
-            self.connectButton.setTitle("Connected", forState: UIControlState.Normal)
+            
+            print("ur connected bror")
+        }
+        if state == MCSessionState.Connected.rawValue{
+            print("Its officaial")
         }
     }
     
     func handleRecievedDataWithNotification(notification: NSNotification){
         let userInfo = notification.userInfo! as Dictionary
         let recievedData: NSData = userInfo["data"] as! NSData
-        
-        
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
