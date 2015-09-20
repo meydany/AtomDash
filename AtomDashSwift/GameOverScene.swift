@@ -53,7 +53,7 @@ class GameOverScene: SKScene {
         highScoreLabel!.position = CGPoint(x: self.frame.midX, y: (6.5*self.frame.height)/10)
         highScoreLabel!.text = "High Score: \(highScore!)"
         highScoreLabel!.fontName = "DINCondensed-Bold"
-        highScoreLabel!.fontSize = 75
+        highScoreLabel!.fontSize = 65
         highScoreLabel!.fontColor = UIColor.blackColor()
         
         mainMenuButton = ButtonTemplate(name: "MainMenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))

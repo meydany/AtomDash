@@ -11,7 +11,7 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    var menuScene: SKScene?
+    var menuScene: SKScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.multipleTouchEnabled = false
         
-        menuScene = FirstTimeInstructionsScene(size: skView.bounds.size)
+        menuScene = MenuScene(size: skView.bounds.size)
         
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill

@@ -11,6 +11,9 @@ import SpriteKit
 
 class Player : SKShapeNode {
     
+    var lastTouch: CGPoint!
+    var deltaPosition: CGPoint!
+    
     override init() {
         
         super.init()
@@ -31,6 +34,27 @@ class Player : SKShapeNode {
         self.physicsBody!.categoryBitMask = ColliderObject.playerCollider.rawValue
         self.physicsBody!.contactTestBitMask = ColliderObject.enemyCollider.rawValue | ColliderObject.targetCollider.rawValue
         self.physicsBody!.collisionBitMask = ColliderObject.wallCollider.rawValue
+        
+        lastTouch = CGPoint()
+        deltaPosition = CGPoint()
+    }
+    
+    func startDrag(locationOfTouch: CGPoint){
+        lastTouch = locationOfTouch
+    }
+    
+    func updatePositionForDragMovement(locationOfTouch: CGPoint){
+        
+        
+        let currentTouch:CGPoint = locationOfTouch
+        
+        deltaPosition.x = currentTouch.x - lastTouch.x
+        deltaPosition.y = currentTouch.y - lastTouch.y
+        
+        self.position.x += deltaPosition.x
+        self.position.y += deltaPosition.y
+        
+        lastTouch = currentTouch
     }
     
     required init?(coder aDecoder: NSCoder) {

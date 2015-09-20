@@ -33,7 +33,7 @@ class TimeLabel: SKLabelNode{
     func startCountdown(seconds: Int){
         isTimeUp = false
         self.text = String(seconds)
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(1),SKAction.runBlock(countdown)])))
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(1), SKAction.runBlock(countdown)])))
     }
     
     func countdown() {
@@ -46,6 +46,20 @@ class TimeLabel: SKLabelNode{
             self.fontColor = UIColor(red: redValue!, green: 0, blue: 0, alpha: 1)
         }
         else {
+            isTimeUp = true
+        }
+    }
+    
+    func addTime(seconds: Int){
+        self.text = String((Int(self.text!)! + seconds))
+    }
+    
+    func removeTime(seconds: Int){
+        if (Int(self.text!)! - seconds >= 0){
+            self.text = String((Int(self.text!)! - seconds))
+        }
+        else{
+            self.text = "0"
             isTimeUp = true
         }
     }

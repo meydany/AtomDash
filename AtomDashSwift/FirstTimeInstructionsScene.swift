@@ -9,7 +9,8 @@
 import Foundation
 import SpriteKit
 
-class FirstTimeInstructionsScene: SKScene {
+class FirstTimeInstructionsScene: SKScene
+{
     
     var firstLabelView: UITextView!
     var secondLabelView: UITextView!
@@ -19,6 +20,8 @@ class FirstTimeInstructionsScene: SKScene {
     var slides: Int?
     
     var scrollView: UIScrollView!
+    
+    var gotItButton: ButtonTemplate!
     
     override func didMoveToView(view: SKView) {
         scrollView = UIScrollView(frame: CGRectMake(0, 0, view.frame.width, view.frame.height))
@@ -33,19 +36,25 @@ class FirstTimeInstructionsScene: SKScene {
         secondLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
+        gotItButton = ButtonTemplate(name: "GotItButton",labelName: "Got it",  size: CGSize(width: (scrollView.frame.width / CGFloat(slides!))/2.5, height: scrollView.frame.height/8), position: CGPoint(x: (scrollView.frame.width / CGFloat(slides!))/2, y: scrollView.frame.midY), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
+        gotItButton.zPosition = 10
+        
         scrollView?.contentSize = CGSize(width: view.frame.width * CGFloat(slides!), height: view.frame.height)
         
         scrollView.addSubview(firstLabelView)
         scrollView.addSubview(secondLabelView)
         scrollView.addSubview(thirdLabelView)
+        
         self.view?.addSubview(scrollView!)
+        //scrollView.removeFromSuperview()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
         for touch in (touches as Set<UITouch>) {
-            _ = touch.locationInNode(self)
+            print("touch")
+            print(touch.locationInNode(self).x)
             
         }
     }

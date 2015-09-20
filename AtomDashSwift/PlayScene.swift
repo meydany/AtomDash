@@ -102,7 +102,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         for touch in (touches) {
             let location = touch.locationInNode(self)
 
-            player!.moveToPosition(location, moveType: MoveType.Direct)
+            //player!.moveToPosition(location, moveType: MoveType.Direct)
+            player!.startDrag(location)
             
             if let name = self.nodeAtPoint(location).name{
                 switch name {
@@ -145,17 +146,24 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches{
+            player!.updatePositionForDragMovement(touch.locationInNode(self))
+        }
+    }
+    
     func didBeginContact(contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         switch contactMask {
         case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
+            timeLabel!.removeTime(2)
             contact.bodyB.node!.removeActionForKey("moveEnemy")
             contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
-            scoreLabel!.removeScore(1)
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeFromParent()
-            scoreLabel!.addScore(2)
+            scoreLabel!.addScore(1)
+            timeLabel!.addTime(1)
             newTarget = true
         default:
             print("Default collision", terminator: "")
