@@ -39,7 +39,7 @@ class InstructionsScene: SKScene {
         targetNode!.position = CGPoint(x: (3*self.frame.width)/4, y: (4*self.frame.height)/5)
 
         lineOnePartOne = makeLabel("You are the", position: CGPoint(x: self.frame.width/2.7, y: (3*self.frame.height)/5), color: UIColor(red: 0, green: 0, blue: 0, alpha: 1))
-        lineOnePartTwo = makeLabel("BLUE", position: CGPoint(x: self.frame.midX * 1.5, y: (3*self.frame.height)/5), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
+        lineOnePartTwo = makeLabel("BLUE", position: CGPoint(x: self.frame.midX * 1.5 + 10, y: (3*self.frame.height)/5), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
         
         lineTwoPartOne = makeLabel("Run from the", position: CGPoint(x: self.frame.width/2.5, y: (2.5*self.frame.height)/5), color: UIColor(red: 0, green: 0, blue: 0, alpha: 1))
         lineTwoPartTwo = makeLabel("RED", position: CGPoint(x: lineOnePartOne!.position.x + (lineOnePartTwo!.frame.width * 1.9), y: (2.5*self.frame.height)/5), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
