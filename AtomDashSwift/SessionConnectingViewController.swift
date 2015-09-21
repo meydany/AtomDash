@@ -70,7 +70,6 @@ class SessionConnectingViewController: UIViewController, MCBrowserViewController
         let state = userInfo.objectForKey("state") as! Int
         
         if state != MCSessionState.Connecting.rawValue{
-            
             print("ur connected bror")
         }
         if state == MCSessionState.Connected.rawValue{

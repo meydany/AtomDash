@@ -84,7 +84,7 @@ class MenuScene: SKScene {
                     print("Make this scene!", terminator: "")
                     //Make leaderbaords menu
                 case "InstructionsButton":
-                    let instructionsScene = InstructionsScene(size: self.scene!.size)
+                    let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
                     self.scene!.view?.presentScene(instructionsScene)
                 case "MultiplayerButton":
                     let chooseConnectionType = ChooseMultiplayerConnectionType(size: self.scene!.size)
