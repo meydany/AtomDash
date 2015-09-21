@@ -157,7 +157,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         switch contactMask {
         case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            timeLabel!.removeTime(2)
+            //timeLabel!.removeTime(2)
+            timeLabel!.text = "0"
+            timeLabel!.isTimeUp = true
             contact.bodyB.node!.removeActionForKey("moveEnemy")
             contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
@@ -193,7 +195,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         else{
             enemy!.position = CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
-            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(3))) + 3.0))
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(3))) + 2.0))
         }
         
         enemy!.runAction(moveEnemyAction!, withKey: "moveEnemy")
