@@ -61,7 +61,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         newTarget = false
         
         // Creating enemies
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.75),SKAction.runBlock(addEnemy)])))
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.4),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
@@ -148,7 +148,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches{
-            player!.updatePositionForDragMovement(touch.locationInNode(self))
+            if (!scene!.paused){
+                player!.updatePositionForDragMovement(touch.locationInNode(self))
+            }
         }
     }
     
@@ -195,7 +197,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         else{
             enemy!.position = CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
-            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(3))) + 2.0))
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(1))) + 2.0))
         }
         
         enemy!.runAction(moveEnemyAction!, withKey: "moveEnemy")
