@@ -18,25 +18,25 @@ enum ColliderObject: UInt32 {
 
 class PlayScene: SKScene, SKPhysicsContactDelegate {
     
-    var player: Player?
-    var enemy: Enemy?
-    var target: Target?
+    var player: Player!
+    var enemy: Enemy!
+    var target: Target!
     
-    var scoreLabel: ScoreLabel?
+    var scoreLabel: ScoreLabel!
+    var dragLabel: SKLabelNode!
     
-    var newTarget: Bool?
+    var pauseButton: SKNode!
+    var resumeButton: ButtonTemplate!
+    var exitButton: ButtonTemplate!
+    var restartButton: ButtonTemplate!
     
-    var moveEnemyAction: SKAction?
+    var newTarget: Bool!
     
-    var timer: NSTimer?
+    var moveEnemyAction: SKAction!
     
-    var pauseButton: SKNode?
+    var timer: NSTimer!
     
-    var resumeButton: ButtonTemplate?
-    var exitButton: ButtonTemplate?
-    var restartButton: ButtonTemplate?
-    
-    var backgroundFilterNode: SKSpriteNode?
+    var backgroundFilterNode: SKSpriteNode!
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -52,30 +52,37 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         //Player instantiation
         player = Player()
-        player!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        player.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         //Target instantiation
         target = Target()
-        target!.moveToRandomPosition(self.frame)
+        target.moveToRandomPosition(self.frame)
         newTarget = false
         
         // Creating enemies
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.4),SKAction.runBlock(addEnemy)])))
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
         
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
-        scoreLabel!.position = CGPoint(x: self.frame.midX + scoreLabel!.frame.width/2, y: self.frame.maxY - labelBuffer)
+        scoreLabel.position = CGPoint(x: self.frame.midX + scoreLabel.frame.width/2, y: self.frame.maxY - labelBuffer)
+        
+        dragLabel = SKLabelNode(text: "DRAG TO START")
+        dragLabel.name = "DragLabel"
+        dragLabel.fontName = "DINCondensed-Bold"
+        dragLabel.fontSize = 25
+        dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
+        dragLabel.fontColor = UIColor.darkGrayColor()
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
-        pauseButton?.xScale = 0.9
-        pauseButton?.yScale = 0.9
-        pauseButton?.position.x = self.frame.minX + (pauseButton!.frame.width * 0.75)
-        pauseButton?.position.y = self.frame.minY + (pauseButton!.frame.height * 0.75)
-        pauseButton?.name = "PauseButton"
+        pauseButton.xScale = 0.9
+        pauseButton.yScale = 0.9
+        pauseButton.position.x = self.frame.minX + (pauseButton!.frame.width * 0.75)
+        pauseButton.position.y = self.frame.minY + (pauseButton!.frame.height * 0.75)
+        pauseButton.name = "PauseButton"
         
         resumeButton = ButtonTemplate(name: "ResumeButton",labelName: "RESUME",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
         
@@ -83,22 +90,39 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
         
-        self.addChild(pauseButton!)
-        self.addChild(player!)
-        self.addChild(target!)
-        self.addChild(scoreLabel!)
+        self.addChild(pauseButton)
+        self.addChild(player)
+        self.addChild(target)
+        self.addChild(scoreLabel)
+        self.addChild(dragLabel)
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        if(self.childNodeWithName("DragLabel") != nil) {
+            self.view!.paused = true
+        }
+        if(newTarget!) {
+            createNewTarget()
+            
+            newTarget = false
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         /* Called when a touch begins */
         
+        if(self.view!.paused && self.childNodeWithName("DragLabel") != nil) {
+            self.childNodeWithName("DragLabel")!.removeFromParent()
+            self.view!.paused = false
+        }
+        
         for touch in (touches) {
             let location = touch.locationInNode(self)
             
-            //player!.moveToPosition(location, moveType: MoveType.Direct)
-            player!.startDrag(location)
+            player.startDrag(location)
             
             if let name = self.nodeAtPoint(location).name{
+                
                 switch name {
                 case "PauseButton":
                     if(!scene!.paused) {
@@ -110,23 +134,20 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                         self.addChild(restartButton!)
                         
                     }
-                    break
                 case "ResumeButton":
                     if(scene!.paused) {
                         scene!.paused = false
                         
                         removeFilter()
-                        resumeButton!.removeFromParent()
-                        exitButton!.removeFromParent()
-                        restartButton!.removeFromParent()
+                        resumeButton.removeFromParent()
+                        exitButton.removeFromParent()
+                        restartButton.removeFromParent()
                     }
-                    break
                 case "ExitButton":
                     if(scene!.paused) {
                         let menuScene = MenuScene(size: self.scene!.size)
                         self.scene!.view?.presentScene(menuScene)
                     }
-                    break
                 case "RestartButton":
                     if(scene!.paused) {
                         let playScene = PlayScene(size: self.scene!.size)
@@ -135,6 +156,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                 default:
                     break
                 }
+                
             }
         }
     }
@@ -151,29 +173,24 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         switch contactMask {
+            
         case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeActionForKey("moveEnemy")
             contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
             gameOver()
+            
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeFromParent()
-            scoreLabel!.addScore(1)
+            scoreLabel.addScore(1)
             newTarget = true
+            
         default:
             print("Default collision", terminator: "")
         }
     }
     
-    override func update(currentTime: CFTimeInterval) {
-        if(newTarget!) {
-            createNewTarget()
-            
-            newTarget = false
-        }
-    }
-    
     func gameOver() {
-        let gameOverScene = GameOverScene(score: Int(scoreLabel!.text!)!,size: self.scene!.size)
+        let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
         self.scene!.view?.presentScene(gameOverScene)
     }
     
@@ -182,36 +199,36 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         enemy = Enemy(side: SpawnSide.Right)
         
         if (arc4random_uniform(2) == 1){
-            enemy!.position = CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
-            moveEnemyAction = SKAction.moveTo(CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
+            enemy.position = CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
         }
         else{
-            enemy!.position = CGPoint(x: -enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2)
-            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy!.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy!.frame.height))) + enemy!.frame.height/2), duration: (Double(arc4random_uniform(UInt32(1))) + 2.0))
+            enemy.position = CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: (Double(arc4random_uniform(UInt32(1))) + 2.0))
         }
         
-        enemy!.runAction(moveEnemyAction!, withKey: "moveEnemy")
-        self.addChild(enemy!)
+        enemy.runAction(moveEnemyAction!, withKey: "moveEnemy")
+        self.addChild(enemy)
     }
     
     func createNewTarget() {
         target = Target()
-        target!.moveToRandomPosition(self.frame)
+        target.moveToRandomPosition(self.frame)
         
-        self.addChild(target!)
+        self.addChild(target)
     }
     
     func applyFilter() {
         backgroundFilterNode = SKSpriteNode(color: UIColor.whiteColor(), size: self.view!.frame.size)
-        backgroundFilterNode!.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-        backgroundFilterNode!.zPosition = self.scene!.zPosition + 1
-        backgroundFilterNode!.alpha = 0.75
+        backgroundFilterNode.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        backgroundFilterNode.zPosition = self.scene!.zPosition + 1
+        backgroundFilterNode.alpha = 0.75
         
-        self.addChild(backgroundFilterNode!)
+        self.addChild(backgroundFilterNode)
     }
     
     func removeFilter() {
-        backgroundFilterNode!.removeFromParent()
+        backgroundFilterNode.removeFromParent()
     }
 }
 

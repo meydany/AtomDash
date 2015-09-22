@@ -32,7 +32,7 @@ class MenuScene: SKScene {
         gameName.fontName = "DINCondensed-Bold"
         gameName.fontSize = 75
         gameName.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - gameName.frame.height - ((1 * self.frame.height)/10))
-        gameName.fontColor = UIColor.blackColor()
+        gameName.fontColor = UIColor.darkGrayColor()
         
         playerNode = Player()
         playerNode!.position = CGPoint(x: self.frame.width/4, y: (3.5*self.frame.height)/5)
@@ -53,7 +53,6 @@ class MenuScene: SKScene {
         self.addChild(targetNode!)
         self.addChild(enemyNode!)
 
-        
         self.addChild(multiplayerButton)
         self.addChild(leaderboardsButton)
         self.addChild(instructionsButton)
@@ -69,6 +68,7 @@ class MenuScene: SKScene {
             let location = touch.locationInNode(self)
             
             if let name = self.nodeAtPoint(location).name{
+                
                 switch name {
                 case "PlayButton":
                     if(NSUserDefaults().boolForKey("instructionsScene")) {
@@ -92,6 +92,7 @@ class MenuScene: SKScene {
                 default:
                     break
                 }
+                
             }
         }
     }

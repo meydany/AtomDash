@@ -21,7 +21,7 @@ class ScoreLabel: SKLabelNode {
         self.text = "0"
         self.fontName = "DINCondensed-Bold"
         self.fontSize = 75
-        self.fontColor = UIColor.blackColor()
+        self.fontColor = UIColor.darkGrayColor()
     }
     
     func addScore(points: Int){
