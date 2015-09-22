@@ -23,7 +23,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var target: Target?
     
     var scoreLabel: ScoreLabel?
-    var timeLabel: TimeLabel?
     
     var newTarget: Bool?
     
@@ -66,14 +65,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
         
-        // Creating the TimeLabel
-        timeLabel = TimeLabel()
-        timeLabel!.position = CGPoint(x: labelBuffer, y: self.frame.maxY - labelBuffer)
-        timeLabel!.startCountdown(10)
-        
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
-        scoreLabel!.position = CGPoint(x: self.frame.maxX - labelBuffer, y: self.frame.maxY - labelBuffer)
+        scoreLabel!.position = CGPoint(x: self.frame.midX + scoreLabel!.frame.width/2, y: self.frame.maxY - labelBuffer)
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
@@ -92,7 +86,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(pauseButton!)
         self.addChild(player!)
         self.addChild(target!)
-        self.addChild(timeLabel!)
         self.addChild(scoreLabel!)
     }
     
@@ -101,7 +94,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         for touch in (touches) {
             let location = touch.locationInNode(self)
-
+            
             //player!.moveToPosition(location, moveType: MoveType.Direct)
             player!.startDrag(location)
             
@@ -110,7 +103,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                 case "PauseButton":
                     if(!scene!.paused) {
                         scene!.paused = true
-                    
+                        
                         applyFilter()
                         self.addChild(resumeButton!)
                         self.addChild(exitButton!)
@@ -121,7 +114,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                 case "ResumeButton":
                     if(scene!.paused) {
                         scene!.paused = false
-                    
+                        
                         removeFilter()
                         resumeButton!.removeFromParent()
                         exitButton!.removeFromParent()
@@ -159,32 +152,29 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         switch contactMask {
         case ColliderObject.enemyCollider.rawValue | ColliderObject.playerCollider.rawValue:
-            //timeLabel!.removeTime(2)
-            timeLabel!.text = "0"
-            timeLabel!.isTimeUp = true
             contact.bodyB.node!.removeActionForKey("moveEnemy")
             contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
+            gameOver()
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeFromParent()
             scoreLabel!.addScore(1)
-            timeLabel!.addTime(1)
             newTarget = true
         default:
             print("Default collision", terminator: "")
         }
     }
-   
+    
     override func update(currentTime: CFTimeInterval) {
         if(newTarget!) {
             createNewTarget()
             
             newTarget = false
         }
-        
-        if (timeLabel!.isTimeUp){
-            let gameOverScene = GameOverScene(score: Int(scoreLabel!.text!)!, size: self.scene!.size)
-            self.scene!.view?.presentScene(gameOverScene)
-        }
+    }
+    
+    func gameOver() {
+        let gameOverScene = GameOverScene(score: Int(scoreLabel!.text!)!,size: self.scene!.size)
+        self.scene!.view?.presentScene(gameOverScene)
     }
     
     
