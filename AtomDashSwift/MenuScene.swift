@@ -48,11 +48,11 @@ class MenuScene: SKScene {
         instructionsButton = ButtonTemplate(name: "InstructionsButton",labelName: "INSTRUCTIONS",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         multiplayerButton = ButtonTemplate(name: "MultiplayerButton",labelName: "MULTIPLAYER",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor(red: 0.87, green: 0.8, blue: 0.93, alpha: 1))
         
-        /*
+        
         self.addChild(playerNode!)
         self.addChild(targetNode!)
         self.addChild(enemyNode!)
-        */
+
         
         self.addChild(multiplayerButton)
         self.addChild(leaderboardsButton)
