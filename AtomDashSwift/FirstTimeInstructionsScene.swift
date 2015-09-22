@@ -46,8 +46,8 @@ class FirstTimeInstructionsScene: SKScene {
         secondLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
 
-        gotItButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8)))
-        gotItButton.center = CGPoint(x: 0, y: 0)
+        gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2.5, height: self.frame.width/8))
+        gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*5 - gotItButton.frame.width/2, y: self.frame.height/1.5)
         gotItButton.layer.cornerRadius = 10
         gotItButton.backgroundColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
         gotItButton.setTitle("GOT IT", forState: UIControlState.Normal)
@@ -57,21 +57,17 @@ class FirstTimeInstructionsScene: SKScene {
         gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * CGFloat(scalingFactor))
         gotItButton.titleLabel!.textAlignment = NSTextAlignment.Center
         gotItButton.contentEdgeInsets = UIEdgeInsets(top: gotItButton.frame.height/5, left: 0, bottom: 0, right: 0)
-
-        buttonView = UIView(frame: CGRectMake(self.frame.midX * 5, self.frame.height/1.5, gotItButton.frame.width, gotItButton.frame.height))
-        buttonView.addSubview(gotItButton)
         
         scrollView.addSubview(firstLabelView)
         scrollView.addSubview(secondLabelView)
         scrollView.addSubview(thirdLabelView)
-        scrollView.addSubview(buttonView)
+        scrollView.addSubview(gotItButton)
         
         self.view?.addSubview(scrollView!)
         //self.view?.addSubview(pageControl)
 
     }
     
-//    
 //    func changePage(sender: AnyObject) -> () {
 //        if(pageControl.currentPage != 3) {
 //            let x = CGFloat(pageControl.currentPage) * scrollView.frame.size.width
