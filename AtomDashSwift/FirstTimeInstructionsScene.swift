@@ -9,21 +9,19 @@
 import Foundation
 import SpriteKit
 
-class FirstTimeInstructionsScene: SKScene
-{
+class FirstTimeInstructionsScene: SKScene {
     
     var firstLabelView: UITextView!
     var secondLabelView: UITextView!
     var thirdLabelView: UITextView!
     
-    // Counts the amount of slides we will have, helps for optimization
-    var slides: Int!
+    var gotItButton: UIButton!
+    var buttonView: UIView!
     
     var scrollView: UIScrollView!
+//    var pageControl: UIPageControl!
     
-    var pageControl: UIPageControl!
-    
-    var gotItButton: ButtonTemplate!
+    var slides: Int!
     
     override func didMoveToView(view: SKView) {
         
@@ -33,48 +31,60 @@ class FirstTimeInstructionsScene: SKScene
         scrollView.pagingEnabled = true
         scrollView.contentSize = CGSize(width: view.frame.width * 3, height: view.frame.height)
         
-        pageControl = UIPageControl(frame: CGRectMake(0,view.frame.height/4,scrollView.frame.width, scrollView.frame.height))
-        pageControl.numberOfPages = 3
-        pageControl.currentPage = 0
-        pageControl.tintColor = UIColor.redColor()
-        pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
-        pageControl.currentPageIndicatorTintColor = UIColor.grayColor()
-        
-        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
-        
+//        pageControl = UIPageControl(frame: CGRectMake(0,view.frame.height/2.5,scrollView.frame.width, scrollView.frame.height))
+//        pageControl.numberOfPages = 4
+//        pageControl.currentPage = 0
+//        pageControl.tintColor = UIColor.redColor()
+//        pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
+//        pageControl.currentPageIndicatorTintColor = UIColor.grayColor()
+//        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
+//        
         slides = Int()
         slides = 0
         
         firstLabelView = makeTextView("You are the ", part2: "BLUE", color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
         secondLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
         thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
-        
-        gotItButton = ButtonTemplate(name: "GotItButton",labelName: "Got it",  size: CGSize(width: (scrollView.frame.width / CGFloat(slides))/2.5, height: scrollView.frame.height/8), position: CGPoint(x: (scrollView.frame.width / CGFloat(slides))/2, y: scrollView.frame.midY), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
-        gotItButton.zPosition = 10
+
+        gotItButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8)))
+        gotItButton.center = CGPoint(x: 0, y: 0)
+        gotItButton.layer.cornerRadius = 10
+        gotItButton.backgroundColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
+        gotItButton.setTitle("GOT IT", forState: UIControlState.Normal)
+        gotItButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        gotItButton.addTarget(self, action: "presentPlayScene", forControlEvents: UIControlEvents.TouchUpInside)
+        let scalingFactor = min(self.frame.width / gotItButton.frame.width, self.frame.height / gotItButton.frame.height)/1.25
+        gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * CGFloat(scalingFactor))
+        gotItButton.titleLabel!.textAlignment = NSTextAlignment.Center
+        gotItButton.contentEdgeInsets = UIEdgeInsets(top: gotItButton.frame.height/5, left: 0, bottom: 0, right: 0)
+
+        buttonView = UIView(frame: CGRectMake(self.frame.midX * 5, self.frame.height/1.5, gotItButton.frame.width, gotItButton.frame.height))
+        buttonView.addSubview(gotItButton)
         
         scrollView.addSubview(firstLabelView)
         scrollView.addSubview(secondLabelView)
         scrollView.addSubview(thirdLabelView)
+        scrollView.addSubview(buttonView)
         
         self.view?.addSubview(scrollView!)
-        self.view?.addSubview(pageControl)
+        //self.view?.addSubview(pageControl)
 
     }
     
-    func changePage(sender: AnyObject) -> () {
-        let x = CGFloat(pageControl.currentPage) * scrollView.frame.size.width
-        scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
-    }
+//    
+//    func changePage(sender: AnyObject) -> () {
+//        if(pageControl.currentPage != 3) {
+//            let x = CGFloat(pageControl.currentPage) * scrollView.frame.size.width
+//            scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+//        }else {
+//            scrollView.removeFromSuperview()
+//            pageControl.removeFromSuperview()
+//            let playScene = PlayScene(size: self.scene!.size)
+//            self.scene!.view?.presentScene(playScene)
+//        }
+//
+//    }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
-        
-        for touch in (touches as Set<UITouch>) {
-            print("touch")
-            print(touch.locationInNode(self).x)
-            
-        }
-    }
     
     func makeTextView(part1: String, part2: String, color: UIColor) -> UITextView{
         
@@ -95,6 +105,12 @@ class FirstTimeInstructionsScene: SKScene
         let stringPartTwo = NSMutableAttributedString(string: secondPart, attributes: [NSForegroundColorAttributeName: color])
         stringPartOne.appendAttributedString(stringPartTwo)
         return stringPartOne
+    }
+    
+    func presentPlayScene() {
+        scrollView.removeFromSuperview()
+        let playScene = PlayScene(size: self.scene!.size)
+        self.scene!.view?.presentScene(playScene)
     }
     
 }
