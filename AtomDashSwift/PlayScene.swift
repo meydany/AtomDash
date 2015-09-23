@@ -139,7 +139,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                         self.addChild(exitButton!)
                         self.addChild(restartButton!)
                     }
-                    
                 case "ResumeButton":
                     if(scene!.paused) {
                         scene!.paused = false
@@ -149,21 +148,18 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                         exitButton.removeFromParent()
                         restartButton.removeFromParent()
                     }
-                    
                 case "ExitButton":
                     if(scene!.paused) {
                         let menuScene = MenuScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
                         self.scene!.view?.presentScene(menuScene, transition: transition)
                     }
-                    
                 case "RestartButton":
                     if(scene!.paused) {
                         let playScene = PlayScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
                     }
-                    
                 default:
                     break
                 }

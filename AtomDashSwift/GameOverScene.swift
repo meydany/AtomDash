@@ -81,12 +81,10 @@ class GameOverScene: SKScene {
                 let playScene = PlayScene(size: self.scene!.size)
                 let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
                 self.scene!.view?.presentScene(playScene, transition: transition)
-                
             case "MainMenuButton":
                 let menuScene = MenuScene(size: self.scene!.size)
                 let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
                 self.scene!.view?.presentScene(menuScene, transition: transition)
-                
             default:
                 break
             }
