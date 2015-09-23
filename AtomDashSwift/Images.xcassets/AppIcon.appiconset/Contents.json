@@ -1,39 +1,34 @@
 {
   "images" : [
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Screen Shot 2015-09-21 at 10.23.51 PM.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Screen Shot 2015-09-21 at 10.23.51 PM-1.png",
+      "size" : "29x29",
       "scale" : "3x"
     },
     {
-      "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Screen Shot 2015-09-21 at 10.23.51 PM-4.png",
+      "size" : "40x40",
       "scale" : "2x"
     },
     {
-      "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Screen Shot 2015-09-21 at 10.23.51 PM-5.png",
+      "size" : "40x40",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Screen Shot 2015-09-21 at 10.23.51 PM-2.png",
+      "filename" : "AppIcon.png",
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Screen Shot 2015-09-21 at 10.23.51 PM-3.png",
+      "size" : "60x60",
       "scale" : "3x"
     }
   ],

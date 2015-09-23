@@ -151,13 +151,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                 case "ExitButton":
                     if(scene!.paused) {
                         let menuScene = MenuScene(size: self.scene!.size)
-                        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(menuScene, transition: transition)
                     }
                 case "RestartButton":
                     if(scene!.paused) {
                         let playScene = PlayScene(size: self.scene!.size)
-                        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
                     }
                 default:
@@ -234,7 +234,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     func gameOver() {
         let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
-        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
         self.scene!.view?.presentScene(gameOverScene, transition: transition)
     }
 }

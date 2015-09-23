@@ -25,7 +25,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
     var slides: Int!
     
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.whiteColor()
         
         currentScrollPoint = CGPoint(x: 0,y: 0)
         
@@ -120,7 +120,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
     func presentPlayScene() {
         fadeOutViews()
         let playScene = PlayScene(size: self.scene!.size)
-        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
         self.view?.presentScene(playScene, transition: transition)
     }
     

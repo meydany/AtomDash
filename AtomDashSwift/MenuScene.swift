@@ -73,7 +73,7 @@ class MenuScene: SKScene {
                 case "PlayButton":
                     if(NSUserDefaults().boolForKey("instructionsScene")) {
                         let playScene = PlayScene(size: self.scene!.size)
-                        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
                     }
                     else {
@@ -85,11 +85,11 @@ class MenuScene: SKScene {
                     print("Make this scene!", terminator: "")
                 case "InstructionsButton":
                     let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
-                    let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                    let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                     self.scene!.view?.presentScene(instructionsScene, transition: transition)
                 case "MultiplayerButton":
                     let chooseConnectionType = ChooseMultiplayerConnectionType(size: self.scene!.size)
-                    let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                    let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                     self.scene!.view?.presentScene(chooseConnectionType, transition: transition)
                 default:
                     break
