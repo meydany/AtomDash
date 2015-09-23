@@ -74,7 +74,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         dragLabel = SKLabelNode(text: "DRAG TO START")
         dragLabel.name = "DragLabel"
         dragLabel.fontName = "DINCondensed-Bold"
-        dragLabel.fontSize = 25
+        dragLabel.fontSize = 25 * PlayScene().getScreenWidthRatio()
         dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
         dragLabel.fontColor = UIColor.lightGrayColor()
         
@@ -236,6 +236,17 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
         self.scene!.view?.presentScene(gameOverScene, transition: transition)
+    }
+    
+    func getScreenWidthRatio() -> CGFloat {
+        let screenWidth = UIScreen.mainScreen().bounds.size.width
+        return screenWidth/375 //iphone 6 screen width (everything will be relative to this width)
+    }
+    
+    func getScreenHeightRatio() -> CGFloat {
+        let screenHeight = UIScreen.mainScreen().bounds.size.height
+        print(screenHeight)
+        return screenHeight/667 //iphone 6 screen height (everything will be relative to this height)
     }
 }
 

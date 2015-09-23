@@ -27,9 +27,9 @@ class Enemy: SKShapeNode {
         self.side = side
         
         let mutablePath: CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35), CGFloat(0), CGFloat(M_PI*2), true)
+        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * PlayScene().getScreenWidthRatio()), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
-        self.lineWidth = 8;
+        self.lineWidth = 8 * PlayScene().getScreenWidthRatio()
         self.strokeColor = UIColor.gameRedColor()
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)

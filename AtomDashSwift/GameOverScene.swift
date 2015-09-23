@@ -41,21 +41,19 @@ class GameOverScene: SKScene {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        let scalingFactor = min(self.frame.width / self.frame.width, self.frame.height / self.frame.height)/1.25
-
+    
         scoreLabel = SKLabelNode()
-        scoreLabel.position = CGPoint(x: self.frame.midX, y: (8*self.frame.height)/10)
+        scoreLabel.position = CGPoint(x: self.frame.midX, y: ((8*self.frame.height)/10))
         scoreLabel.text = "Score: \(gameScore!)"
         scoreLabel.fontName = "HelveticaNeue-Thin"
-        scoreLabel.fontSize = 75 * scalingFactor
+        scoreLabel.fontSize = 75 * PlayScene().getScreenWidthRatio()
         scoreLabel.fontColor = UIColor.blackColor()
         
         highScoreLabel = SKLabelNode()
         highScoreLabel.position = CGPoint(x: self.frame.midX, y: (7*self.frame.height)/10)
         highScoreLabel.text = "High Score: \(highScore!)"
         highScoreLabel.fontName = "HelveticaNeue-Thin"
-        highScoreLabel.fontSize = 45 * scalingFactor
+        highScoreLabel.fontSize = 45 * PlayScene().getScreenWidthRatio()
         highScoreLabel.fontColor = UIColor.darkGrayColor()
         
         mainMenuButton = ButtonTemplate(name: "MainMenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameBlueColor())

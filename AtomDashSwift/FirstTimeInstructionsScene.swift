@@ -64,7 +64,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         
         //Button text
         let scalingFactor = min(self.frame.width / gotItButton.frame.width, self.frame.height / gotItButton.frame.height)/1.25
-        gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * CGFloat(scalingFactor))
+        gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * PlayScene().getScreenWidthRatio() * CGFloat(scalingFactor))
         gotItButton.titleLabel!.textAlignment = NSTextAlignment.Center
         gotItButton.contentEdgeInsets = UIEdgeInsets(top: gotItButton.frame.height/5, left: 0, bottom: 0, right: 0)
         
@@ -81,6 +81,14 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         fadeInViews()
 //        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(scrollView!)})
 //        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(pageControl)})
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        if(pageControl.alpha == 0 && scrollView.alpha == 0) {
+            runAction(SKAction.waitForDuration(0.1), completion: {self.pageControl.removeFromSuperview()})
+            runAction(SKAction.waitForDuration(0.1), completion: {self.scrollView.removeFromSuperview()})
+            print("destroyed")
+        }
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -100,7 +108,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         
         let textView = UITextView(frame: CGRectMake(CGFloat(slides!) * self.frame.width, 0, self.frame.width, self.frame.height))
         textView.attributedText = createAttributedString(part1, secondPart: part2, color: color)
-        textView.font = UIFont(name: "DINCondensed-Bold", size: 50)
+        textView.font = UIFont(name: "DINCondensed-Bold", size: 50 * PlayScene().getScreenWidthRatio())
         textView.textAlignment = NSTextAlignment.Center
         textView.editable = false
         textView.contentOffset = CGPoint(x: 0, y: -self.frame.height/4)
@@ -122,14 +130,6 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         let playScene = PlayScene(size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
         self.view?.presentScene(playScene, transition: transition)
-    }
-    
-    override func update(currentTime: CFTimeInterval) {
-        if(pageControl.alpha == 0 && scrollView.alpha == 0) {
-            runAction(SKAction.waitForDuration(0.1), completion: {self.pageControl.removeFromSuperview()})
-            runAction(SKAction.waitForDuration(0.1), completion: {self.scrollView.removeFromSuperview()})
-            print("destroyed")
-        }
     }
     
     func fadeInViews() {
