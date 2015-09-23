@@ -88,7 +88,8 @@ class MenuScene: SKScene {
                     
                 case "InstructionsButton":
                     let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
-                    self.scene!.view?.presentScene(instructionsScene)
+                    let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                    self.scene!.view?.presentScene(instructionsScene, transition: transition)
                     
                 case "MultiplayerButton":
                     let chooseConnectionType = ChooseMultiplayerConnectionType(size: self.scene!.size)

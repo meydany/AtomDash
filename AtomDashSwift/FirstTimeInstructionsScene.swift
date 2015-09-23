@@ -25,6 +25,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
     var slides: Int!
     
     override func didMoveToView(view: SKView) {
+        self.backgroundColor = UIColor.blackColor()
         
         currentScrollPoint = CGPoint(x: 0,y: 0)
         
@@ -73,9 +74,8 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.addSubview(thirdLabelView)
         scrollView.addSubview(gotItButton)
         
-        self.view?.addSubview(scrollView!)
-        self.view?.addSubview(pageControl)
-
+        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(scrollView!)})
+        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(pageControl)})
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -116,7 +116,8 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.removeFromSuperview()
         pageControl.removeFromSuperview()
         let playScene = PlayScene(size: self.scene!.size)
-        self.scene!.view?.presentScene(playScene)
+        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.presentScene(playScene, transition: transition)})
     }
     
 }
