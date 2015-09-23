@@ -35,6 +35,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.directionalLockEnabled = true
         scrollView.pagingEnabled = true
         scrollView.contentSize = CGSize(width: view.frame.width * 3, height: view.frame.height)
+        scrollView.alpha = 0.1
         
         pageControl = UIPageControl(frame: CGRectMake((3*view.frame.width)/8,view.frame.height/1.25,scrollView.frame.width/4, scrollView.frame.height/8))
         pageControl.numberOfPages = 3
@@ -42,6 +43,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         pageControl.tintColor = UIColor.redColor()
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.grayColor()
+        pageControl.alpha = 0.1
 
         slides = Int()
         slides = 0
@@ -74,8 +76,14 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.addSubview(thirdLabelView)
         scrollView.addSubview(gotItButton)
         
-        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(scrollView!)})
-        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(pageControl)})
+        self.view?.addSubview(scrollView)
+        self.view?.addSubview(pageControl)
+        UIView.animateWithDuration(0.5, animations: {
+            self.pageControl.alpha = 1
+            self.scrollView.alpha = 1
+        })
+//        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(scrollView!)})
+//        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.addSubview(pageControl)})
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -113,11 +121,21 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
     }
     
     func presentPlayScene() {
-        scrollView.removeFromSuperview()
-        pageControl.removeFromSuperview()
+        UIView.animateWithDuration(0.5, animations: {
+            self.pageControl.alpha = 0
+            self.scrollView.alpha = 0
+        })
         let playScene = PlayScene(size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
-        runAction(SKAction.waitForDuration(0.1), completion: {self.view?.presentScene(playScene, transition: transition)})
+        self.view?.presentScene(playScene, transition: transition)
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        if(pageControl.alpha == 0 && scrollView.alpha == 0) {
+            runAction(SKAction.waitForDuration(0.1), completion: {self.pageControl.removeFromSuperview()})
+            runAction(SKAction.waitForDuration(0.1), completion: {self.scrollView.removeFromSuperview()})
+            print("destroyed")
+        }
     }
     
 }
