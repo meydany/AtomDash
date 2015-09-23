@@ -38,6 +38,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var backgroundFilterNode: SKSpriteNode!
     
+    var initialPauseWait: Bool!
+    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -74,7 +76,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         dragLabel.fontName = "DINCondensed-Bold"
         dragLabel.fontSize = 25
         dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
-        dragLabel.fontColor = UIColor.darkGrayColor()
+        dragLabel.fontColor = UIColor.lightGrayColor()
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
@@ -84,11 +86,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.position.y = self.frame.minY + (pauseButton!.frame.height * 0.75)
         pauseButton.name = "PauseButton"
         
-        resumeButton = ButtonTemplate(name: "ResumeButton",labelName: "RESUME",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
+        resumeButton = ButtonTemplate(name: "ResumeButton",labelName: "RESUME",  size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5), color: UIColor.gameBlueColor())
         
-        exitButton = ButtonTemplate(name: "ExitButton", labelName: "EXIT", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
+        exitButton = ButtonTemplate(name: "ExitButton", labelName: "EXIT", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5), color: UIColor.gameRedColor())
         
-        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
+        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
+        
+        initialPauseWait = true
         
         self.addChild(pauseButton)
         self.addChild(player)
@@ -98,8 +102,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(self.childNodeWithName("DragLabel") != nil) {
-            self.view!.paused = true
+        if(initialPauseWait!) {
+            runAction(SKAction.waitForDuration(0.1), completion: {self.view!.paused = true})
+            initialPauseWait = false
         }
         if(newTarget!) {
             createNewTarget()
@@ -113,12 +118,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         if(self.view!.paused && self.childNodeWithName("DragLabel") != nil) {
             self.childNodeWithName("DragLabel")!.removeFromParent()
+            self.childNodeWithName("Enemy")?.removeFromParent()
             self.view!.paused = false
         }
         
         for touch in (touches) {
             let location = touch.locationInNode(self)
-            
+        
             player.startDrag(location)
             
             if let name = self.nodeAtPoint(location).name{
@@ -132,8 +138,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                         self.addChild(resumeButton!)
                         self.addChild(exitButton!)
                         self.addChild(restartButton!)
-                        
                     }
+                    
                 case "ResumeButton":
                     if(scene!.paused) {
                         scene!.paused = false
@@ -143,16 +149,21 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                         exitButton.removeFromParent()
                         restartButton.removeFromParent()
                     }
+                    
                 case "ExitButton":
                     if(scene!.paused) {
                         let menuScene = MenuScene(size: self.scene!.size)
-                        self.scene!.view?.presentScene(menuScene)
+                        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                        self.scene!.view?.presentScene(menuScene, transition: transition)
                     }
+                    
                 case "RestartButton":
                     if(scene!.paused) {
                         let playScene = PlayScene(size: self.scene!.size)
-                        self.scene!.view?.presentScene(playScene)
+                        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                        self.scene!.view?.presentScene(playScene, transition: transition)
                     }
+                    
                 default:
                     break
                 }
@@ -189,12 +200,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func gameOver() {
-        let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
-        self.scene!.view?.presentScene(gameOverScene)
-    }
-    
-    
     func addEnemy(){
         enemy = Enemy(side: SpawnSide.Right)
         
@@ -229,6 +234,12 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     func removeFilter() {
         backgroundFilterNode.removeFromParent()
+    }
+    
+    func gameOver() {
+        let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
+        let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+        self.scene!.view?.presentScene(gameOverScene, transition: transition)
     }
 }
 

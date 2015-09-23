@@ -47,20 +47,20 @@ class GameOverScene: SKScene {
         scoreLabel = SKLabelNode()
         scoreLabel.position = CGPoint(x: self.frame.midX, y: (8*self.frame.height)/10)
         scoreLabel.text = "Score: \(gameScore!)"
-        scoreLabel.fontName = "DINCondensed-Bold"
+        scoreLabel.fontName = "HelveticaNeue-Thin"
         scoreLabel.fontSize = 75 * scalingFactor
-        scoreLabel.fontColor = UIColor.darkGrayColor()
+        scoreLabel.fontColor = UIColor.blackColor()
         
         highScoreLabel = SKLabelNode()
-        highScoreLabel.position = CGPoint(x: self.frame.midX, y: (6.5*self.frame.height)/10)
+        highScoreLabel.position = CGPoint(x: self.frame.midX, y: (7*self.frame.height)/10)
         highScoreLabel.text = "High Score: \(highScore!)"
-        highScoreLabel.fontName = "DINCondensed-Bold"
-        highScoreLabel.fontSize = 65 * scalingFactor
+        highScoreLabel.fontName = "HelveticaNeue-Thin"
+        highScoreLabel.fontSize = 45 * scalingFactor
         highScoreLabel.fontColor = UIColor.darkGrayColor()
         
-        mainMenuButton = ButtonTemplate(name: "MainMenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1))
+        mainMenuButton = ButtonTemplate(name: "MainMenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameBlueColor())
         
-        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/10), color: UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1))
+        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2.5, height: self.frame.width/8), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameGreenColor())
         
         self.addChild(mainMenuButton)
         self.addChild(restartButton)
@@ -79,12 +79,14 @@ class GameOverScene: SKScene {
             switch name{
             case "RestartButton":
                 let playScene = PlayScene(size: self.scene!.size)
-                self.scene!.view?.presentScene(playScene)
-                break
+                let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                self.scene!.view?.presentScene(playScene, transition: transition)
+                
             case "MainMenuButton":
                 let menuScene = MenuScene(size: self.scene!.size)
-                self.scene!.view?.presentScene(menuScene)
-                break
+                let transition = SKTransition.fadeWithColor(UIColor.blackColor(), duration: 0.7)
+                self.scene!.view?.presentScene(menuScene, transition: transition)
+                
             default:
                 break
             }

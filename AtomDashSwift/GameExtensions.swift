@@ -54,3 +54,21 @@ extension SKNode {
         return randomPos
     }
 }
+
+extension UIColor {
+    class func gameBlueColor() -> UIColor {
+        return UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1)
+    }
+    
+    class func gameRedColor() -> UIColor {
+        return UIColor(red: 0.94, green: 0.55, blue: 0.55, alpha: 1)
+    }
+    
+    class func gameGreenColor() -> UIColor {
+        return UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
+    }
+    
+    class func gamePurpleColor() -> UIColor {
+        return UIColor(red: 0.87, green: 0.8, blue: 0.93, alpha: 1)
+    }
+}
