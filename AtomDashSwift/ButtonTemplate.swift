@@ -15,7 +15,7 @@ class ButtonTemplate: SKShapeNode {
         super.init()
         
         var rect = CGRect(origin: CGPointZero, size: size)
-        self.path = CGPathCreateWithRoundedRect(rect, CGFloat(10), CGFloat(10), nil)
+        self.path = CGPathCreateWithRoundedRect(rect, CGFloat(8 * PlayScene().getScreenWidthRatio()), CGFloat(8 * PlayScene().getScreenWidthRatio()), nil)
         
         self.name = name
         self.position.x = position.x - self.frame.width/2

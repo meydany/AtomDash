@@ -53,7 +53,7 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor.gameGreenColor())
 
         //Button frame
-        gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2.5, height: self.frame.width/8))
+        gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2, height: self.frame.width/7))
         gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*5 - gotItButton.frame.width/2, y: self.frame.height/1.5)
         gotItButton.layer.cornerRadius = 10
         
