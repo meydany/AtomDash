@@ -248,6 +248,14 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         print(screenHeight)
         return screenHeight/667 //iphone 6 screen height (everything will be relative to this height)
     }
+    
+    func getScreenRatio() -> CGFloat {
+        let screenWidth = UIScreen.mainScreen().bounds.size.width
+        let screenHeight = UIScreen.mainScreen().bounds.size.height
+
+        return screenWidth/screenHeight
+        //return getScreenWidthRatio()/getScreenHeightRatio()
+    }
 }
 
 

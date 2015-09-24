@@ -81,7 +81,9 @@ class MenuScene: SKScene {
                     else {
                         NSUserDefaults().setBool(true, forKey: "instructionsScene")
                         let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
-                        self.scene!.view?.presentScene(instructionsScene)
+                        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
+
+                        self.scene!.view?.presentScene(instructionsScene, transition: transition)
                     }
                 case "LeaderboardsButton":
                     print("Make this scene!", terminator: "")

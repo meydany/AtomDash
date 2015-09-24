@@ -3,31 +3,31 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AppIcon-2.png",
+      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-1.PNG",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AppIcon-3.png",
+      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-2.PNG",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIcon-4.png",
+      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-3.PNG",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIcon-5.png",
+      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-4.PNG",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s.PNG",
+      "filename" : "AppIcon.png",
       "scale" : "2x"
     },
     {
@@ -35,42 +35,6 @@
       "idiom" : "iphone",
       "filename" : "AtomDashIcons- iPhone 6 Plus, 6s Plus.PNG",
       "scale" : "3x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "ipad",
-      "filename" : "AppIcon-2 copy-1.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "ipad",
-      "filename" : "AppIcon-2 copy.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "ipad",
-      "filename" : "AppIcon-2 copy-2.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "ipad",
-      "filename" : "AppIcon-2 copy-3.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "76x76",
-      "idiom" : "ipad",
-      "filename" : "AtomDashIcons-iPad 2 and iPad mini.PNG",
-      "scale" : "1x"
-    },
-    {
-      "size" : "76x76",
-      "idiom" : "ipad",
-      "filename" : "AtomDashIcons- iPad and iPad Mini.PNG",
-      "scale" : "2x"
     }
   ],
   "info" : {
