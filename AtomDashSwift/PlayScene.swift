@@ -108,7 +108,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         if(newTarget!) {
             createNewTarget()
-            
             newTarget = false
         }
     }
@@ -119,6 +118,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         if(self.view!.paused && self.childNodeWithName("DragLabel") != nil) {
             self.childNodeWithName("DragLabel")!.removeFromParent()
             self.childNodeWithName("Enemy")?.removeFromParent()
+            scoreLabel.text = "0"
             self.view!.paused = false
         }
         

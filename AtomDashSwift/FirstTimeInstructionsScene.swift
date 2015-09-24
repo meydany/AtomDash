@@ -55,24 +55,19 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         secondLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor.gameRedColor())
         thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor.gameGreenColor())
 
+
         //Button frame
-        gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2, height: self.frame.width/7))
+        gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2.5, height: self.frame.width/7))
         gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*5 - gotItButton.frame.width/2, y: self.frame.height/1.5)
         gotItButton.layer.cornerRadius = 10
-        
-        //Button background and title
-        gotItButton.backgroundColor = UIColor.gameGreenColor()
+        gotItButton.backgroundColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
         gotItButton.setTitle("GOT IT", forState: UIControlState.Normal)
-        gotItButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        gotItButton.addTarget(self, action: "presentPlayScene", forControlEvents: UIControlEvents.TouchUpInside)
         
-        //Button text
         let scalingFactor = min(self.frame.width / gotItButton.frame.width, self.frame.height / gotItButton.frame.height)/1.25
-        gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * PlayScene().getScreenWidthRatio() * CGFloat(scalingFactor))
+        gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * CGFloat(scalingFactor))
         gotItButton.titleLabel!.textAlignment = NSTextAlignment.Center
         gotItButton.contentEdgeInsets = UIEdgeInsets(top: gotItButton.frame.height/5, left: 0, bottom: 0, right: 0)
-        
-        //Button event
-        gotItButton.addTarget(self, action: "presentPlayScene", forControlEvents: UIControlEvents.TouchUpInside)
         
         removeSubviews = false
 
