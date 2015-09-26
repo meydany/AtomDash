@@ -106,6 +106,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             runAction(SKAction.waitForDuration(0.1), completion: {self.view!.paused = true})
             initialPauseWait = false
         }
+        
         if(newTarget!) {
             createNewTarget()
             newTarget = false
@@ -199,13 +200,15 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     func addEnemy(){
         enemy = Enemy(side: SpawnSide.Right)
         
+        let movementDuration = (Double(arc4random_uniform(UInt32(3))) + 3.0)
+        
         if (arc4random_uniform(2) == 1){
             enemy.position = CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
-            moveEnemyAction = SKAction.moveTo(CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: (Double(arc4random_uniform(UInt32(6))) + 1.0))
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: movementDuration)
         }
         else{
             enemy.position = CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
-            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: (Double(arc4random_uniform(UInt32(1))) + 2.0))
+            moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: movementDuration)
         }
         
         enemy.runAction(moveEnemyAction!, withKey: "moveEnemy")
