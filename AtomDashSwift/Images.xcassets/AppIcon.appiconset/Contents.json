@@ -3,37 +3,37 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-1.png",
+      "filename" : "AppIcon 58px-1.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-7.png",
+      "filename" : "AppIcon87px-1.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-6.png",
+      "filename" : "AppIcon80px-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-4.png",
+      "filename" : "AppIcon120px-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 5, 6 and 6s-5.png",
+      "filename" : "AppIcon120px-2.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AtomDashIcons- iPhone 6 Plus, 6s Plus.png",
+      "filename" : "AppIcon180px-1.png",
       "scale" : "3x"
     }
   ],
