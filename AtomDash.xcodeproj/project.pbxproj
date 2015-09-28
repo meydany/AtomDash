@@ -28,6 +28,7 @@
 		8641A9581BA4ED04001B89EB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9571BA4ED04001B89EB /* Player.swift */; };
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
 		864705381BAD03BB00222756 /* FirstTimeInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
+		86604E981BB8C9500030DD5E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86604E971BB8C9500030DD5E /* GameKit.framework */; };
 		866ECA5C1BABB49E00D2EB65 /* InstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */; };
 		86DDC8CE1BA686C700F444FB /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DDC8CD1BA686C700F444FB /* Target.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		8641A9571BA4ED04001B89EB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8641A9591BA4F5C8001B89EB /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeInstructionsScene.swift; sourceTree = "<group>"; };
+		86604E971BB8C9500030DD5E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsScene.swift; sourceTree = "<group>"; };
 		86DDC8CD1BA686C700F444FB /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86604E981BB8C9500030DD5E /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +108,7 @@
 		8641A9231BA4E9F6001B89EB = {
 			isa = PBXGroup;
 			children = (
+				86604E971BB8C9500030DD5E /* GameKit.framework */,
 				8641A92E1BA4E9F6001B89EB /* AtomDashSwift */,
 				8641A9481BA4E9F6001B89EB /* AtomDashSwiftTests */,
 				8641A92D1BA4E9F6001B89EB /* Products */,
@@ -219,14 +223,20 @@
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = MilkyShakeMobile;
+				ORGANIZATIONNAME = SoyMobile;
 				TargetAttributes = {
 					8641A92B1BA4E9F6001B89EB = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = VEFXGBBZ5N;
 						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
