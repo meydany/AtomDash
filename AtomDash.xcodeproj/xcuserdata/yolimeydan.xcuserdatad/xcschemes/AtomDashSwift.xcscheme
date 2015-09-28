@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8641A92B1BA4E9F6001B89EB"
-               BuildableName = "AtomDash.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
+               BuildableName = "AtomDash.app"
                BlueprintName = "AtomDash"
                ReferencedContainer = "container:AtomDash.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8641A92B1BA4E9F6001B89EB"
-            BuildableName = "AtomDash.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
+            BuildableName = "AtomDash.app"
             BlueprintName = "AtomDash"
             ReferencedContainer = "container:AtomDash.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8641A92B1BA4E9F6001B89EB"
-            BuildableName = "AtomDash.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
+            BuildableName = "AtomDash.app"
             BlueprintName = "AtomDash"
             ReferencedContainer = "container:AtomDash.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8641A92B1BA4E9F6001B89EB"
-            BuildableName = "AtomDash.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
+            BuildableName = "AtomDash.app"
             BlueprintName = "AtomDash"
             ReferencedContainer = "container:AtomDash.xcodeproj">
          </BuildableReference>
