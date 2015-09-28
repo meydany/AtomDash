@@ -223,7 +223,7 @@
 				TargetAttributes = {
 					8641A92B1BA4E9F6001B89EB = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 7L28G4QD23;
+						DevelopmentTeam = KCFRH39NM7;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 0;
@@ -433,7 +433,7 @@
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.milkyshakemobile.AtomDashSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milkyshakemobile.AtomDashSwiftYoli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -449,7 +449,7 @@
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.milkyshakemobile.AtomDashSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milkyshakemobile.AtomDashSwiftYoli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

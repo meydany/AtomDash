@@ -86,7 +86,6 @@ class MenuScene: SKScene {
                         self.scene!.view?.presentScene(instructionsScene, transition: transition)
                     }
                 case "LeaderboardsButton":
-                    
                     print("Make this scene!", terminator: "")
                 case "InstructionsButton":
                     let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
