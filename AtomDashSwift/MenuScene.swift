@@ -22,6 +22,7 @@ class MenuScene: SKScene {
     var targetNode: Target!
     
     var gameName: SKLabelNode!
+    var copyRightNode: SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         self.scaleMode = .AspectFill
@@ -34,6 +35,12 @@ class MenuScene: SKScene {
         gameName.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - gameName.frame.height - ((1 * self.frame.height)/10)))
         gameName.fontColor = UIColor.darkGrayColor()
         
+        copyRightNode = SKLabelNode(text: "© 2015 SoyMobile")
+        copyRightNode.fontName = "DINCondensed-Bold"
+        copyRightNode.fontSize = 15 * PlayScene().getScreenWidthRatio()
+        copyRightNode.position = CGPoint(x: self.frame.midX, y: (self.frame.minY + copyRightNode.frame.height))
+        copyRightNode.fontColor = UIColor.darkGrayColor()
+
         playerNode = Player()
         playerNode!.position = CGPoint(x: self.frame.width/4, y: (3.5*self.frame.height)/5)
         
@@ -61,6 +68,7 @@ class MenuScene: SKScene {
         self.addChild(playButton)
         
         self.addChild(gameName)
+        self.addChild(copyRightNode)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
