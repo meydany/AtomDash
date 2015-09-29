@@ -110,6 +110,19 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
             GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
                 if error == nil {
                     self.authenticated = true
+                    let leaderboardName: String? = "AtomDashLeaderboardID"
+                    print(leaderboardName)
+                    GKLocalPlayer.localPlayer().loadDefaultLeaderboardIdentifierWithCompletionHandler
+                        { (leaderboardName, error) -> Void in
+                            if error != nil
+                            {
+                                print("error")
+                            }
+                            else
+                            {
+                                print("Leaderboard created")
+                            }
+                    }
                 } else {
                     print("\(error?.localizedDescription)")
                 }

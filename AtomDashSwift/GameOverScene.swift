@@ -95,7 +95,7 @@ class GameOverScene: SKScene {
         
         if(score > highScore) {
             NSUserDefaults().setInteger(score, forKey: "highScore")
-            GCHelper.sharedInstance.reportLeaderboardIdentifier("ScoreLeaderboaard", score: score)
+            GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: score)
             highScore = score
         }
         
