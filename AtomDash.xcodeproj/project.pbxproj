@@ -450,7 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7c70b3a3-f05c-41d3-b750-83030f2042bd";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -466,7 +466,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7c70b3a3-f05c-41d3-b750-83030f2042bd";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

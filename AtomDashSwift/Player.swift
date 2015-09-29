@@ -22,7 +22,6 @@ class Player : SKShapeNode {
         
         let mutablePath: CGMutablePathRef = CGPathCreateMutable()
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(40 * PlayScene().getScreenWidthRatio()), CGFloat(0), CGFloat(M_PI*2), true)
-        print(40 * PlayScene().getScreenWidthRatio())
         self.path = mutablePath
         self.lineWidth = 9 * PlayScene().getScreenWidthRatio()
         self.strokeColor = UIColor.gameBlueColor()

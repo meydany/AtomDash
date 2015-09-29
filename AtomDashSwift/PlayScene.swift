@@ -223,7 +223,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     func applyFilter() {
         backgroundFilterNode = SKSpriteNode(color: UIColor.whiteColor(), size: self.view!.frame.size)
         backgroundFilterNode.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-        backgroundFilterNode.zPosition = self.scene!.zPosition + 1
+        backgroundFilterNode.zPosition = 1
         backgroundFilterNode.alpha = 0.75
         
         self.addChild(backgroundFilterNode)
