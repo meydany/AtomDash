@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import GameKit
 
-class GameViewController: UIViewController{
+class GameViewController: UIViewController, GCHelperDelegate{
     
     var menuScene: SKScene!
     var connectButton: UIButton!
@@ -33,6 +33,20 @@ class GameViewController: UIViewController{
         menuScene!.scaleMode = .AspectFill
         
         skView.presentScene(menuScene!)
+    }
+    
+    func matchStarted(){
+    
+    }
+    
+    /// Method called when the device received data about the match from another device in the match.
+    func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String){
+        print("match Connected")
+    }
+    
+    /// Method called when the match has ended.
+    func matchEnded(){
+    
     }
     
     override func shouldAutorotate() -> Bool {

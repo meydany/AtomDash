@@ -11,9 +11,7 @@ import MultipeerConnectivity
 import SpriteKit
 import CoreBluetooth
 
-class SessionConnectingViewController: UIViewController, MCBrowserViewControllerDelegate {
-    
-    var appDelegate: AppDelegate!
+class SessionConnectingViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +39,6 @@ class SessionConnectingViewController: UIViewController, MCBrowserViewController
         
         let chooseConnectionType = ChooseMultiplayerConnectionType(size: skView.frame.size)
         
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.mpcHandler.setupPeerWithDisplayName(UIDevice.currentDevice().name)
-        appDelegate.mpcHandler.setupSession()
-        appDelegate.mpcHandler.advertiseSelf(true)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "peerChangedStateWithNotification:", name: "MPC_DidChangeStateNotification", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleRecievedDataWithNotification:", name: "MPC_DidReceiveDataNotification", object: nil)
@@ -56,41 +49,11 @@ class SessionConnectingViewController: UIViewController, MCBrowserViewController
     }
     
     func connectToPlayer() {
-        if appDelegate.mpcHandler.session != nil{
-            appDelegate.mpcHandler.setupBrowser()
-            appDelegate.mpcHandler.browser.delegate = self
         
-            self.presentViewController(appDelegate.mpcHandler.browser, animated: true, completion: nil)
-        }
     }
-    
-    func peerChangedStateWithNotification(notification: NSNotification){
-        let userInfo = NSDictionary(dictionary: notification.userInfo!)
-        
-        let state = userInfo.objectForKey("state") as! Int
-        
-        if state != MCSessionState.Connecting.rawValue{
-            print("ur connected bror")
-        }
-        if state == MCSessionState.Connected.rawValue{
-            print("Its officaial")
-        }
-    }
-    
-    func handleRecievedDataWithNotification(notification: NSNotification){
-        let userInfo = notification.userInfo! as Dictionary
-        let recievedData: NSData = userInfo["data"] as! NSData
-    }
+
     
     override func prefersStatusBarHidden() -> Bool {
         return true
-    }
-    
-    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
-        appDelegate.mpcHandler.browser.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
-        appDelegate.mpcHandler.browser.dismissViewControllerAnimated(true, completion: nil)
     }
 }
