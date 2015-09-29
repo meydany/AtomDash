@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import GameKit
 
 class GameViewController: UIViewController{
     
@@ -16,6 +17,8 @@ class GameViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "GameViewController"
         
         // Configure the view.
         let skView = self.view as! SKView
@@ -28,7 +31,7 @@ class GameViewController: UIViewController{
 
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill
-
+        
         skView.presentScene(menuScene!)
     }
     

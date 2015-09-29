@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SpriteKit
+import GameKit
 
 class MenuScene: SKScene {
     
@@ -69,6 +70,7 @@ class MenuScene: SKScene {
         
         self.addChild(gameName)
         self.addChild(copyRightNode)
+    
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -95,6 +97,7 @@ class MenuScene: SKScene {
                     }
                 case "LeaderboardsButton":
                     print("Make this scene!", terminator: "")
+                    //GCHelper.sharedInstance.showGameCenter(, viewState: GKGameCenterViewControllerState.Leaderboards)
                 case "InstructionsButton":
                     let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
                     let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
