@@ -11,6 +11,7 @@
 		090E55BD1BA781ED001B0982 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55BC1BA781ED001B0982 /* GameOverScene.swift */; };
 		090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55BE1BA787EC001B0982 /* TimeLabel.swift */; };
 		090E55C11BA7B52F001B0982 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55C01BA7B52F001B0982 /* MenuScene.swift */; };
+		092FDFB71BBB241C0061804F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86604E971BB8C9500030DD5E /* GameKit.framework */; };
 		093480381BAE1A49003D04CB /* MPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093480371BAE1A49003D04CB /* MPCHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958C8871BA623AD00DFF781 /* ScoreLabel.swift */; };
 		0987BE921BB9F36F0042C1B4 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987BE911BB9F36F0042C1B4 /* GCHelper.swift */; settings = {ASSET_TAGS = (); }; };
@@ -29,7 +30,6 @@
 		8641A9581BA4ED04001B89EB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9571BA4ED04001B89EB /* Player.swift */; };
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
 		864705381BAD03BB00222756 /* FirstTimeInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
-		86604E981BB8C9500030DD5E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86604E971BB8C9500030DD5E /* GameKit.framework */; };
 		866ECA5C1BABB49E00D2EB65 /* InstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */; };
 		86DDC8CE1BA686C700F444FB /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DDC8CD1BA686C700F444FB /* Target.swift */; };
 /* End PBXBuildFile section */
@@ -81,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86604E981BB8C9500030DD5E /* GameKit.framework in Frameworks */,
+				092FDFB71BBB241C0061804F /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
