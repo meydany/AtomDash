@@ -20,7 +20,7 @@ class ButtonTemplate: SKShapeNode {
         self.name = name
         self.position.x = position.x - self.frame.width/2
         self.position.y = position.y - self.frame.height/2
-        self.zPosition = 2
+        self.zPosition = 1
         self.fillColor = color
         self.alpha = 1
         

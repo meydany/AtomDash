@@ -96,7 +96,6 @@ class MenuScene: SKScene {
                         self.scene!.view?.presentScene(instructionsScene, transition: transition)
                     }
                 case "LeaderboardsButton":
-                    print("Make this scene!", terminator: "")
                     GCHelper.sharedInstance.showGameCenter((self.view!.window?.rootViewController!)!, viewState: GKGameCenterViewControllerState.Leaderboards)
                 case "InstructionsButton":
                     let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
