@@ -97,7 +97,7 @@ class MenuScene: SKScene {
                     }
                 case "LeaderboardsButton":
                     print("Make this scene!", terminator: "")
-                    //GCHelper.sharedInstance.showGameCenter(, viewState: GKGameCenterViewControllerState.Leaderboards)
+                    GCHelper.sharedInstance.showGameCenter((self.view!.window?.rootViewController!)!, viewState: GKGameCenterViewControllerState.Leaderboards)
                 case "InstructionsButton":
                     let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
                     let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
