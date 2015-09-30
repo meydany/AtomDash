@@ -38,13 +38,27 @@ class GameViewController: UIViewController, GCHelperDelegate {
     }
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
+        print("Recieving Data...")
+        var info: Int = 0
+        didReceiveData.getBytes(&info, length: sizeof(Int))
         
+        print("\(info) recieved")
     }
     
     func matchStarted() {
         let currentViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)?.view as! SKView
         currentViewController.presentScene(MultiplayerPlayScene())
         print("Match Started")
+        // Share NSdaata
+        var num: Int = 100
+        let sampleData: NSData = NSData(bytes: &num, length: sizeof(Int))
+        print("Sending data")
+        do {
+            try GCHelper.sharedInstance.match.sendDataToAllPlayers(sampleData, withDataMode: .Reliable)
+        }
+        catch{
+            print("there was an error \(error)")
+        }
     }
     
     func matchEnded() {

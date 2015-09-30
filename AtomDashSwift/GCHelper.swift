@@ -248,6 +248,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         case .StateConnected where !matchStarted && theMatch.expectedPlayerCount == 0:
             lookupPlayers()
         case .StateDisconnected:
+            print("Disconnected")
             matchStarted = false
             delegate?.matchEnded()
             match = nil
