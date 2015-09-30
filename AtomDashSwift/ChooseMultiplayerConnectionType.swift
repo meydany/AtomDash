@@ -65,13 +65,6 @@ class ChooseMultiplayerConnectionType: SKScene {
                     break
                 case "BluetoothConnectButton":
                     GCHelper.sharedInstance.findMatchWithMinPlayers(2, maxPlayers: 2, viewController: (self.view!.window?.rootViewController!)!, delegate: (self.view!.window?.rootViewController!)! as! GCHelperDelegate)
-                    //EasyGameCenter.findMatchWithMinPlayers(2, maxPlayers: 2)
-                    /*
-                    let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController?.presentedViewController!)!
-                    if currentViewController.title == "SessionConnectingViewController"{
-                        (currentViewController as! SessionConnectingViewController).connectToPlayer()
-                    }
-                    */
                     break
                 default:
                     break

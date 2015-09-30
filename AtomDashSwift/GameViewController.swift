@@ -14,14 +14,15 @@ class GameViewController: UIViewController, GCHelperDelegate {
     
     var menuScene: SKScene!
     var connectButton: UIButton!
+    var skView: SKView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "GameViewController"
-        
+
         // Configure the view.
-        let skView = self.view as! SKView
+        skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
@@ -33,6 +34,7 @@ class GameViewController: UIViewController, GCHelperDelegate {
         menuScene!.scaleMode = .AspectFill
         
         skView.presentScene(menuScene!)
+        print(skView)
     }
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
@@ -40,8 +42,9 @@ class GameViewController: UIViewController, GCHelperDelegate {
     }
     
     func matchStarted() {
+        let currentViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)?.view as! SKView
+        currentViewController.presentScene(MultiplayerPlayScene())
         print("Match Started")
-        SKView().presentScene(MultiplayerPlayScene(), transition: SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7))
     }
     
     func matchEnded() {
