@@ -76,9 +76,9 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
     }
 
     private func lookupPlayers() {
-        let playerIDs = match.players.map { $0.playerID } as! [String]
-
-        GKPlayer.loadPlayersForIdentifiers(playerIDs) { (players, error) -> Void in
+        let playerID:[String] = [match.players[0].playerID!]
+        
+        GKPlayer.loadPlayersForIdentifiers(playerID) { (players, error) -> Void in
             if error != nil {
                 print("Error retrieving player info: \(error!.localizedDescription)")
                 self.matchStarted = false
@@ -118,10 +118,6 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
                             {
                                 print("error")
                             }
-                            else
-                            {
-                                print("Leaderboard created")
-                            }
                     }
                 } else {
                     print("\(error?.localizedDescription)")
@@ -140,6 +136,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         :param: viewController The view controller to present required GameKit view controllers from.
         :param: delegate The delegate receiving data from GCHelper.
     */
+    
     public func findMatchWithMinPlayers(minPlayers: Int, maxPlayers: Int, viewController: UIViewController, delegate theDelegate: GCHelperDelegate) {
         matchStarted = false
         match = nil
@@ -228,7 +225,6 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         match = theMatch
         match.delegate = self
         if !matchStarted && match.expectedPlayerCount == 0 {
-            print("Ready to start match!")
             self.lookupPlayers()
         }
     }

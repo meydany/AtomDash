@@ -12,6 +12,7 @@
 		090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55BE1BA787EC001B0982 /* TimeLabel.swift */; };
 		090E55C11BA7B52F001B0982 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E55C01BA7B52F001B0982 /* MenuScene.swift */; };
 		092FDFB71BBB241C0061804F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86604E971BB8C9500030DD5E /* GameKit.framework */; };
+		092FDFB91BBB5F6F0061804F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */; };
 		093480381BAE1A49003D04CB /* MPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093480371BAE1A49003D04CB /* MPCHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958C8871BA623AD00DFF781 /* ScoreLabel.swift */; };
 		0987BE921BB9F36F0042C1B4 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987BE911BB9F36F0042C1B4 /* GCHelper.swift */; settings = {ASSET_TAGS = (); }; };
@@ -49,6 +50,7 @@
 		090E55BC1BA781ED001B0982 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		090E55BE1BA787EC001B0982 /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		090E55C01BA7B52F001B0982 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		093480371BAE1A49003D04CB /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHandler.swift; sourceTree = "<group>"; };
 		0958C8871BA623AD00DFF781 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		0987BE911BB9F36F0042C1B4 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				092FDFB91BBB5F6F0061804F /* SystemConfiguration.framework in Frameworks */,
 				092FDFB71BBB241C0061804F /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +113,7 @@
 		8641A9231BA4E9F6001B89EB = {
 			isa = PBXGroup;
 			children = (
+				092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */,
 				86604E971BB8C9500030DD5E /* GameKit.framework */,
 				8641A92E1BA4E9F6001B89EB /* AtomDashSwift */,
 				8641A9481BA4E9F6001B89EB /* AtomDashTests */,
@@ -450,7 +454,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
-				PROVISIONING_PROFILE = "7c70b3a3-f05c-41d3-b750-83030f2042bd";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -466,7 +470,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
-				PROVISIONING_PROFILE = "7c70b3a3-f05c-41d3-b750-83030f2042bd";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
