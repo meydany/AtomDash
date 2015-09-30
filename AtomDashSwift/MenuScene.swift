@@ -43,13 +43,13 @@ class MenuScene: SKScene {
         copyRightNode.fontColor = UIColor.darkGrayColor()
 
         playerNode = Player()
-        playerNode!.position = CGPoint(x: self.frame.width/4, y: (3.5*self.frame.height)/5)
+        playerNode!.position = CGPoint(x: self.frame.width/4, y: (3.4*self.frame.height)/5)
         
         enemyNode = Enemy(side: SpawnSide.Right)
-        enemyNode!.position = CGPoint(x: (2*self.frame.width)/4, y: (3.5*self.frame.height)/5)
+        enemyNode!.position = CGPoint(x: (2*self.frame.width)/4, y: (3.4*self.frame.height)/5)
         
         targetNode = Target()
-        targetNode!.position = CGPoint(x: (3*self.frame.width)/4, y: (3.5*self.frame.height)/5)
+        targetNode!.position = CGPoint(x: (3*self.frame.width)/4, y: (3.4*self.frame.height)/5)
         
         playButton = ButtonTemplate(name: "PlayButton",labelName: "PLAY",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         

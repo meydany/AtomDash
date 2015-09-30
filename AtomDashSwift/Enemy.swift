@@ -27,12 +27,12 @@ class Enemy: SKShapeNode {
         self.side = side
         
         let mutablePath: CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(40 * PlayScene().getScreenWidthRatio()), CGFloat(0), CGFloat(M_PI*2), true)
+        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * PlayScene().getScreenWidthRatio()), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
-        self.lineWidth = 9 * PlayScene().getScreenWidthRatio()
+        self.lineWidth = 8 * PlayScene().getScreenWidthRatio()
         self.strokeColor = UIColor.gameRedColor()
         
-        physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
+        physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2.1)
         self.physicsBody!.affectedByGravity = false
         self.physicsBody!.usesPreciseCollisionDetection = true
         self.physicsBody!.dynamic = false

@@ -90,12 +90,16 @@ class GameOverScene: SKScene {
         }
     }
     
+    
     func getHighScore(score: Int) -> Int {
         var highScore = NSUserDefaults().integerForKey("highScore")
         
         if(score > highScore) {
             NSUserDefaults().setInteger(score, forKey: "highScore")
-            GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: score)
+            GKNotificationBanner.showBannerWithTitle("High Score!", message: "New High Score: \(score)", completionHandler: {
+                () -> Void in
+                GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: score)
+            })
             highScore = score
         }
         
