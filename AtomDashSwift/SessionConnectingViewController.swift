@@ -44,7 +44,7 @@ class SessionConnectingViewController: UIViewController{
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleRecievedDataWithNotification:", name: "MPC_DidReceiveDataNotification", object: nil)
         
         skView.presentScene(chooseConnectionType)
-        chooseConnectionType.addBluetoothConnectButton()
+        //chooseConnectionType.addBluetoothConnectButton()
         //self.view.addSubview(connectButton)
     }
     

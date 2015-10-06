@@ -51,10 +51,10 @@
 		090E55BE1BA787EC001B0982 /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		090E55C01BA7B52F001B0982 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		093480371BAE1A49003D04CB /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHandler.swift; sourceTree = "<group>"; };
+		093480371BAE1A49003D04CB /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MPCHandler.swift; path = ../MPCHandler.swift; sourceTree = "<group>"; };
 		0958C8871BA623AD00DFF781 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
-		0987BE911BB9F36F0042C1B4 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
-		09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionConnectingViewController.swift; path = AtomDashSwift/SessionConnectingViewController.swift; sourceTree = "<group>"; };
+		0987BE911BB9F36F0042C1B4 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GCHelper.swift; path = AtomDashSwift/GCHelper.swift; sourceTree = "<group>"; };
+		09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConnectingViewController.swift; sourceTree = "<group>"; };
 		09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseMultiplayerConnectionType.swift; path = AtomDashSwift/ChooseMultiplayerConnectionType.swift; sourceTree = "<group>"; };
 		861E59731BAA4B340055B334 /* ButtonTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTemplate.swift; sourceTree = "<group>"; };
 		8641A92C1BA4E9F6001B89EB /* AtomDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtomDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,9 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				0904A72B1BAF05F100887B0F /* MultiplayerPlayScene.swift */,
-				093480371BAE1A49003D04CB /* MPCHandler.swift */,
-				09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */,
 				09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */,
+				0987BE911BB9F36F0042C1B4 /* GCHelper.swift */,
 			);
 			name = Multiplayer;
 			path = ..;
@@ -133,6 +132,8 @@
 		8641A92E1BA4E9F6001B89EB /* AtomDashSwift */ = {
 			isa = PBXGroup;
 			children = (
+				093480371BAE1A49003D04CB /* MPCHandler.swift */,
+				09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */,
 				0904A72E1BAF064E00887B0F /* Multiplayer */,
 				090E55C01BA7B52F001B0982 /* MenuScene.swift */,
 				8641A9351BA4E9F6001B89EB /* PlayScene.swift */,
@@ -145,7 +146,6 @@
 				0958C8871BA623AD00DFF781 /* ScoreLabel.swift */,
 				090E55BE1BA787EC001B0982 /* TimeLabel.swift */,
 				861E59731BAA4B340055B334 /* ButtonTemplate.swift */,
-				0987BE911BB9F36F0042C1B4 /* GCHelper.swift */,
 				8641A9371BA4E9F6001B89EB /* GameViewController.swift */,
 				8641A9551BA4EC69001B89EB /* GameExtensions.swift */,
 				8641A9311BA4E9F6001B89EB /* AppDelegate.swift */,

@@ -99,7 +99,9 @@ class GameOverScene: SKScene {
             NSUserDefaults().setInteger(score, forKey: "highScore")
             GKNotificationBanner.showBannerWithTitle("High Score!", message: "New High Score: \(score)", completionHandler: {
                 () -> Void in
-                GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: score)
+                if(GKLocalPlayer.localPlayer().authenticated) {
+                    GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: score)
+                }
             })
             highScore = score
         }

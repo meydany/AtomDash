@@ -67,6 +67,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
 
     internal func authenticationChanged() {
         if GKLocalPlayer.localPlayer().authenticated && !authenticated {
+            GKLocalPlayer.localPlayer().registerListener(self)
             print("Authentication changed: player authenticated")
             authenticated = true
         } else {
@@ -110,21 +111,25 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
             GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
                 if error == nil {
                     self.authenticated = true
-                    let leaderboardName: String? = "AtomDashLeaderboardID"
-                    print(leaderboardName)
-                    GKLocalPlayer.localPlayer().loadDefaultLeaderboardIdentifierWithCompletionHandler
-                        { (leaderboardName, error) -> Void in
-                            if error != nil
-                            {
-                                print("error")
-                            }
-                    }
                 } else {
                     print("\(error?.localizedDescription)")
                 }
             }
         } else {
             print("Already authenticated")
+        }
+    }
+    
+    func authenticateLocalPlayerWithLogin(){
+        if(GKLocalPlayer.localPlayer().authenticated == false) {
+            GKLocalPlayer.localPlayer().authenticateHandler = {(viewController, error) -> Void in
+                if (viewController != nil) {
+                    let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
+                    currentViewController.presentViewController(viewController!, animated: true, completion: nil)
+                }else{
+                    print((GKLocalPlayer().authenticated))
+                }
+            }
         }
     }
 

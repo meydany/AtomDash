@@ -13,11 +13,9 @@ import GameKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mpcHandler: MPCHandler = MPCHandler()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
         GCHelper.sharedInstance.authenticateLocalUser()
         return true
     }
