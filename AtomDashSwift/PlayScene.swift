@@ -39,6 +39,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var backgroundFilterNode: SKSpriteNode!
     
     var initialPauseWait: Bool!
+    var gameStarted: Bool!
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -93,7 +94,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
         initialPauseWait = true
+        gameStarted = false
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
+
         self.addChild(pauseButton)
         self.addChild(player)
         self.addChild(target)
@@ -103,7 +108,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: CFTimeInterval) {
         if(initialPauseWait!) {
-            runAction(SKAction.waitForDuration(0.1), completion: {self.view!.paused = true})
+            runAction(SKAction.waitForDuration(0.1), completion: {self.scene!.paused = true})
             initialPauseWait = false
         }
         if(newTarget!) {
@@ -115,11 +120,12 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         /* Called when a touch begins */
         
-        if(self.view!.paused && self.childNodeWithName("DragLabel") != nil) {
+        if(scene!.paused && self.childNodeWithName("DragLabel") != nil) {
             self.childNodeWithName("DragLabel")!.removeFromParent()
             self.childNodeWithName("Enemy")?.removeFromParent()
             scoreLabel.text = "0"
-            self.view!.paused = false
+            gameStarted = true
+            scene!.paused = false
         }
         
         for touch in (touches) {
@@ -133,20 +139,12 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                 case "PauseButton":
                     if(!scene!.paused) {
                         scene!.paused = true
-                        
-                        applyFilter()
-                        self.addChild(resumeButton!)
-                        self.addChild(exitButton!)
-                        self.addChild(restartButton!)
+                        applyPauseFilter()
                     }
                 case "ResumeButton":
                     if(scene!.paused) {
                         scene!.paused = false
-                        
-                        removeFilter()
-                        resumeButton.removeFromParent()
-                        exitButton.removeFromParent()
-                        restartButton.removeFromParent()
+                        removePauseFilter()
                     }
                 case "ExitButton":
                     if(scene!.paused) {
@@ -220,23 +218,41 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(target)
     }
     
-    func applyFilter() {
+    func applyPauseFilter() {
         backgroundFilterNode = SKSpriteNode(color: UIColor.whiteColor(), size: self.view!.frame.size)
         backgroundFilterNode.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         backgroundFilterNode.zPosition = 1
         backgroundFilterNode.alpha = 0.75
         
         self.addChild(backgroundFilterNode)
+        self.addChild(resumeButton!)
+        self.addChild(exitButton!)
+        self.addChild(restartButton!)
     }
     
-    func removeFilter() {
+    func removePauseFilter() {
         backgroundFilterNode.removeFromParent()
+        resumeButton.removeFromParent()
+        exitButton.removeFromParent()
+        restartButton.removeFromParent()
     }
     
     func gameOver() {
         let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
         self.scene!.view?.presentScene(gameOverScene, transition: transition)
+    }
+    
+    func pauseSceneOnHomePress() {
+        scene!.paused = true
+        if((scene!.childNodeWithName("ResumeButton") == nil) && gameStarted!) {
+            applyPauseFilter()
+        }
+    }
+    
+    func pauseSceneOnActive(notification: NSNotification) {
+        let pauseTimer: SKAction = SKAction.repeatAction(SKAction.sequence([SKAction.waitForDuration(0),SKAction.performSelector(Selector("pauseSceneOnHomePress"), onTarget: self)]), count: 1)
+        runAction(pauseTimer)
     }
     
     func getScreenWidthRatio() -> CGFloat {

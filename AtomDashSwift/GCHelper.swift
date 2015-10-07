@@ -67,10 +67,12 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
 
     internal func authenticationChanged() {
         if GKLocalPlayer.localPlayer().authenticated && !authenticated {
+            GKLocalPlayer.localPlayer().unregisterAllListeners()
             GKLocalPlayer.localPlayer().registerListener(self)
             print("Authentication changed: player authenticated")
             authenticated = true
         } else {
+            GKLocalPlayer.localPlayer().unregisterAllListeners()
             print("Authentication changed: player not authenticated")
             authenticated = false
         }
@@ -126,8 +128,6 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
                 if (viewController != nil) {
                     let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
                     currentViewController.presentViewController(viewController!, animated: true, completion: nil)
-                }else{
-                    print((GKLocalPlayer().authenticated))
                 }
             }
         }
@@ -154,27 +154,9 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         request.maxPlayers = maxPlayers
 
         let mmvc = GKMatchmakerViewController(matchRequest: request)!
-        mmvc.matchmakerDelegate = self
+        mmvc.matchmakerDelegate = GCHelper.sharedInstance
 
         presentingViewController.presentViewController(mmvc, animated: true, completion: nil)
-    }
-
-    /**
-        Reports progress on an achievement to GameKit.
-
-        :param: identifier A string that matches the identifier string used to create an achievement in iTunes Connect.
-        :param: percent A percentage value (0 - 100) stating how far the user has progressed on the achievement.
-    */
-    public func reportAchievementIdentifier(identifier: String, percent: Double) {
-        let achievement = GKAchievement(identifier: identifier)
-
-        achievement.percentComplete = percent
-        achievement.showsCompletionBanner = true
-        GKAchievement.reportAchievements([achievement]) { (error) -> Void in
-            if error != nil {
-                print("Error in reporting achievements: \(error)")
-            }
-        }
     }
 
     /**
@@ -218,6 +200,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
 
     public func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController) {
         presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+        
     }
 
     public func matchmakerViewController(viewController: GKMatchmakerViewController, didFailWithError error: NSError) {
@@ -233,7 +216,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
             self.lookupPlayers()
         }
     }
-
+    
     // MARK: GKMatchDelegate
 
     public func match(theMatch: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
@@ -273,10 +256,12 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
     }
 
     // MARK: GKLocalPlayerListener
-
     public func player(player: GKPlayer, didAcceptInvite inviteToAccept: GKInvite) {
         let mmvc = GKMatchmakerViewController(invite: inviteToAccept)!
         mmvc.matchmakerDelegate = self
         presentingViewController.presentViewController(mmvc, animated: true, completion: nil)
+    }
+    
+    public func player(player: GKPlayer, didRequestMatchWithRecipients recipientPlayers: [GKPlayer]) {
     }
 }

@@ -23,8 +23,8 @@ class GameViewController: UIViewController, GCHelperDelegate {
 
         // Configure the view.
         skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.multipleTouchEnabled = false
         

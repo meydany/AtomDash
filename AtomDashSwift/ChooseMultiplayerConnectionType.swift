@@ -11,7 +11,15 @@ import GameKit
 
 class ChooseMultiplayerConnectionType: SKScene {
     
+    var multiplayerLabel: SKLabelNode!
+    
     var gameCenterButton: ButtonTemplate!
+    var wifiBluetoothButton: ButtonTemplate!
+    var facebookButton: ButtonTemplate!
+    var menuButton: ButtonTemplate!
+    
+    var singlePlayerNode: Player!
+    var multiplayerPlayerNode: MultiplayerPlayerNode!
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -22,10 +30,36 @@ class ChooseMultiplayerConnectionType: SKScene {
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
-        gameCenterButton = ButtonTemplate(name: "GameCenterButton", labelName: "GAME CENTER", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (8 * self.frame.height)/10), color: UIColor(red: 0.62, green: 0.85, blue: 0.94, alpha: 1))
+        multiplayerLabel = SKLabelNode(text: "MULTIPLAYER")
+        multiplayerLabel.fontName = "DINCondensed-Bold"
+        multiplayerLabel.fontSize = 75 * PlayScene().getScreenWidthRatio()
+        multiplayerLabel.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - multiplayerLabel.frame.height - ((1 * self.frame.height)/10)))
+        multiplayerLabel.fontColor = UIColor.darkGrayColor()
+        
+        singlePlayerNode = Player()
+        singlePlayerNode!.position = CGPoint(x: self.frame.width/3, y: (3.4*self.frame.height)/5)
+        
+        multiplayerPlayerNode = MultiplayerPlayerNode()
+        multiplayerPlayerNode!.position = CGPoint(x: (2*self.frame.width)/3, y: (3.4*self.frame.height)/5)
+        
+        gameCenterButton = ButtonTemplate(name: "GameCenterButton", labelName: "GAME CENTER", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
+        
+        wifiBluetoothButton = ButtonTemplate(name: "WifiBluetoothButton", labelName: "WIFI/BLUETOOTH", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gamePurpleColor())
+        
+        facebookButton = ButtonTemplate(name: "FacebookButton", labelName: "FACEBOOK", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameRedColor())
+        
+        menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameBlueColor())
         
         
         self.addChild(gameCenterButton)
+        self.addChild(wifiBluetoothButton)
+        self.addChild(facebookButton)
+        self.addChild(menuButton)
+        
+        self.addChild(multiplayerLabel)
+        
+        self.addChild(singlePlayerNode)
+        self.addChild(multiplayerPlayerNode)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -37,6 +71,10 @@ class ChooseMultiplayerConnectionType: SKScene {
                     let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
                     GCHelper.sharedInstance.findMatchWithMinPlayers(2, maxPlayers: 2, viewController: currentViewController, delegate: currentViewController as! GCHelperDelegate)
                     break
+                case "MenuButton":
+                    let menuScene = MenuScene(size: self.scene!.size)
+                    let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
+                    self.scene!.view?.presentScene(menuScene, transition: transition)
                 default:
                     break
                 }
