@@ -41,6 +41,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var initialPauseWait: Bool!
     var gameStarted: Bool!
     
+    var updatesCalled: Int!
+    var updateBuffer: Int!
+    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -96,6 +99,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         initialPauseWait = true
         gameStarted = false
         
+        updatesCalled = 0
+        updateBuffer = 1
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
 
@@ -115,6 +121,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             createNewTarget()
             newTarget = false
         }
+        updatesCalled!++
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
@@ -186,11 +193,17 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             contact.bodyB.node!.removeFromParent()
-            scoreLabel.addScore(1)
             newTarget = true
-            
+            if(updatesCalled > updateBuffer) {
+                scoreLabel.addScore(1)
+                
+                updatesCalled = 0
+            }else {
+                print("Prevented score glitch")
+                updatesCalled = 0
+            }
         default:
-            print("Default collision", terminator: "")
+            print("Default collision")
         }
     }
     
