@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import GameKit
+import iAd
 
 class GameViewController: UIViewController, GCHelperDelegate {
     
@@ -20,9 +21,9 @@ class GameViewController: UIViewController, GCHelperDelegate {
         super.viewDidLoad()
         
         self.title = "GameViewController"
-
+        
         // Configure the view.
-        skView = self.view as! SKView
+        skView = self.originalContentView as! SKView
         //skView.showsFPS = true
         //skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
@@ -34,7 +35,6 @@ class GameViewController: UIViewController, GCHelperDelegate {
         menuScene!.scaleMode = .AspectFill
         
         skView.presentScene(menuScene!)
-        print(skView)
     }
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {

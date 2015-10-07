@@ -9,6 +9,7 @@
 import SpriteKit
 import UIKit
 import GameKit
+import iAd
 
 class GameOverScene: SKScene {
     
@@ -27,6 +28,10 @@ class GameOverScene: SKScene {
     var enemyNode: Enemy!
     var targetNode: Target!
     
+    var currentViewController: UIViewController!
+    var interstitialAd: ADInterstitialAd!
+    var interstitialAdView: UIView!
+    
     init(score: Int, size: CGSize) {
         super.init(size: size)
             
@@ -42,7 +47,9 @@ class GameOverScene: SKScene {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-    
+        
+        loadInterstitialAd()
+        
         scoreLabel = SKLabelNode()
         scoreLabel.position = CGPoint(x: self.frame.midX, y: ((8*self.frame.height)/10))
         scoreLabel.text = "Score: \(gameScore!)"
@@ -68,6 +75,18 @@ class GameOverScene: SKScene {
         self.addChild(highScoreLabel)
     }
     
+    func loadInterstitialAd() {
+        currentViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
+        currentViewController.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
+        UIViewController.prepareInterstitialAds()
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        if(currentViewController.shouldPresentInterstitialAd) {
+            print(currentViewController.requestInterstitialAdPresentation())
+        }
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch:UITouch! = touches.first as UITouch?
         let positionInScene = touch.locationInNode(self)
@@ -90,7 +109,6 @@ class GameOverScene: SKScene {
             
         }
     }
-    
     
     func getHighScore(score: Int) -> Int {
         var highScore = NSUserDefaults().integerForKey("highScore")
