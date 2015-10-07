@@ -30,9 +30,9 @@
 		8641A9561BA4EC69001B89EB /* GameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9551BA4EC69001B89EB /* GameExtensions.swift */; };
 		8641A9581BA4ED04001B89EB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9571BA4ED04001B89EB /* Player.swift */; };
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
-		864705381BAD03BB00222756 /* FirstTimeInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
-		866ECA5C1BABB49E00D2EB65 /* InstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */; };
+		864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
 		868ECFC91BC481CA0029121A /* MultiplayerPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */; settings = {ASSET_TAGS = (); }; };
+		868ECFCD1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
 		86DDC8CE1BA686C700F444FB /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DDC8CD1BA686C700F444FB /* Target.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,10 +73,10 @@
 		8641A9551BA4EC69001B89EB /* GameExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
 		8641A9571BA4ED04001B89EB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8641A9591BA4F5C8001B89EB /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
-		864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeInstructionsScene.swift; sourceTree = "<group>"; };
+		864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleplayerInstructionsScene.swift; sourceTree = "<group>"; };
 		86604E971BB8C9500030DD5E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsScene.swift; sourceTree = "<group>"; };
 		868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayerNode.swift; sourceTree = "<group>"; };
+		868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerInstructionsScene.swift; sourceTree = "<group>"; };
 		86DDC8CD1BA686C700F444FB /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +107,7 @@
 				0904A72B1BAF05F100887B0F /* MultiplayerPlayScene.swift */,
 				09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */,
 				0987BE911BB9F36F0042C1B4 /* GCHelper.swift */,
+				868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */,
 			);
 			name = Multiplayer;
 			path = ..;
@@ -141,8 +142,7 @@
 				090E55C01BA7B52F001B0982 /* MenuScene.swift */,
 				8641A9351BA4E9F6001B89EB /* PlayScene.swift */,
 				090E55BC1BA781ED001B0982 /* GameOverScene.swift */,
-				866ECA5B1BABB49E00D2EB65 /* InstructionsScene.swift */,
-				864705371BAD03BB00222756 /* FirstTimeInstructionsScene.swift */,
+				864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */,
 				8641A9571BA4ED04001B89EB /* Player.swift */,
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
 				86DDC8CD1BA686C700F444FB /* Target.swift */,
@@ -309,10 +309,10 @@
 				0987BE921BB9F36F0042C1B4 /* GCHelper.swift in Sources */,
 				090E55C11BA7B52F001B0982 /* MenuScene.swift in Sources */,
 				8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */,
-				866ECA5C1BABB49E00D2EB65 /* InstructionsScene.swift in Sources */,
 				090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */,
+				868ECFCD1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift in Sources */,
 				8641A9561BA4EC69001B89EB /* GameExtensions.swift in Sources */,
-				864705381BAD03BB00222756 /* FirstTimeInstructionsScene.swift in Sources */,
+				864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */,
 				09BA68601BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift in Sources */,
 				0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */,
 				09BA685E1BAE5A77003FBE8D /* SessionConnectingViewController.swift in Sources */,
@@ -454,7 +454,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
@@ -470,7 +470,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;

@@ -1,19 +1,20 @@
 //
-//  FirstTimeInstructionsScene.swift
-//  AtomDashSwift
+//  MultiplayerInstructionsScene.swift
+//  AtomDash
 //
-//  Created by Yoli Meydan on 9/17/15.
-//  Copyright (c) 2015 MilkyShakeMobile. All rights reserved.
+//  Created by Yoli Meydan on 10/6/15.
+//  Copyright © 2015 SoyMobile. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
+class MultiplayerInstructionsScene: SKScene, UIScrollViewDelegate{
     
     var firstLabelView: UITextView!
     var secondLabelView: UITextView!
     var thirdLabelView: UITextView!
+    var fourthLabelView: UITextView!
     
     var gotItButton: UIButton!
     var buttonView: UIView!
@@ -37,32 +38,33 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.directionalLockEnabled = true
         scrollView.pagingEnabled = true
         scrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
-        scrollView.contentSize = CGSize(width: view.frame.width * 3, height: view.frame.height)
+        scrollView.contentSize = CGSize(width: view.frame.width * 4, height: view.frame.height)
         scrollView.alpha = 0
         
         pageControl = UIPageControl(frame: CGRectMake((3*view.frame.width)/8,view.frame.height/1.25,scrollView.frame.width/4, scrollView.frame.height/8))
-        pageControl.numberOfPages = 3
+        pageControl.numberOfPages = 4
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor.redColor()
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.grayColor()
         pageControl.alpha = 0
-
+        
         slides = Int()
         slides = 0
         
         firstLabelView = makeTextView("You are the ", part2: "BLUE", color: UIColor.gameBlueColor())
-        secondLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor.gameRedColor())
-        thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor.gameGreenColor())
-
-
+        secondLabelView = makeTextView("They are the ", part2: "PURPLE", color: UIColor.gamePurpleColor())
+        thirdLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor.gameRedColor())
+        fourthLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor.gameGreenColor())
+        
+        
         //Button frame
         gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2.5, height: self.frame.width/7))
-        gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*5 - gotItButton.frame.width/2, y: self.frame.height/1.5)
+        gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*7 - gotItButton.frame.width/2, y: self.frame.height/1.5)
         gotItButton.layer.cornerRadius = 10
         gotItButton.backgroundColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
         gotItButton.setTitle("GOT IT", forState: UIControlState.Normal)
-        gotItButton.addTarget(self, action: "presentPlayScene", forControlEvents: UIControlEvents.TouchUpInside)
+        gotItButton.addTarget(self, action: "presentInstructionsScene", forControlEvents: UIControlEvents.TouchUpInside)
         
         let scalingFactor = min(self.frame.width / gotItButton.frame.width, self.frame.height / gotItButton.frame.height)/1.25
         gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * CGFloat(scalingFactor))
@@ -70,10 +72,11 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         gotItButton.contentEdgeInsets = UIEdgeInsets(top: gotItButton.frame.height/5, left: 0, bottom: 0, right: 0)
         
         removeSubviews = false
-
+        
         scrollView.addSubview(firstLabelView)
         scrollView.addSubview(secondLabelView)
         scrollView.addSubview(thirdLabelView)
+        scrollView.addSubview(fourthLabelView)
         scrollView.addSubview(gotItButton)
         
         self.view?.addSubview(scrollView)
@@ -123,11 +126,11 @@ class FirstTimeInstructionsScene: SKScene, UIScrollViewDelegate{
         return stringPartOne
     }
     
-    func presentPlayScene() {
+    func presentInstructionsScene() {
         fadeOutViews()
-        let playScene = PlayScene(size: self.scene!.size)
+        let chooseScene = ChooseMultiplayerConnectionType(size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
-        self.view?.presentScene(playScene, transition: transition)
+        self.view?.presentScene(chooseScene, transition: transition)
     }
     
     func fadeInViews() {

@@ -15,7 +15,7 @@ class ChooseMultiplayerConnectionType: SKScene {
     
     var gameCenterButton: ButtonTemplate!
     var wifiBluetoothButton: ButtonTemplate!
-    var facebookButton: ButtonTemplate!
+    var instructionsButton: ButtonTemplate!
     var menuButton: ButtonTemplate!
     
     var singlePlayerNode: Player!
@@ -46,14 +46,14 @@ class ChooseMultiplayerConnectionType: SKScene {
         
         wifiBluetoothButton = ButtonTemplate(name: "WifiBluetoothButton", labelName: "WIFI/BLUETOOTH", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gamePurpleColor())
         
-        facebookButton = ButtonTemplate(name: "FacebookButton", labelName: "FACEBOOK", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameRedColor())
+        instructionsButton = ButtonTemplate(name: "InstructionsButton", labelName: "INSTRUCTIONS", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameRedColor())
         
         menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameBlueColor())
         
         
         self.addChild(gameCenterButton)
         self.addChild(wifiBluetoothButton)
-        self.addChild(facebookButton)
+        self.addChild(instructionsButton)
         self.addChild(menuButton)
         
         self.addChild(multiplayerLabel)
@@ -71,6 +71,10 @@ class ChooseMultiplayerConnectionType: SKScene {
                     let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
                     GCHelper.sharedInstance.findMatchWithMinPlayers(2, maxPlayers: 2, viewController: currentViewController, delegate: currentViewController as! GCHelperDelegate)
                     break
+                case "InstructionsButton":
+                    let instructionsScene = MultiplayerInstructionsScene(size: self.scene!.size)
+                    let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
+                    self.scene!.view?.presentScene(instructionsScene, transition: transition)
                 case "MenuButton":
                     let menuScene = MenuScene(size: self.scene!.size)
                     let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)

@@ -90,7 +90,7 @@ class MenuScene: SKScene {
                     }
                     else {
                         NSUserDefaults().setBool(true, forKey: "instructionsScene")
-                        let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
+                        let instructionsScene = SingleplayerInstructionsScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
 
                         self.scene!.view?.presentScene(instructionsScene, transition: transition)
@@ -98,7 +98,7 @@ class MenuScene: SKScene {
                 case "LeaderboardsButton":
                     GCHelper.sharedInstance.showGameCenter((self.view!.window?.rootViewController!)!, viewState: GKGameCenterViewControllerState.Leaderboards)
                 case "InstructionsButton":
-                    let instructionsScene = FirstTimeInstructionsScene(size: self.scene!.size)
+                    let instructionsScene = SingleplayerInstructionsScene(size: self.scene!.size)
                     let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                     self.scene!.view?.presentScene(instructionsScene, transition: transition)
                 case "MultiplayerButton":
