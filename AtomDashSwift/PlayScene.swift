@@ -100,7 +100,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         gameStarted = false
         
         updatesCalled = 0
-        updateBuffer = 1
+        updateBuffer = 5 //adjust this according to performance 
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
@@ -192,16 +192,14 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             gameOver()
             
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
+            if(updatesCalled > updateBuffer) {
+                scoreLabel.addScore(1) //only adds score if collision is called more than 1 frame after previous collision
+            }else {
+                print("Prevented score glitch") //attempted to add score again immediately after collision
+            }
             contact.bodyB.node!.removeFromParent()
             newTarget = true
-            if(updatesCalled > updateBuffer) {
-                scoreLabel.addScore(1)
-                
-                updatesCalled = 0
-            }else {
-                print("Prevented score glitch")
-                updatesCalled = 0
-            }
+            updatesCalled = 0 //resets for next check
         default:
             print("Default collision")
         }
