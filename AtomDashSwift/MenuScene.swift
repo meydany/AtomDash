@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SpriteKit
 import GameKit
+import iAd
 
 class MenuScene: SKScene {
     
@@ -29,7 +30,7 @@ class MenuScene: SKScene {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        
+                
         gameName = SKLabelNode(text: "ATOM DASH")
         gameName.fontName = "DINCondensed-Bold"
         gameName.fontSize = 75 * PlayScene().getScreenWidthRatio()
@@ -39,7 +40,7 @@ class MenuScene: SKScene {
         copyRightNode = SKLabelNode(text: "© 2015 SoyMobile")
         copyRightNode.fontName = "DINCondensed-Bold"
         copyRightNode.fontSize = 15 * PlayScene().getScreenWidthRatio()
-        copyRightNode.position = CGPoint(x: self.frame.midX, y: (self.frame.minY + copyRightNode.frame.height))
+        copyRightNode.position = CGPoint(x: self.frame.midX, y: (self.frame.minY + copyRightNode.frame.height)*2)
         copyRightNode.fontColor = UIColor.darkGrayColor()
 
         playerNode = Player()

@@ -45,6 +45,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var updateBuffer: Int!
     
     override func didMoveToView(view: SKView) {
+        
         self.physicsWorld.contactDelegate = self
         
         self.scaleMode = .AspectFill

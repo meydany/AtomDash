@@ -23,7 +23,7 @@ class GameViewController: UIViewController, GCHelperDelegate {
         self.title = "GameViewController"
         
         // Configure the view.
-        skView = self.originalContentView as! SKView
+        skView = self.view as! SKView
         //skView.showsFPS = true
         //skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
@@ -33,7 +33,7 @@ class GameViewController: UIViewController, GCHelperDelegate {
 
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill
-        
+
         skView.presentScene(menuScene!)
     }
     
