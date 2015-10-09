@@ -45,7 +45,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     var updateBuffer: Int!
     
     override func didMoveToView(view: SKView) {
-        
         self.physicsWorld.contactDelegate = self
         
         self.scaleMode = .AspectFill
@@ -79,7 +78,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         dragLabel = SKLabelNode(text: "DRAG TO START")
         dragLabel.name = "DragLabel"
         dragLabel.fontName = "DINCondensed-Bold"
-        dragLabel.fontSize = 25 * PlayScene().getScreenWidthRatio()
+        dragLabel.fontSize = 25 * Screen.screenHeightRatio
         dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
         dragLabel.fontColor = UIColor.lightGrayColor()
         
@@ -98,10 +97,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
         initialPauseWait = true
-        gameStarted = false
         
         updatesCalled = 0
         updateBuffer = 5 //adjust this according to performance 
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
@@ -255,6 +255,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         self.scene!.view?.presentScene(gameOverScene, transition: transition)
     }
     
+
     func pauseSceneOnHomePress() {
         scene!.paused = true
         if((scene!.childNodeWithName("ResumeButton") == nil) && gameStarted!) {
@@ -267,22 +268,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         runAction(pauseTimer)
     }
     
-    func getScreenWidthRatio() -> CGFloat {
-        let screenWidth = UIScreen.mainScreen().bounds.size.width
-        return screenWidth/375 //iphone 6 screen width (everything will be relative to this width)
-    }
-    
-    func getScreenHeightRatio() -> CGFloat {
-        let screenHeight = UIScreen.mainScreen().bounds.size.height
-        return screenHeight/667 //iphone 6 screen height (everything will be relative to this height)
-    }
-    
-    func getScreenRatio() -> CGFloat {
-        let screenWidth = UIScreen.mainScreen().bounds.size.width
-        let screenHeight = UIScreen.mainScreen().bounds.size.height
-
-        return screenWidth/screenHeight
-        //return getScreenWidthRatio()/getScreenHeightRatio()
+    deinit {
+        print("hello")
     }
 }
 

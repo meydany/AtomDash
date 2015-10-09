@@ -19,9 +19,9 @@ class Target: SKShapeNode {
         self.name = "Target"
         
         let mutablePath: CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * PlayScene().getScreenWidthRatio()), CGFloat(0), CGFloat(M_PI*2), true)
+        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * Screen.screenWidthRatio), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
-        self.lineWidth = 8 * PlayScene().getScreenWidthRatio()
+        self.lineWidth = 8 * Screen.screenWidthRatio
         self.strokeColor = UIColor.gameGreenColor()
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)

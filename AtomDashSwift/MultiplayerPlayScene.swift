@@ -67,7 +67,7 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
         dragLabel = SKLabelNode(text: "DRAG TO START")
         dragLabel.name = "DragLabel"
         dragLabel.fontName = "DINCondensed-Bold"
-        dragLabel.fontSize = 25 * PlayScene().getScreenWidthRatio()
+        dragLabel.fontSize = 25 * Screen.screenWidthRatio
         dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
         dragLabel.fontColor = UIColor.lightGrayColor()
         

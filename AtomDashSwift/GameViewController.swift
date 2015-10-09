@@ -11,6 +11,16 @@ import SpriteKit
 import GameKit
 import iAd
 
+public struct Screen {
+    static var screenWidth = UIScreen.mainScreen().bounds.size.width
+    static var screenWidthRatio = screenWidth/375
+    
+    static var screenHeight = UIScreen.mainScreen().bounds.size.height
+    static var screenHeightRatio = screenHeight/667
+    
+    static var screenRatio = screenWidth/screenHeight
+}
+
 class GameViewController: UIViewController, GCHelperDelegate {
     
     var menuScene: SKScene!

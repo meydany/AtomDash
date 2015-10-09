@@ -20,7 +20,7 @@ class ScoreLabel: SKLabelNode {
         
         self.text = "0"
         self.fontName = "HelveticaNeue-Thin"
-        self.fontSize = 75 * PlayScene().getScreenWidthRatio()
+        self.fontSize = 75 * Screen.screenWidthRatio
         self.fontColor = UIColor.darkGrayColor()
     }
     

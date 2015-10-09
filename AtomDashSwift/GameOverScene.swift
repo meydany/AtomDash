@@ -55,14 +55,14 @@ class GameOverScene: SKScene {
         scoreLabel.position = CGPoint(x: self.frame.midX, y: ((8*self.frame.height)/10))
         scoreLabel.text = "Score: \(gameScore!)"
         scoreLabel.fontName = "HelveticaNeue-Thin"
-        scoreLabel.fontSize = 75 * PlayScene().getScreenWidthRatio()
+        scoreLabel.fontSize = 75 * Screen.screenWidthRatio
         scoreLabel.fontColor = UIColor.blackColor()
         
         highScoreLabel = SKLabelNode()
         highScoreLabel.position = CGPoint(x: self.frame.midX, y: (7*self.frame.height)/10)
         highScoreLabel.text = "High Score: \(highScore!)"
         highScoreLabel.fontName = "HelveticaNeue-Thin"
-        highScoreLabel.fontSize = 45 * PlayScene().getScreenWidthRatio()
+        highScoreLabel.fontSize = 45 * Screen.screenWidthRatio
         highScoreLabel.fontColor = UIColor.darkGrayColor()
         
         mainMenuButton = ButtonTemplate(name: "MainMenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameBlueColor())
@@ -135,13 +135,8 @@ class GameOverScene: SKScene {
         return highScore
     }
     
-    deinit {
-        print("bye")
-    }
-    
     func pauseSceneOnHomePress() {
         print("hello")
         scene?.paused = true
     }
-    
 }

@@ -32,7 +32,7 @@ class ChooseMultiplayerConnectionType: SKScene {
         
         multiplayerLabel = SKLabelNode(text: "MULTIPLAYER")
         multiplayerLabel.fontName = "DINCondensed-Bold"
-        multiplayerLabel.fontSize = 75 * PlayScene().getScreenWidthRatio()
+        multiplayerLabel.fontSize = 75 * Screen.screenWidthRatio
         multiplayerLabel.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - multiplayerLabel.frame.height - ((1 * self.frame.height)/10)))
         multiplayerLabel.fontColor = UIColor.darkGrayColor()
         

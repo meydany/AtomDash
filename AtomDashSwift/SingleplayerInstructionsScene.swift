@@ -106,7 +106,7 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
         
         let textView = UITextView(frame: CGRectMake(CGFloat(slides!) * self.frame.width, 0, self.frame.width, self.frame.height))
         textView.attributedText = createAttributedString(part1, secondPart: part2, color: color)
-        textView.font = UIFont(name: "DINCondensed-Bold", size: 50 * PlayScene().getScreenWidthRatio())
+        textView.font = UIFont(name: "DINCondensed-Bold", size: 50 * Screen.screenWidthRatio)
         textView.textAlignment = NSTextAlignment.Center
         textView.editable = false
         textView.contentOffset = CGPoint(x: 0, y: -self.frame.height/4)
