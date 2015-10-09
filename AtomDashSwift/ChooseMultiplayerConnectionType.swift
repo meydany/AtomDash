@@ -66,6 +66,7 @@ class ChooseMultiplayerConnectionType: SKScene {
         for touch in touches{
             let location = touch.locationInNode(self)
             if let name = self.nodeAtPoint(location).name{
+            self.removeAllActions()
             switch name{
                 case "GameCenterButton":
                     let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!

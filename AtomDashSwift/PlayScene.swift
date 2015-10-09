@@ -43,7 +43,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var updatesCalled: Int!
     var updateBuffer: Int!
-    
+        
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -100,9 +100,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         updatesCalled = 0
         updateBuffer = 5 //adjust this according to performance 
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        
+                
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
 
@@ -142,7 +140,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             player.startDrag(location)
             
             if let name = self.nodeAtPoint(location).name{
-                
                 switch name {
                 case "PauseButton":
                     if(!scene!.paused) {
@@ -156,12 +153,14 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                     }
                 case "ExitButton":
                     if(scene!.paused) {
+                        self.removeAllActions()
                         let menuScene = MenuScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(menuScene, transition: transition)
                     }
                 case "RestartButton":
                     if(scene!.paused) {
+                        self.removeAllActions()
                         let playScene = PlayScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
@@ -250,6 +249,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
+        self.removeAllActions()
         let gameOverScene = GameOverScene(score: Int(scoreLabel.text!)!,size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
         self.scene!.view?.presentScene(gameOverScene, transition: transition)
@@ -266,10 +266,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     func pauseSceneOnActive(notification: NSNotification) {
         let pauseTimer: SKAction = SKAction.repeatAction(SKAction.sequence([SKAction.waitForDuration(0),SKAction.performSelector(Selector("pauseSceneOnHomePress"), onTarget: self)]), count: 1)
         runAction(pauseTimer)
-    }
-    
-    deinit {
-        print("hello")
     }
 }
 

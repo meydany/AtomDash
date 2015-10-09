@@ -124,6 +124,7 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
     }
     
     func presentPlayScene() {
+        self.removeAllActions()
         fadeOutViews()
         let playScene = PlayScene(size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)

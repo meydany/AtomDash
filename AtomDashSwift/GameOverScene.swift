@@ -139,4 +139,8 @@ class GameOverScene: SKScene {
         print("hello")
         scene?.paused = true
     }
+    
+    deinit {
+        weak var viewController: GameViewController? = GameViewController()
+    }
 }

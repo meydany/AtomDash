@@ -80,6 +80,7 @@ class MenuScene: SKScene {
         for touch in (touches as Set<UITouch>) {
             let location = touch.locationInNode(self)
             
+            self.removeAllActions()
             if let name = self.nodeAtPoint(location).name{
                 
                 switch name {
