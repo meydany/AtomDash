@@ -14,6 +14,7 @@
 		092FDFB71BBB241C0061804F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86604E971BB8C9500030DD5E /* GameKit.framework */; };
 		092FDFB91BBB5F6F0061804F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */; };
 		093480381BAE1A49003D04CB /* MPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093480371BAE1A49003D04CB /* MPCHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		0950FD091BC85E4500D234B1 /* DataPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FD081BC85E4500D234B1 /* DataPacket.swift */; settings = {ASSET_TAGS = (); }; };
 		0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958C8871BA623AD00DFF781 /* ScoreLabel.swift */; };
 		0987BE921BB9F36F0042C1B4 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987BE911BB9F36F0042C1B4 /* GCHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		09BA685E1BAE5A77003FBE8D /* SessionConnectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -54,6 +55,7 @@
 		090E55C01BA7B52F001B0982 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		093480371BAE1A49003D04CB /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MPCHandler.swift; path = ../MPCHandler.swift; sourceTree = "<group>"; };
+		0950FD081BC85E4500D234B1 /* DataPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPacket.swift; sourceTree = "<group>"; };
 		0958C8871BA623AD00DFF781 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		0987BE911BB9F36F0042C1B4 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GCHelper.swift; path = AtomDashSwift/GCHelper.swift; sourceTree = "<group>"; };
 		09BA685D1BAE5A77003FBE8D /* SessionConnectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConnectingViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				09BA685F1BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift */,
 				0987BE911BB9F36F0042C1B4 /* GCHelper.swift */,
 				868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */,
+				0950FD081BC85E4500D234B1 /* DataPacket.swift */,
 			);
 			name = Multiplayer;
 			path = ..;
@@ -317,6 +320,7 @@
 				868ECFCD1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift in Sources */,
 				8641A9561BA4EC69001B89EB /* GameExtensions.swift in Sources */,
 				864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */,
+				0950FD091BC85E4500D234B1 /* DataPacket.swift in Sources */,
 				09BA68601BAE6B48003FBE8D /* ChooseMultiplayerConnectionType.swift in Sources */,
 				0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */,
 				09BA685E1BAE5A77003FBE8D /* SessionConnectingViewController.swift in Sources */,

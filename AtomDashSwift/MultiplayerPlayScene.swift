@@ -8,6 +8,7 @@
 
 import SpriteKit
 import Darwin
+import GameKit
 
 class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
     
@@ -16,7 +17,6 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
     var target: Target!
     
     var scoreLabel: ScoreLabel!
-    var dragLabel: SKLabelNode!
     
     var pauseButton: SKNode!
     var resumeButton: ButtonTemplate!
@@ -33,6 +33,8 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
     
     var initialPauseWait: Bool!
     
+    var isClient: Bool!
+    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -45,17 +47,26 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody!.contactTestBitMask = ColliderObject.playerCollider.rawValue
         self.physicsBody!.collisionBitMask = ColliderObject.playerCollider.rawValue
         
+        isClient = (UIApplication.sharedApplication().keyWindow?.rootViewController as! GameViewController).isClient
+        
         //Player instantiation
         player = Player()
         player.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
-        //Target instantiation
         target = Target()
-        target.moveToRandomPosition(self.frame)
-        newTarget = false
-        
-        // Creating enemies
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
+        if isClient == true{
+            //Target instantiation
+            target.moveToRandomPosition(self.frame)
+            newTarget = false
+            
+            // Creating enemies
+            runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
+        }
+        else{
+            //set target location that you get from Client
+            
+            // getting the create enemies from the Client
+        }
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
@@ -63,13 +74,6 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
         // Creating the ScoreLabel
         scoreLabel = ScoreLabel()
         scoreLabel.position = CGPoint(x: self.frame.midX + scoreLabel.frame.width/2, y: self.frame.maxY - labelBuffer)
-        
-        dragLabel = SKLabelNode(text: "DRAG TO START")
-        dragLabel.name = "DragLabel"
-        dragLabel.fontName = "DINCondensed-Bold"
-        dragLabel.fontSize = 25 * Screen.screenWidthRatio
-        dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
-        dragLabel.fontColor = UIColor.lightGrayColor()
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
@@ -83,21 +87,14 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
         exitButton = ButtonTemplate(name: "ExitButton", labelName: "EXIT", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/5), color: UIColor.gameRedColor())
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
-        initialPauseWait = true
-        
         self.addChild(pauseButton)
         self.addChild(player)
         self.addChild(target)
         self.addChild(scoreLabel)
-        self.addChild(dragLabel)
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(initialPauseWait!) {
-            runAction(SKAction.waitForDuration(0.1), completion: {self.view!.paused = true})
-            initialPauseWait = false
-        }
-        if(newTarget!) {
+        if(isClient == true && newTarget!) {
             createNewTarget()
             newTarget = false
         }
@@ -105,13 +102,6 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         /* Called when a touch begins */
-        
-        if(self.view!.paused && self.childNodeWithName("DragLabel") != nil) {
-            self.childNodeWithName("DragLabel")!.removeFromParent()
-            self.childNodeWithName("Enemy")?.removeFromParent()
-            scoreLabel.text = "0"
-            self.view!.paused = false
-        }
         
         for touch in (touches) {
             let location = touch.locationInNode(self)
@@ -190,17 +180,29 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
     func addEnemy(){
         enemy = Enemy(side: SpawnSide.Right)
         let enemySpeed = (Double(arc4random_uniform(UInt32(3))) + 3.0)
+        let startingPosition: CGPoint!
         
         if (arc4random_uniform(2) == 1){
-            enemy.position = CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
+            startingPosition = CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
             moveEnemyAction = SKAction.moveTo(CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: enemySpeed)
         }
         else{
-            enemy.position = CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
+            startingPosition = CGPoint(x: -enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2)
             moveEnemyAction = SKAction.moveTo(CGPoint(x: self.frame.width + enemy.frame.width, y: CGFloat(arc4random_uniform(UInt32((self.frame.height + 1) - enemy.frame.height))) + enemy.frame.height/2), duration: enemySpeed)
         }
         
+        // Check every 1 second that enemy positions are synced
+        enemy.position = startingPosition
+        
         enemy.runAction(moveEnemyAction!, withKey: "moveEnemy")
+        self.addChild(enemy)
+    }
+    
+    // Gets the instantiated enemy from the Client
+    func getEnemy(startingPosition: CGPoint, enemySpeed: Double, moveEnemyAction: SKAction){
+        enemy = Enemy(side: SpawnSide.Right)
+        enemy.position = startingPosition
+        enemy.runAction(moveEnemyAction)
         self.addChild(enemy)
     }
     
@@ -209,6 +211,27 @@ class MultiplayerPlayScene: SKScene, SKPhysicsContactDelegate {
         target.moveToRandomPosition(self.frame)
         
         self.addChild(target)
+    }
+    
+    // Gets target Position from Client
+    func getTarget(position: CGPoint){
+        target = Target()
+        target.position = position
+        
+        self.addChild(target)
+    }
+    
+    // DidRecieveData function
+    func didRecieveData(match: GKMatch, didReceiveData: NSData, fromPlayer: String){
+        // Recieve + set position of enemy node (every frame)
+        
+        // Recieve + set position of target (when it sends a message that the target is gone)
+        
+        // Recieve + set position of enemies (when instantiated)
+        // Recieve position of Enemies every 1 second (to make sure they are on track)
+        
+        //var data: DataPacket = DataPacket(enemyNodePosition: <#T##CGPoint!#>, targetPosition: <#T##CGPoint!#>, multiplayerNode: <#T##CGPoint!#>, newTarget: <#T##Bool!#>, newEnemy: <#T##Bool!#>)
+    
     }
     
     func applyFilter() {

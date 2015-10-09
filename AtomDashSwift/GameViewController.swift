@@ -26,6 +26,7 @@ class GameViewController: UIViewController, GCHelperDelegate {
     var menuScene: SKScene!
     var connectButton: UIButton!
     var skView: SKView!
+    var isClient: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,8 @@ class GameViewController: UIViewController, GCHelperDelegate {
         didReceiveData.getBytes(&info, length: sizeof(Int))
         
         print("\(info) recieved")
+        
+        MultiplayerPlayScene().didRecieveData(match, didReceiveData: didReceiveData, fromPlayer: fromPlayer)
     }
     
     func matchStarted() {
@@ -68,12 +71,25 @@ class GameViewController: UIViewController, GCHelperDelegate {
         var num: Int = 100
         let sampleData: NSData = NSData(bytes: &num, length: sizeof(Int))
         print("Sending data")
+        
         do {
             try GCHelper.sharedInstance.match.sendDataToAllPlayers(sampleData, withDataMode: .Reliable)
         }
         catch{
             print("there was an error \(error)")
         }
+        
+        GCHelper.sharedInstance.match.chooseBestHostingPlayerWithCompletionHandler({(player) -> Void in
+            if (player!.playerID == GKLocalPlayer.localPlayer().playerID){
+                self.isClient = true
+            }
+            else{
+                self.isClient = false
+            }
+            
+            // More Efficent line, not sure if it works in swift
+            // self.isClient = player!.playerID == GKLocalPlayer.localPlayer().playerID
+        })
     }
     
     func matchEnded() {
