@@ -44,7 +44,12 @@ class GameViewController: UIViewController, GCHelperDelegate {
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill
 
-        skView.presentScene(menuScene!)
+        //Because authentication was lagging the game, I'm using a thread to start both at the same time
+        dispatch_async(dispatch_get_main_queue(), {
+            self.skView.presentScene(self.menuScene!) //Thread 2
+            GCHelper.sharedInstance.authenticateLocalUser() //Thread 1
+        })
+
     }
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
