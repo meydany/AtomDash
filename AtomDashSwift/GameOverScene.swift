@@ -29,16 +29,16 @@ class GameOverScene: SKScene {
     var targetNode: Target!
     
     var currentViewController: UIViewController!
-    var interstitialAd: ADInterstitialAd!
-    var interstitialAdView: UIView!
+    static var presentAdMob = false //Global variable avaibible to all instances of GameOverScene
+    var stopPresentingAds: Bool!
     
     init(score: Int, size: CGSize) {
         super.init(size: size)
-            
+        
         gameScore = score
         highScore = getHighScore(score)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -49,6 +49,7 @@ class GameOverScene: SKScene {
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
         loadInterstitialAd()
+        stopPresentingAds = false
         
         scoreLabel = SKLabelNode()
         scoreLabel.position = CGPoint(x: self.frame.midX, y: ((8*self.frame.height)/10))
@@ -68,6 +69,8 @@ class GameOverScene: SKScene {
         
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameGreenColor())
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
+        
         self.addChild(mainMenuButton)
         self.addChild(restartButton)
         
@@ -77,13 +80,18 @@ class GameOverScene: SKScene {
     
     func loadInterstitialAd() {
         currentViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-        currentViewController.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
+        currentViewController.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic
         UIViewController.prepareInterstitialAds()
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(currentViewController.shouldPresentInterstitialAd) {
-            print(currentViewController.requestInterstitialAdPresentation())
+        if(currentViewController.shouldPresentInterstitialAd && currentViewController.requestInterstitialAdPresentation()) {
+            stopPresentingAds = true
+            GameOverScene.presentAdMob = true
+            print("Presented iAd")
+        }else if(GameOverScene.presentAdMob && !stopPresentingAds) {
+            stopPresentingAds = true
+            print("Presented AdMob")
         }
     }
     
@@ -126,4 +134,14 @@ class GameOverScene: SKScene {
         
         return highScore
     }
+    
+    deinit {
+        print("bye")
+    }
+    
+    func pauseSceneOnHomePress() {
+        print("hello")
+        scene?.paused = true
+    }
+    
 }
