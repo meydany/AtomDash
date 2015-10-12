@@ -97,6 +97,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
         initialPauseWait = true
+        gameStarted = false
         
         updatesCalled = 0
         updateBuffer = 5 //adjust this according to performance 

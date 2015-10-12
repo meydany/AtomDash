@@ -33,8 +33,19 @@
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
 		864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
 		866513FA1BC5C4F1001BD0C8 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866513F91BC5C4F1001BD0C8 /* iAd.framework */; };
+		866F55381BCC6BC600870908 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866F55371BCC6BC600870908 /* GoogleMobileAds.framework */; };
 		868ECFC91BC481CA0029121A /* MultiplayerPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */; settings = {ASSET_TAGS = (); }; };
 		868ECFCD1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
+		86D4EB2C1BCC66A80049C150 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB2B1BCC66A80049C150 /* AdSupport.framework */; };
+		86D4EB2E1BCC66B00049C150 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB2D1BCC66B00049C150 /* AudioToolbox.framework */; };
+		86D4EB301BCC66BB0049C150 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB2F1BCC66BB0049C150 /* AVFoundation.framework */; };
+		86D4EB321BCC66CC0049C150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB311BCC66CB0049C150 /* CoreGraphics.framework */; };
+		86D4EB341BCC66D70049C150 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB331BCC66D70049C150 /* CoreMedia.framework */; };
+		86D4EB361BCC66E50049C150 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB351BCC66E50049C150 /* CoreTelephony.framework */; };
+		86D4EB381BCC66F50049C150 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB371BCC66F50049C150 /* EventKit.framework */; };
+		86D4EB3A1BCC66FF0049C150 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB391BCC66FF0049C150 /* EventKitUI.framework */; };
+		86D4EB3C1BCC670B0049C150 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB3B1BCC670B0049C150 /* MessageUI.framework */; };
+		86D4EB3E1BCC67150049C150 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB3D1BCC67150049C150 /* StoreKit.framework */; };
 		86DDC8CE1BA686C700F444FB /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DDC8CD1BA686C700F444FB /* Target.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,8 +90,19 @@
 		864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleplayerInstructionsScene.swift; sourceTree = "<group>"; };
 		86604E971BB8C9500030DD5E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		866513F91BC5C4F1001BD0C8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		866F55371BCC6BC600870908 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../Downloads/GoogleMobileAdsSdkiOS-7.5.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayerNode.swift; sourceTree = "<group>"; };
 		868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerInstructionsScene.swift; sourceTree = "<group>"; };
+		86D4EB2B1BCC66A80049C150 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		86D4EB2D1BCC66B00049C150 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		86D4EB2F1BCC66BB0049C150 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		86D4EB311BCC66CB0049C150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		86D4EB331BCC66D70049C150 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		86D4EB351BCC66E50049C150 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		86D4EB371BCC66F50049C150 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		86D4EB391BCC66FF0049C150 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		86D4EB3B1BCC670B0049C150 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		86D4EB3D1BCC67150049C150 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		86DDC8CD1BA686C700F444FB /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +111,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				866F55381BCC6BC600870908 /* GoogleMobileAds.framework in Frameworks */,
+				86D4EB3E1BCC67150049C150 /* StoreKit.framework in Frameworks */,
+				86D4EB3C1BCC670B0049C150 /* MessageUI.framework in Frameworks */,
+				86D4EB3A1BCC66FF0049C150 /* EventKitUI.framework in Frameworks */,
+				86D4EB381BCC66F50049C150 /* EventKit.framework in Frameworks */,
+				86D4EB361BCC66E50049C150 /* CoreTelephony.framework in Frameworks */,
+				86D4EB341BCC66D70049C150 /* CoreMedia.framework in Frameworks */,
+				86D4EB321BCC66CC0049C150 /* CoreGraphics.framework in Frameworks */,
+				86D4EB301BCC66BB0049C150 /* AVFoundation.framework in Frameworks */,
+				86D4EB2E1BCC66B00049C150 /* AudioToolbox.framework in Frameworks */,
+				86D4EB2C1BCC66A80049C150 /* AdSupport.framework in Frameworks */,
 				866513FA1BC5C4F1001BD0C8 /* iAd.framework in Frameworks */,
 				092FDFB91BBB5F6F0061804F /* SystemConfiguration.framework in Frameworks */,
 				092FDFB71BBB241C0061804F /* GameKit.framework in Frameworks */,
@@ -122,6 +155,17 @@
 		8641A9231BA4E9F6001B89EB = {
 			isa = PBXGroup;
 			children = (
+				866F55371BCC6BC600870908 /* GoogleMobileAds.framework */,
+				86D4EB3D1BCC67150049C150 /* StoreKit.framework */,
+				86D4EB3B1BCC670B0049C150 /* MessageUI.framework */,
+				86D4EB391BCC66FF0049C150 /* EventKitUI.framework */,
+				86D4EB371BCC66F50049C150 /* EventKit.framework */,
+				86D4EB351BCC66E50049C150 /* CoreTelephony.framework */,
+				86D4EB331BCC66D70049C150 /* CoreMedia.framework */,
+				86D4EB311BCC66CB0049C150 /* CoreGraphics.framework */,
+				86D4EB2F1BCC66BB0049C150 /* AVFoundation.framework */,
+				86D4EB2D1BCC66B00049C150 /* AudioToolbox.framework */,
+				86D4EB2B1BCC66A80049C150 /* AdSupport.framework */,
 				866513F91BC5C4F1001BD0C8 /* iAd.framework */,
 				092FDFB81BBB5F6F0061804F /* SystemConfiguration.framework */,
 				86604E971BB8C9500030DD5E /* GameKit.framework */,
@@ -392,6 +436,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -438,6 +483,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

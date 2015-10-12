@@ -10,27 +10,28 @@ import SpriteKit
 import UIKit
 import GameKit
 import iAd
+import GoogleMobileAds
 
 class GameOverScene: SKScene {
     
     var userDefaults: NSUserDefaults!
     
-    var scoreLabel: SKLabelNode!
-    var highScoreLabel: SKLabelNode!
+    var gameOverNode: SKLabelNode!
+    var gameOverMenuButton: ButtonTemplate!
+    var gameOverRestartButton: ButtonTemplate!
+    var gameOverScoreNode: SKShapeNode!
+    var gameOverScoreText: SKLabelNode!
+    var gameOverHighscoreText: SKLabelNode!
     
     var gameScore: Int!
     var highScore: Int!
     
-    var restartButton: SKNode!
-    var mainMenuButton: SKNode!
-    
-    var playerNode: Player!
-    var enemyNode: Enemy!
-    var targetNode: Target!
-    
     var currentViewController: UIViewController!
     static var presentAdMob = false //Global variable avaibible to all instances of GameOverScene
     var stopPresentingAds: Bool!
+    
+    static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
+    static var timesPlayed: Int = 0
     
     init(score: Int, size: CGSize) {
         super.init(size: size)
@@ -51,31 +52,49 @@ class GameOverScene: SKScene {
         loadInterstitialAd()
         stopPresentingAds = false
         
-        scoreLabel = SKLabelNode()
-        scoreLabel.position = CGPoint(x: self.frame.midX, y: ((8*self.frame.height)/10))
-        scoreLabel.text = "Score: \(gameScore!)"
-        scoreLabel.fontName = "HelveticaNeue-Thin"
-        scoreLabel.fontSize = 75 * Screen.screenWidthRatio
-        scoreLabel.fontColor = UIColor.blackColor()
+        GameOverScene.timesPlayed++
         
-        highScoreLabel = SKLabelNode()
-        highScoreLabel.position = CGPoint(x: self.frame.midX, y: (7*self.frame.height)/10)
-        highScoreLabel.text = "High Score: \(highScore!)"
-        highScoreLabel.fontName = "HelveticaNeue-Thin"
-        highScoreLabel.fontSize = 45 * Screen.screenWidthRatio
-        highScoreLabel.fontColor = UIColor.darkGrayColor()
+        gameOverNode = SKLabelNode(text: "GAME OVER")
+        gameOverNode.fontName = "DINCondensed-Bold"
+        gameOverNode.fontSize = 75 * Screen.screenWidthRatio
+        gameOverNode.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - gameOverNode.frame.height - ((1 * self.frame.height)/10)))
+        gameOverNode.zPosition = 1
+        gameOverNode.fontColor = UIColor.darkGrayColor()
         
-        mainMenuButton = ButtonTemplate(name: "MainMenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameBlueColor())
+        gameOverMenuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/10), color: UIColor.gameBlueColor())
         
-        restartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameGreenColor())
+        gameOverRestartButton = ButtonTemplate(name: "RestartButton", labelName: "RESTART", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3.5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
+        gameOverScoreNode = SKShapeNode(rectOfSize: CGSize(width: self.frame.width/1.5, height: self.frame.width/2), cornerRadius: 10 * Screen.screenWidthRatio)
+        gameOverScoreNode.position = CGPoint(x: self.frame.midX, y: (6*self.frame.height)/10)
+        gameOverScoreNode.zPosition = 1
+        gameOverScoreNode.fillColor = UIColor.whiteColor()
+        gameOverScoreNode.strokeColor = UIColor.darkGrayColor()
+        gameOverScoreNode.glowWidth = 0.1
+        gameOverScoreNode.name = "GameOverScoreNode"
         
-        self.addChild(mainMenuButton)
-        self.addChild(restartButton)
+        gameOverScoreText = SKLabelNode()
+        gameOverScoreText.text = "Score: \(gameScore)"
+        gameOverScoreText.position = CGPoint(x: self.frame.midX, y: (6.3*self.frame.height)/10)
+        gameOverScoreText.fontName = "Helvetica-Light"
+        gameOverScoreText.fontSize = 50 * Screen.screenWidthRatio
+        gameOverScoreText.fontColor = UIColor.darkGrayColor()
+        gameOverScoreText.zPosition = 1
         
-        self.addChild(scoreLabel)
-        self.addChild(highScoreLabel)
+        gameOverHighscoreText = SKLabelNode()
+        gameOverHighscoreText.text = "High Score: \(highScore)"
+        gameOverHighscoreText.position = CGPoint(x: self.frame.midX, y: (5.2*self.frame.height)/10)
+        gameOverHighscoreText.fontName = "Helvetica-Light"
+        gameOverHighscoreText.fontSize = 30 * Screen.screenWidthRatio
+        gameOverHighscoreText.fontColor = UIColor.darkGrayColor()
+        gameOverHighscoreText.zPosition = 1
+        
+        self.addChild(gameOverNode)
+        self.addChild(gameOverMenuButton)
+        self.addChild(gameOverRestartButton)
+        self.addChild(gameOverScoreNode)
+        self.addChild(gameOverScoreText)
+        self.addChild(gameOverHighscoreText)
     }
     
     func loadInterstitialAd() {
@@ -84,14 +103,31 @@ class GameOverScene: SKScene {
         UIViewController.prepareInterstitialAds()
     }
     
+    func loadAdMobInterstitialAd() -> GADInterstitial{
+        let tempAd = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
+        
+        let request: GADRequest = GADRequest()
+        request.testDevices = ["2e870b280621a7bf297cad79e82087b4"]
+        
+        tempAd.loadRequest(request)
+        return tempAd
+    }
+    
     override func update(currentTime: CFTimeInterval) {
         if(currentViewController.shouldPresentInterstitialAd && currentViewController.requestInterstitialAdPresentation()) {
             stopPresentingAds = true
             GameOverScene.presentAdMob = true
+            GameOverScene.adMobInterstitial = loadAdMobInterstitialAd()
             print("Presented iAd")
-        }else if(GameOverScene.presentAdMob && !stopPresentingAds) {
+        }else if(GameOverScene.presentAdMob && !stopPresentingAds && GameOverScene.adMobInterstitial.isReady && (GameOverScene.timesPlayed % 2 == 0)) {
+            GameOverScene.adMobInterstitial.presentFromRootViewController(currentViewController)
+            GameOverScene.timesPlayed = 0
+            GameOverScene.adMobInterstitial = loadAdMobInterstitialAd()
             stopPresentingAds = true
             print("Presented AdMob")
+        }else if(GameOverScene.timesPlayed > 2) { //Just in case iAd never loads
+            GameOverScene.presentAdMob = true
+            GameOverScene.adMobInterstitial = loadAdMobInterstitialAd()
         }
     }
     
@@ -107,7 +143,7 @@ class GameOverScene: SKScene {
                 let playScene = PlayScene(size: self.scene!.size)
                 let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                 self.scene!.view?.presentScene(playScene, transition: transition)
-            case "MainMenuButton":
+            case "MenuButton":
                 let menuScene = MenuScene(size: self.scene!.size)
                 let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                 self.scene!.view?.presentScene(menuScene, transition: transition)
@@ -133,14 +169,5 @@ class GameOverScene: SKScene {
         }
         
         return highScore
-    }
-    
-    func pauseSceneOnHomePress() {
-        print("hello")
-        scene?.paused = true
-    }
-    
-    deinit {
-        weak var viewController: GameViewController? = GameViewController()
     }
 }
