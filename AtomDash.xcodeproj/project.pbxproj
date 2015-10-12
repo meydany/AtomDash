@@ -33,7 +33,7 @@
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
 		864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
 		866513FA1BC5C4F1001BD0C8 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866513F91BC5C4F1001BD0C8 /* iAd.framework */; };
-		866F55381BCC6BC600870908 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866F55371BCC6BC600870908 /* GoogleMobileAds.framework */; };
+		866F553A1BCC76F300870908 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866F55391BCC76F300870908 /* GoogleMobileAds.framework */; };
 		868ECFC91BC481CA0029121A /* MultiplayerPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */; settings = {ASSET_TAGS = (); }; };
 		868ECFCD1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */; settings = {ASSET_TAGS = (); }; };
 		86D4EB2C1BCC66A80049C150 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB2B1BCC66A80049C150 /* AdSupport.framework */; };
@@ -91,6 +91,7 @@
 		86604E971BB8C9500030DD5E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		866513F91BC5C4F1001BD0C8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		866F55371BCC6BC600870908 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../Downloads/GoogleMobileAdsSdkiOS-7.5.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
+		866F55391BCC76F300870908 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "GoogleMobileAdsSdkiOS-7.5.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayerNode.swift; sourceTree = "<group>"; };
 		868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerInstructionsScene.swift; sourceTree = "<group>"; };
 		86D4EB2B1BCC66A80049C150 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -111,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				866F55381BCC6BC600870908 /* GoogleMobileAds.framework in Frameworks */,
+				866F553A1BCC76F300870908 /* GoogleMobileAds.framework in Frameworks */,
 				86D4EB3E1BCC67150049C150 /* StoreKit.framework in Frameworks */,
 				86D4EB3C1BCC670B0049C150 /* MessageUI.framework in Frameworks */,
 				86D4EB3A1BCC66FF0049C150 /* EventKitUI.framework in Frameworks */,
@@ -155,6 +156,7 @@
 		8641A9231BA4E9F6001B89EB = {
 			isa = PBXGroup;
 			children = (
+				866F55391BCC76F300870908 /* GoogleMobileAds.framework */,
 				866F55371BCC6BC600870908 /* GoogleMobileAds.framework */,
 				86D4EB3D1BCC67150049C150 /* StoreKit.framework */,
 				86D4EB3B1BCC670B0049C150 /* MessageUI.framework */,
@@ -507,6 +509,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-7.5.1",
+				);
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -523,6 +529,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-7.5.1",
+				);
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
