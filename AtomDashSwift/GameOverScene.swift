@@ -107,7 +107,7 @@ class GameOverScene: SKScene {
         let tempAd = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
         
         let request: GADRequest = GADRequest()
-        request.testDevices = ["2e870b280621a7bf297cad79e82087b4"]
+        request.testDevices.append(kGADSimulatorID)
         
         tempAd.loadRequest(request)
         return tempAd
