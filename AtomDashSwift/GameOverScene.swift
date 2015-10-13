@@ -41,6 +41,9 @@ class GameOverScene: SKScene {
         
         gameScore = score
         highScore = getHighScore(score)
+        
+        stopPresentingAds = false
+        GameOverScene.timesPlayed++
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,9 +54,6 @@ class GameOverScene: SKScene {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        stopPresentingAds = false
-        GameOverScene.timesPlayed++
         
         gameOverNode = SKLabelNode(text: "GAME OVER")
         gameOverNode.fontName = "DINCondensed-Bold"
@@ -116,6 +116,9 @@ class GameOverScene: SKScene {
     }
     
     func presentiAdInterstitialAd() {
+        print("Presented iAd")
+
+        GameOverScene.currentViewController.requestInterstitialAdPresentation()
         GameOverScene.presentAdMob = true
         GameOverScene.timesPlayed = 0
 
@@ -127,6 +130,8 @@ class GameOverScene: SKScene {
     }
     
     func presentAdMobInterstitialAd() {
+        print("Presented AdMob")
+
         GameOverScene.adMobInterstitial.presentFromRootViewController(GameOverScene.currentViewController)
         GameOverScene.timesPlayed = 0
         
@@ -138,15 +143,15 @@ class GameOverScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(GameOverScene.currentViewController.shouldPresentInterstitialAd && GameOverScene.currentViewController.requestInterstitialAdPresentation() && (GameOverScene.timesPlayed % 2 == 0)) {
-            presentiAdInterstitialAd()
-            print("Presented iAd")
-        }else if(GameOverScene.presentAdMob && !stopPresentingAds && GameOverScene.adMobInterstitial.isReady && (GameOverScene.timesPlayed % 2 == 0)) {
-            presentAdMobInterstitialAd()
-            print("Presented AdMob")
-        }else if(GameOverScene.timesPlayed > 2) { //Just in case iAd never loads
+        if(!stopPresentingAds && (GameOverScene.timesPlayed % 2 == 0) && GameOverScene.currentViewController.shouldPresentInterstitialAd && GameOverScene.currentViewController.requestInterstitialAdPresentation().boolValue) {
+            self.presentiAdInterstitialAd()
+        }else if(!stopPresentingAds && (GameOverScene.timesPlayed % 2 == 0) && GameOverScene.presentAdMob && GameOverScene.adMobInterstitial.isReady) {
+            self.presentAdMobInterstitialAd()
+        }else if(!stopPresentingAds && GameOverScene.timesPlayed > 2) { //Just in case iAd never loads
             GameOverScene.presentAdMob = true
             GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
+            GameOverScene.loadiAdInterstitialAd()
+            stopPresentingAds = true
         }
     }
     

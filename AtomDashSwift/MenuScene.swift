@@ -36,7 +36,7 @@ class MenuScene: SKScene {
         gameName.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - gameName.frame.height - ((1 * self.frame.height)/10)))
         gameName.fontColor = UIColor.darkGrayColor()
         
-        copyRightNode = SKLabelNode(text: "© 2015 SoyMobile")
+        copyRightNode = SKLabelNode(text: "Created by Oran Luzon, Yoli Meydan, and Shalev Goldszmidt")
         copyRightNode.fontName = "DINCondensed-Bold"
         copyRightNode.fontSize = 15 * Screen.screenWidthRatio
         copyRightNode.position = CGPoint(x: self.frame.midX, y: (self.frame.minY + copyRightNode.frame.height)*2)
