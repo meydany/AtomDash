@@ -74,6 +74,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         } else {
             GKLocalPlayer.localPlayer().unregisterAllListeners()
             print("Authentication changed: player not authenticated")
+            GKNotificationBanner.showBannerWithTitle("Oh no!", message: "Log into Game Center", completionHandler: {})
             authenticated = false
         }
     }
@@ -107,30 +108,21 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
     // MARK: User functions
 
     /// Authenticates the user with their Game Center account if possible
-//    public func authenticateLocalUser() {
-//        print("Authenticating local user...")
-//        if GKLocalPlayer.localPlayer().authenticated == false {
-//            GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
-//                if error == nil {
-//                    self.authenticated = true
-//                } else {
-//                    print("\(error?.localizedDescription)")
-//                }
-//            }
-//        } else {
-//            print("Already authenticated")
-//        }
-//    }
-    
-    func authenticateLocalUser(){
-        if(GKLocalPlayer.localPlayer().authenticated == false) {
-            GKLocalPlayer.localPlayer().authenticateHandler = {(viewController, error) -> Void in
-                if (viewController != nil) {
-                    GKNotificationBanner.showBannerWithTitle("Oh no!", message: "Log into Game Center", completionHandler: {})
+    public func authenticateLocalUser() {
+        print("Authenticating local user...")
+        if GKLocalPlayer.localPlayer().authenticated == false {
+            GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
+                if error == nil {
+                    self.authenticated = true
+                } else {
+                    print("\(error?.localizedDescription)")
                 }
             }
+        } else {
+            print("Already authenticated")
         }
     }
+
 
     /**
         Attempts to pair up the user with other users who are also looking for a match.
