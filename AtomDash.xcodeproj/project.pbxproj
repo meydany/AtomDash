@@ -90,7 +90,6 @@
 		864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleplayerInstructionsScene.swift; sourceTree = "<group>"; };
 		86604E971BB8C9500030DD5E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		866513F91BC5C4F1001BD0C8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		866F55371BCC6BC600870908 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../Downloads/GoogleMobileAdsSdkiOS-7.5.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		866F55391BCC76F300870908 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "GoogleMobileAdsSdkiOS-7.5.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		868ECFC81BC481CA0029121A /* MultiplayerPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayerNode.swift; sourceTree = "<group>"; };
 		868ECFCC1BC4A3BB0029121A /* MultiplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerInstructionsScene.swift; sourceTree = "<group>"; };
@@ -158,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				866F55391BCC76F300870908 /* GoogleMobileAds.framework */,
-				866F55371BCC6BC600870908 /* GoogleMobileAds.framework */,
 				86D4EB3D1BCC67150049C150 /* StoreKit.framework */,
 				86D4EB3B1BCC670B0049C150 /* MessageUI.framework */,
 				86D4EB391BCC66FF0049C150 /* EventKitUI.framework */,

@@ -26,12 +26,12 @@ class GameOverScene: SKScene {
     var gameScore: Int!
     var highScore: Int!
     
-    var currentViewController: UIViewController!
+    static var currentViewController: UIViewController! = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
     static var presentAdMob = false //Global variable avaibible to all instances of GameOverScene
     var stopPresentingAds: Bool!
     
     static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
-    static var timesPlayed: Int = 0
+    static var timesPlayed: Int = 1
     
     init(score: Int, size: CGSize) {
         super.init(size: size)
@@ -49,9 +49,7 @@ class GameOverScene: SKScene {
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
-        loadInterstitialAd()
         stopPresentingAds = false
-        
         GameOverScene.timesPlayed++
         
         gameOverNode = SKLabelNode(text: "GAME OVER")
@@ -97,13 +95,14 @@ class GameOverScene: SKScene {
         self.addChild(gameOverHighscoreText)
     }
     
-    func loadInterstitialAd() {
-        currentViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-        currentViewController.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic
+    static func loadiAdInterstitialAd() {
+        print("Loading iAd")
+        
         UIViewController.prepareInterstitialAds()
     }
     
-    func loadAdMobInterstitialAd() -> GADInterstitial{
+    static func loadAdMobInterstitialAd() -> GADInterstitial{
+        print("Loading Admob")
         let tempAd = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
         
         let request: GADRequest = GADRequest()
@@ -113,21 +112,38 @@ class GameOverScene: SKScene {
         return tempAd
     }
     
+    func presentiAdInterstitialAd() {
+        GameOverScene.presentAdMob = true
+        GameOverScene.timesPlayed = 0
+
+        //Reloads ads
+        GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
+        GameOverScene.loadiAdInterstitialAd()
+        
+        stopPresentingAds = true
+    }
+    
+    func presentAdMobInterstitialAd() {
+        GameOverScene.adMobInterstitial.presentFromRootViewController(GameOverScene.currentViewController)
+        GameOverScene.timesPlayed = 0
+        
+        //Reloads ads
+        GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
+        GameOverScene.loadiAdInterstitialAd()
+
+        stopPresentingAds = true
+    }
+    
     override func update(currentTime: CFTimeInterval) {
-        if(currentViewController.shouldPresentInterstitialAd && currentViewController.requestInterstitialAdPresentation()) {
-            stopPresentingAds = true
-            GameOverScene.presentAdMob = true
-            GameOverScene.adMobInterstitial = loadAdMobInterstitialAd()
+        if(GameOverScene.currentViewController.shouldPresentInterstitialAd && GameOverScene.currentViewController.requestInterstitialAdPresentation() && (GameOverScene.timesPlayed % 2 == 0)) {
+            presentiAdInterstitialAd()
             print("Presented iAd")
         }else if(GameOverScene.presentAdMob && !stopPresentingAds && GameOverScene.adMobInterstitial.isReady && (GameOverScene.timesPlayed % 2 == 0)) {
-            GameOverScene.adMobInterstitial.presentFromRootViewController(currentViewController)
-            GameOverScene.timesPlayed = 0
-            GameOverScene.adMobInterstitial = loadAdMobInterstitialAd()
-            stopPresentingAds = true
+            presentAdMobInterstitialAd()
             print("Presented AdMob")
         }else if(GameOverScene.timesPlayed > 2) { //Just in case iAd never loads
             GameOverScene.presentAdMob = true
-            GameOverScene.adMobInterstitial = loadAdMobInterstitialAd()
+            GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
         }
     }
     

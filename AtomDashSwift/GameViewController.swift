@@ -50,7 +50,11 @@ class GameViewController: UIViewController, GCHelperDelegate {
             self.skView.presentScene(self.menuScene!) //Thread 2
             GCHelper.sharedInstance.authenticateLocalUser() //Thread 1
         })
-
+        
+        //Loads ads
+        self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic
+        GameOverScene.loadAdMobInterstitialAd()
+        GameOverScene.loadiAdInterstitialAd()
     }
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
