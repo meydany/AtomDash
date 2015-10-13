@@ -148,6 +148,7 @@ class GameOverScene: SKScene {
             print("No ad availible")
             GameOverScene.loadiAdInterstitialAd()
             GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
+            GameOverScene.timesPlayed++ //Insures ad is displayed on next death
             presentAds = false
         }
     }
