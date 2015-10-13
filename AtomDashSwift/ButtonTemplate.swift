@@ -37,7 +37,7 @@ class ButtonTemplate: SKShapeNode {
         
         // Change the fontSize.
         buttonLabel.fontSize *= (scalingFactor)
-        self.addChild(buttonLabel)        
+        self.addChild(buttonLabel)
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -17,7 +17,6 @@ class MenuScene: SKScene {
     var playButton: ButtonTemplate!
     var leaderboardsButton: ButtonTemplate!
     var instructionsButton: ButtonTemplate!
-    var multiplayerButton: ButtonTemplate!
     
     var playerNode: Player!
     var enemyNode: Enemy!
@@ -54,17 +53,14 @@ class MenuScene: SKScene {
         
         playButton = ButtonTemplate(name: "PlayButton",labelName: "PLAY",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
-        leaderboardsButton = ButtonTemplate(name: "LeaderboardsButton",labelName: "LEADERBOARDS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameRedColor())
+        leaderboardsButton = ButtonTemplate(name: "LeaderboardsButton",labelName: "LEADERBOARDS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameRedColor())
         
-        instructionsButton = ButtonTemplate(name: "InstructionsButton",labelName: "INSTRUCTIONS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameBlueColor())
-        
-        multiplayerButton = ButtonTemplate(name: "MultiplayerButton",labelName: "MULTIPLAYER",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gamePurpleColor())
+        instructionsButton = ButtonTemplate(name: "InstructionsButton",labelName: "INSTRUCTIONS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameBlueColor())
         
         self.addChild(playerNode!)
         self.addChild(targetNode!)
         self.addChild(enemyNode!)
 
-        self.addChild(multiplayerButton)
         self.addChild(leaderboardsButton)
         self.addChild(instructionsButton)
         self.addChild(playButton)
@@ -103,10 +99,6 @@ class MenuScene: SKScene {
                     let instructionsScene = SingleplayerInstructionsScene(size: self.scene!.size)
                     let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                     self.scene!.view?.presentScene(instructionsScene, transition: transition)
-                case "MultiplayerButton":
-                    let chooseConnectionType = ChooseMultiplayerConnectionType(size: self.scene!.size)
-                    let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
-                    self.scene!.view?.presentScene(chooseConnectionType, transition: transition)
                 default:
                     break
                 }

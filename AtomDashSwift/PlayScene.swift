@@ -66,7 +66,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         newTarget = false
         
         // Creating enemies
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
+        //runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
@@ -122,6 +122,23 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             newTarget = false
         }
         updatesCalled!++
+        
+        // Left
+        if ((player.position.x - player.frame.width/2) <= self.frame.minX){
+            player.position.x = self.frame.minX
+        }
+        // Right
+        else if ((player.position.x + player.frame.width/2) >= self.frame.maxX){
+            player.position.x = self.frame.maxX
+        }
+        // Top
+        else if ((player.position.y + player.frame.height/2) >= self.frame.maxY){
+            player.position.y = self.frame.maxY
+        }
+        // Bottom
+        else if ((player.position.y - player.frame.width/2) <= self.frame.minY){
+            player.position.y = self.frame.minY
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
