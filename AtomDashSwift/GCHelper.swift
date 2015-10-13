@@ -107,27 +107,26 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
     // MARK: User functions
 
     /// Authenticates the user with their Game Center account if possible
-    public func authenticateLocalUser() {
-        print("Authenticating local user...")
-        if GKLocalPlayer.localPlayer().authenticated == false {
-            GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
-                if error == nil {
-                    self.authenticated = true
-                } else {
-                    print("\(error?.localizedDescription)")
-                }
-            }
-        } else {
-            print("Already authenticated")
-        }
-    }
+//    public func authenticateLocalUser() {
+//        print("Authenticating local user...")
+//        if GKLocalPlayer.localPlayer().authenticated == false {
+//            GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
+//                if error == nil {
+//                    self.authenticated = true
+//                } else {
+//                    print("\(error?.localizedDescription)")
+//                }
+//            }
+//        } else {
+//            print("Already authenticated")
+//        }
+//    }
     
-    func authenticateLocalPlayerWithLogin(){
+    func authenticateLocalUser(){
         if(GKLocalPlayer.localPlayer().authenticated == false) {
             GKLocalPlayer.localPlayer().authenticateHandler = {(viewController, error) -> Void in
                 if (viewController != nil) {
-                    let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-                    currentViewController.presentViewController(viewController!, animated: true, completion: nil)
+                    GKNotificationBanner.showBannerWithTitle("Oh no!", message: "Log into Game Center", completionHandler: {})
                 }
             }
         }
