@@ -26,12 +26,15 @@ class GameOverScene: SKScene {
     var gameScore: Int!
     var highScore: Int!
     
+    //Global variables avaibible to all instances of GameOverScene
     static var currentViewController: UIViewController! = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-    static var presentAdMob = false //Global variable avaibible to all instances of GameOverScene
-    var stopPresentingAds: Bool!
     
     static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
+    static var presentAdMob = false //Global variable avaibible to all instances of GameOverScene
+    
     static var timesPlayed: Int = 1
+   
+    var stopPresentingAds: Bool!
     
     init(score: Int, size: CGSize) {
         super.init(size: size)
