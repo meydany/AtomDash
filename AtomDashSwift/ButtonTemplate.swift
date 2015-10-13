@@ -11,9 +11,10 @@ import SpriteKit
 
 class ButtonTemplate: SKShapeNode {
     
+    //var textSize: CGFloat?
+    
     init(name: String, labelName: String, size: CGSize, position: CGPoint, color: UIColor) {
         super.init()
-        
         let rect = CGRect(origin: CGPointZero, size: size)
         self.path = CGPathCreateWithRoundedRect(rect, CGFloat(8 * Screen.screenWidthRatio), CGFloat(8 * Screen.screenWidthRatio), nil)
         
@@ -37,6 +38,7 @@ class ButtonTemplate: SKShapeNode {
         
         // Change the fontSize.
         buttonLabel.fontSize *= (scalingFactor)
+        //buttonLabel.fontSize = textSize!
         self.addChild(buttonLabel)
     }
 

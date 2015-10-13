@@ -85,6 +85,11 @@ class MenuScene: SKScene {
                         let playScene = PlayScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
+                        /*
+                        GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: NSUserDefaults().integerForKey("highScore"))
+                        print("Reported HighScore")
+                        print(NSUserDefaults().integerForKey("highScore"))
+                        */
                     }
                     else {
                         NSUserDefaults().setBool(true, forKey: "instructionsScene")
