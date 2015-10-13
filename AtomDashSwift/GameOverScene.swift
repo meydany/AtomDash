@@ -123,7 +123,6 @@ class GameOverScene: SKScene {
         GameOverScene.timesPlayed = 0
 
         //Reloads ads
-        GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
         GameOverScene.loadiAdInterstitialAd()
         
         stopPresentingAds = true
@@ -137,7 +136,6 @@ class GameOverScene: SKScene {
         
         //Reloads ads
         GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
-        GameOverScene.loadiAdInterstitialAd()
 
         stopPresentingAds = true
     }
