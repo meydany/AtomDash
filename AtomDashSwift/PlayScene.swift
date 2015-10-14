@@ -88,6 +88,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
         pauseButton.xScale = 0.9
         pauseButton.yScale = 0.9
+        pauseButton.zPosition = 2
         pauseButton.position.x = self.frame.minX + (pauseButton!.frame.width * 0.75)
         pauseButton.position.y = self.frame.minY + (pauseButton!.frame.height * 0.75)
         pauseButton.name = "PauseButton"
