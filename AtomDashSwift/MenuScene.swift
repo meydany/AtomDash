@@ -51,9 +51,9 @@ class MenuScene: SKScene {
         targetNode = Target()
         targetNode!.position = CGPoint(x: (3*self.frame.width)/4, y: (3.4*self.frame.height)/5)
         
-        playButton = ButtonTemplate(name: "PlayButton",labelName: "PLAY",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
-        
         leaderboardsButton = ButtonTemplate(name: "LeaderboardsButton",labelName: "LEADERBOARDS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameRedColor())
+        
+        playButton = ButtonTemplate(name: "PlayButton",labelName: "PLAY",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (5*self.frame.height)/10), color: UIColor.gameGreenColor())
         
         instructionsButton = ButtonTemplate(name: "InstructionsButton",labelName: "INSTRUCTIONS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameBlueColor())
         

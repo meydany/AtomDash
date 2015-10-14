@@ -45,11 +45,15 @@ class GameViewController: UIViewController, GCHelperDelegate {
         /* Set the scale mode to scale to fit the window */
         menuScene!.scaleMode = .AspectFill
 
+        /*
         //Because authentication was lagging the game, I'm using a thread to start both at the same time
         dispatch_async(dispatch_get_main_queue(), {
             self.skView.presentScene(self.menuScene!) //Thread 2
             GCHelper.sharedInstance.authenticateLocalUser() //Thread 1
         })
+        */
+        
+        self.skView.presentScene(self.menuScene!)
         
         //Loads ads
         self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic

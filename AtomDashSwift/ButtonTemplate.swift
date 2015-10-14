@@ -9,6 +9,11 @@
 import Foundation
 import SpriteKit
 
+public struct ButtonTextSize{
+    static var buttonTextSize: CGFloat = 1
+    static var firstButton: Bool = true
+}
+
 class ButtonTemplate: SKShapeNode {
     
     //var textSize: CGFloat?
@@ -35,6 +40,15 @@ class ButtonTemplate: SKShapeNode {
         buttonLabel.name = name
         
         let scalingFactor = min(self.frame.width / buttonLabel.frame.width, self.frame.height / buttonLabel.frame.height)/1.25
+        
+        if (ButtonTextSize.firstButton == true){
+            buttonLabel.fontSize *= (scalingFactor)
+            ButtonTextSize.buttonTextSize = buttonLabel.fontSize
+            ButtonTextSize.firstButton = false
+        }
+        else{
+            buttonLabel.fontSize = ButtonTextSize.buttonTextSize
+        }
         
         // Change the fontSize.
         buttonLabel.fontSize *= (scalingFactor)
