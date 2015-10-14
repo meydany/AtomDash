@@ -8,6 +8,8 @@
 
 import SpriteKit
 import Darwin
+import GameKit
+
 
 enum ColliderObject: UInt32 {
     case wallCollider = 1

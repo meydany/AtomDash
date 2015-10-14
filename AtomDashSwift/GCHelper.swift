@@ -74,6 +74,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         } else {
             GKLocalPlayer.localPlayer().unregisterAllListeners()
             print("Authentication changed: player not authenticated")
+            GKNotificationBanner.showBannerWithTitle("Oh no!", message: "Log into Game Center", completionHandler: {})
             authenticated = false
         }
     }
@@ -121,17 +122,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
             print("Already authenticated")
         }
     }
-    
-    func authenticateLocalPlayerWithLogin(){
-        if(GKLocalPlayer.localPlayer().authenticated == false) {
-            GKLocalPlayer.localPlayer().authenticateHandler = {(viewController, error) -> Void in
-                if (viewController != nil) {
-                    let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-                    currentViewController.presentViewController(viewController!, animated: true, completion: nil)
-                }
-            }
-        }
-    }
+
 
     /**
         Attempts to pair up the user with other users who are also looking for a match.

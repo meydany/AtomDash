@@ -28,19 +28,19 @@ class GameOverScene: SKScene {
     
     //Global variables avaibible to all instances of GameOverScene
     static var currentViewController: UIViewController! = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-    
     static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
-    static var presentAdMob = false //Global variable avaibible to all instances of GameOverScene
-    
     static var timesPlayed: Int = 1
    
-    var stopPresentingAds: Bool!
+    var presentAds: Bool!
     
     init(score: Int, size: CGSize) {
         super.init(size: size)
         
         gameScore = score
         highScore = getHighScore(score)
+        
+        presentAds = false
+        GameOverScene.timesPlayed++
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,9 +51,6 @@ class GameOverScene: SKScene {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        stopPresentingAds = false
-        GameOverScene.timesPlayed++
         
         gameOverNode = SKLabelNode(text: "GAME OVER")
         gameOverNode.fontName = "DINCondensed-Bold"
@@ -96,6 +93,8 @@ class GameOverScene: SKScene {
         self.addChild(gameOverScoreNode)
         self.addChild(gameOverScoreText)
         self.addChild(gameOverHighscoreText)
+        
+        runAction(SKAction.waitForDuration(0.05), completion: {self.presentAds = true})
     }
     
     static func loadiAdInterstitialAd() {
@@ -116,37 +115,41 @@ class GameOverScene: SKScene {
     }
     
     func presentiAdInterstitialAd() {
-        GameOverScene.presentAdMob = true
+        print("Presented iAd")
+        
+        presentAds = false
+
+        GameOverScene.currentViewController.requestInterstitialAdPresentation()
         GameOverScene.timesPlayed = 0
 
         //Reloads ads
-        GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
         GameOverScene.loadiAdInterstitialAd()
-        
-        stopPresentingAds = true
+        GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
     }
     
     func presentAdMobInterstitialAd() {
+        print("Presented AdMob")
+
+        presentAds = false
+
         GameOverScene.adMobInterstitial.presentFromRootViewController(GameOverScene.currentViewController)
         GameOverScene.timesPlayed = 0
         
         //Reloads ads
         GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
-        GameOverScene.loadiAdInterstitialAd()
-
-        stopPresentingAds = true
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(GameOverScene.currentViewController.shouldPresentInterstitialAd && GameOverScene.currentViewController.requestInterstitialAdPresentation() && (GameOverScene.timesPlayed % 2 == 0)) {
-            presentiAdInterstitialAd()
-            print("Presented iAd")
-        }else if(GameOverScene.presentAdMob && !stopPresentingAds && GameOverScene.adMobInterstitial.isReady && (GameOverScene.timesPlayed % 2 == 0)) {
-            presentAdMobInterstitialAd()
-            print("Presented AdMob")
-        }else if(GameOverScene.timesPlayed > 2) { //Just in case iAd never loads
-            GameOverScene.presentAdMob = true
+        if(presentAds! && (GameOverScene.timesPlayed % 2 == 0)  && GameOverScene.currentViewController.requestInterstitialAdPresentation().boolValue) {
+            self.presentiAdInterstitialAd()
+        }else if(presentAds! && (GameOverScene.timesPlayed % 2 == 0) && GameOverScene.adMobInterstitial.isReady) {
+            self.presentAdMobInterstitialAd()
+        }else if(presentAds! && (GameOverScene.timesPlayed % 2 == 0)) {
+            print("No ad availible")
+            GameOverScene.loadiAdInterstitialAd()
             GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
+            GameOverScene.timesPlayed++ //Insures ad is displayed on next death
+            presentAds = false
         }
     }
     
