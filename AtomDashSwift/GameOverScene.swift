@@ -28,7 +28,7 @@ class GameOverScene: SKScene {
     
     //Global variables avaibible to all instances of GameOverScene
     static var currentViewController: UIViewController! = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-    static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
+    static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/7435571367")
     static var timesPlayed: Int = 1
    
     var presentAds: Bool!
@@ -105,7 +105,7 @@ class GameOverScene: SKScene {
     
     static func loadAdMobInterstitialAd() -> GADInterstitial{
         print("Loading Admob")
-        let tempAd = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/5528519368")
+        let tempAd = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/7435571367")
         
         let request: GADRequest = GADRequest()
         request.testDevices = ["1d37a5bc162bfd28997fa7f4a7c9568c", "2e870b280621a7bf297cad79e82087b4"]
