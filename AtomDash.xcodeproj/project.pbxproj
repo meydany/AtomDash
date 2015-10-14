@@ -514,6 +514,7 @@
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
 				PROVISIONING_PROFILE = "";
@@ -534,6 +535,7 @@
 				INFOPLIST_FILE = AtomDashSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soymobile.atomdash;
 				PRODUCT_NAME = AtomDash;
 				PROVISIONING_PROFILE = "";
