@@ -26,6 +26,17 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
     
     var removeSubviews: Bool!
     
+    var nextScene: SKScene!
+    
+    init (nextScene: SKScene, size: CGSize){
+        self.nextScene = nextScene
+        super.init(size: size)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.whiteColor()
         
@@ -62,7 +73,7 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
         gotItButton.layer.cornerRadius = 10
         gotItButton.backgroundColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
         gotItButton.setTitle("GOT IT", forState: UIControlState.Normal)
-        gotItButton.addTarget(self, action: "presentPlayScene", forControlEvents: UIControlEvents.TouchUpInside)
+        gotItButton.addTarget(self, action: "presentNextScene", forControlEvents: UIControlEvents.TouchUpInside)
         
         let scalingFactor = min(self.frame.width / gotItButton.frame.width, self.frame.height / gotItButton.frame.height)/1.25
         gotItButton.titleLabel!.font = UIFont(name: "DINCondensed-Bold", size: gotItButton.titleLabel!.font.pointSize * CGFloat(scalingFactor))
@@ -123,12 +134,11 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
         return stringPartOne
     }
     
-    func presentPlayScene() {
+    func presentNextScene() {
         self.removeAllActions()
         fadeOutViews()
-        let playScene = PlayScene(size: self.scene!.size)
         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
-        self.view?.presentScene(playScene, transition: transition)
+        self.view?.presentScene(nextScene, transition: transition)
     }
     
     func fadeInViews() {
