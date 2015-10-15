@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "PauseButton.png"
+      "filename" : "PauseButton.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

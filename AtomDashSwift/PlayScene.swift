@@ -86,11 +86,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         // Creating a pause button
         pauseButton = SKSpriteNode(imageNamed: "PauseButton")
-        pauseButton.xScale = 0.9
-        pauseButton.yScale = 0.9
+        pauseButton.xScale = 0.5
+        pauseButton.yScale = 0.5
         pauseButton.zPosition = 2
-        pauseButton.position.x = self.frame.minX + (pauseButton!.frame.width * 0.75)
-        pauseButton.position.y = self.frame.minY + (pauseButton!.frame.height * 0.75)
+        pauseButton.position.x = self.frame.minX + (pauseButton!.frame.width)
+        pauseButton.position.y = self.frame.minY + (pauseButton!.frame.height)
         pauseButton.name = "PauseButton"
         
         resumeButton = ButtonTemplate(name: "ResumeButton",labelName: "RESUME",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/5), color: UIColor.gameBlueColor())
