@@ -33,6 +33,8 @@ class GameOverScene: SKScene {
    
     var presentAds: Bool!
     
+    var adsEnabled: Bool!
+    
     init(score: Int, size: CGSize) {
         super.init(size: size)
         
@@ -94,7 +96,12 @@ class GameOverScene: SKScene {
         self.addChild(gameOverScoreText)
         self.addChild(gameOverHighscoreText)
         
-        runAction(SKAction.waitForDuration(0.05), completion: {self.presentAds = true})
+        // A variable for determining whether the user has ads
+        adsEnabled = true
+        
+        if adsEnabled == true{
+            runAction(SKAction.waitForDuration(0.05), completion: {self.presentAds = true})
+        }
     }
     
     static func loadiAdInterstitialAd() {
