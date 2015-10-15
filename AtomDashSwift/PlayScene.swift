@@ -256,6 +256,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         backgroundFilterNode.zPosition = 1
         backgroundFilterNode.alpha = 0.75
         
+        pauseButton.zPosition = 0
+        
         self.addChild(backgroundFilterNode)
         self.addChild(resumeButton!)
         self.addChild(exitButton!)
@@ -263,6 +265,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func removePauseFilter() {
+        pauseButton.zPosition = 2
+
         backgroundFilterNode.removeFromParent()
         resumeButton.removeFromParent()
         exitButton.removeFromParent()
