@@ -45,15 +45,16 @@ class Player : SKShapeNode {
     
     func updatePositionForDragMovement(locationOfTouch: CGPoint){
         
-        let currentTouch:CGPoint = locationOfTouch
+        //let currentTouch:CGPoint = locationOfTouch
         
-        deltaPosition.x = currentTouch.x - lastTouch.x
-        deltaPosition.y = currentTouch.y - lastTouch.y
+        
+        deltaPosition.x = locationOfTouch.x - lastTouch.x
+        deltaPosition.y = locationOfTouch.y - lastTouch.y
         
         self.position.x += deltaPosition.x
         self.position.y += deltaPosition.y
         
-        lastTouch = currentTouch
+        lastTouch = locationOfTouch
     }
     
     required init?(coder aDecoder: NSCoder) {

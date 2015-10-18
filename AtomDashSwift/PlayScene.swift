@@ -124,6 +124,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             createNewTarget()
             newTarget = false
         }
+        
         updatesCalled!++
         
         // Left
