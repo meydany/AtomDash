@@ -17,13 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         GCHelper.sharedInstance.authenticateLocalUser()
+        
+        NSThread.sleepForTimeInterval(1.0)
         return true
     }
     
     func applicationDidFinishLaunching(application: UIApplication) {
-        let image = UIImage(named: "LaunchImage")
-        let splashScreenView = UIImageView(image: image)
-        self.window?.addSubview(splashScreenView)
+
+
     }
     
     func
