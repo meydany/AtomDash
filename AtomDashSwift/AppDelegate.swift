@@ -20,12 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationDidFinishLaunching(application: UIApplication) {
+        let image = UIImage(named: "LaunchImage")
+        let splashScreenView = UIImageView(image: image)
+        self.window?.addSubview(splashScreenView)
+    }
+    
+    func
+        applicationWillResignActive(application: UIApplication) {
         
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // Use this method to release shared resources,
+        //save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
