@@ -29,7 +29,7 @@ class GameOverScene: SKScene {
     //Global variables avaibible to all instances of GameOverScene
     static var currentViewController: UIViewController! = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
     static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/7435571367")
-    static var timesPlayed: Int = 1
+    static var timesPlayed: Int = 2
    
     var presentAds: Bool!
     
@@ -147,15 +147,15 @@ class GameOverScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(presentAds! && (GameOverScene.timesPlayed % 2 == 0)  && GameOverScene.currentViewController.requestInterstitialAdPresentation().boolValue) {
+        if(presentAds! && (GameOverScene.timesPlayed % 4 == 0)  && GameOverScene.currentViewController.requestInterstitialAdPresentation().boolValue) {
             self.presentiAdInterstitialAd()
-        }else if(presentAds! && (GameOverScene.timesPlayed % 2 == 0) && GameOverScene.adMobInterstitial.isReady) {
+        }else if(presentAds! && (GameOverScene.timesPlayed % 4 == 0) && GameOverScene.adMobInterstitial.isReady) {
             self.presentAdMobInterstitialAd()
-        }else if(presentAds! && (GameOverScene.timesPlayed % 2 == 0)) {
+        }else if(presentAds! && (GameOverScene.timesPlayed % 4 == 0)) {
             print("No ad availible")
             GameOverScene.loadiAdInterstitialAd()
             GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
-            GameOverScene.timesPlayed++ //Insures ad is displayed on next death
+            //GameOverScene.timesPlayed++ //Insures ad is displayed on next death
             presentAds = false
         }
     }
