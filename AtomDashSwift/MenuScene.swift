@@ -82,6 +82,9 @@ class MenuScene: SKScene {
                 switch name {
                 case "PlayButton":
                     if(NSUserDefaults().boolForKey("instructionsScene")) {
+                        if(NSUserDefaults().objectForKey("player") == nil) {
+                            NSUserDefaults().setObject("Default", forKey: "player") //default player is the blue circle
+                        }
                         let playScene = PlayScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
