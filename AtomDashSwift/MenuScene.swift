@@ -92,6 +92,10 @@ class MenuScene: SKScene {
                         */
                     }
                     else {
+                        print("hello")
+
+                        NSUserDefaults().setObject("Default", forKey: "player") //default player is the blue circle
+                        
                         NSUserDefaults().setBool(true, forKey: "instructionsScene")
                         let instructionsScene = SingleplayerInstructionsScene(nextScene: PlayScene(size: (self.scene?.size)!), size: (self.scene?.size)!)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)

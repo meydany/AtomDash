@@ -19,9 +19,24 @@ enum ColliderObject: UInt32 {
     case coinCollider = 16
 }
 
+struct Players {
+    let defaultPlayer = Player()
+    
+    //put more players here
+    
+    func getCurrentPlayer () -> SKNode {
+        switch NSUserDefaults().objectForKey("player") as! String {
+            case "Default":
+                return defaultPlayer
+            default:
+                return defaultPlayer
+        }
+    }
+}
+
 class PlayScene: SKScene, SKPhysicsContactDelegate {
     
-    var player: Player!
+    var currentPlayer: Player!
     var enemy: Enemy!
     var target: Target!
     
@@ -59,9 +74,10 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody!.contactTestBitMask = ColliderObject.playerCollider.rawValue
         self.physicsBody!.collisionBitMask = ColliderObject.playerCollider.rawValue
         
-        //Player instantiation
-        player = Player()
-        player.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        //currentPlayer instantiation
+        
+        currentPlayer = Players().getCurrentPlayer() as! Player
+        currentPlayer.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         //Target instantiation
         target = Target()
@@ -82,7 +98,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         dragLabel.name = "DragLabel"
         dragLabel.fontName = "DINCondensed-Bold"
         dragLabel.fontSize = 25 * Screen.screenHeightRatio
-        dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - player.frame.height)
+        dragLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - currentPlayer.frame.height)
         dragLabel.fontColor = UIColor.lightGrayColor()
         
         // Creating a pause button
@@ -112,7 +128,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
 
         self.addChild(pauseButton)
-        self.addChild(player)
+        self.addChild(currentPlayer)
         self.addChild(target)
         self.addChild(scoreLabel)
         self.addChild(dragLabel)
@@ -131,20 +147,20 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         updatesCalled!++
         
         // Left
-        if ((player.position.x - player.frame.width/2) <= self.frame.minX){
-            player.position.x = self.frame.minX
+        if ((currentPlayer.position.x - currentPlayer.frame.width/2) <= self.frame.minX){
+            currentPlayer.position.x = self.frame.minX
         }
         // Right
-        else if ((player.position.x + player.frame.width/2) >= self.frame.maxX){
-            player.position.x = self.frame.maxX
+        else if ((currentPlayer.position.x + currentPlayer.frame.width/2) >= self.frame.maxX){
+            currentPlayer.position.x = self.frame.maxX
         }
         // Top
-        else if ((player.position.y + player.frame.height/2) >= self.frame.maxY){
-            player.position.y = self.frame.maxY
+        else if ((currentPlayer.position.y + currentPlayer.frame.height/2) >= self.frame.maxY){
+            currentPlayer.position.y = self.frame.maxY
         }
         // Bottom
-        else if ((player.position.y - player.frame.width/2) <= self.frame.minY){
-            player.position.y = self.frame.minY
+        else if ((currentPlayer.position.y - currentPlayer.frame.width/2) <= self.frame.minY){
+            currentPlayer.position.y = self.frame.minY
         }
     }
     
@@ -162,7 +178,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         for touch in (touches) {
             let location = touch.locationInNode(self)
         
-            player.startDrag(location)
+            currentPlayer.startDrag(location)
             
             if let name = self.nodeAtPoint(location).name{
                 switch name {
@@ -201,7 +217,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches{
             if (!scene!.paused){
-                player!.updatePositionForDragMovement(touch.locationInNode(self))
+                currentPlayer!.updatePositionForDragMovement(touch.locationInNode(self))
             }
         }
     }
