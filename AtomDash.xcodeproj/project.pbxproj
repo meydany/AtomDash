@@ -15,6 +15,7 @@
 		0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0958C8871BA623AD00DFF781 /* ScoreLabel.swift */; };
 		0987BE921BB9F36F0042C1B4 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987BE911BB9F36F0042C1B4 /* GCHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		861E59741BAA4B340055B334 /* ButtonTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861E59731BAA4B340055B334 /* ButtonTemplate.swift */; };
+		86302FA51BE048C600F4298F /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86302FA41BE048C600F4298F /* Coin.swift */; settings = {ASSET_TAGS = (); }; };
 		8641A9321BA4E9F6001B89EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9311BA4E9F6001B89EB /* AppDelegate.swift */; };
 		8641A9341BA4E9F6001B89EB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8641A9331BA4E9F6001B89EB /* GameScene.sks */; };
 		8641A9361BA4E9F6001B89EB /* PlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9351BA4E9F6001B89EB /* PlayScene.swift */; };
@@ -59,6 +60,7 @@
 		0958C8871BA623AD00DFF781 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		0987BE911BB9F36F0042C1B4 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
 		861E59731BAA4B340055B334 /* ButtonTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTemplate.swift; sourceTree = "<group>"; };
+		86302FA41BE048C600F4298F /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		8641A92C1BA4E9F6001B89EB /* AtomDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtomDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8641A9301BA4E9F6001B89EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8641A9311BA4E9F6001B89EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
 				86DDC8CD1BA686C700F444FB /* Target.swift */,
 				0958C8871BA623AD00DFF781 /* ScoreLabel.swift */,
+				86302FA41BE048C600F4298F /* Coin.swift */,
 				090E55BE1BA787EC001B0982 /* TimeLabel.swift */,
 				861E59731BAA4B340055B334 /* ButtonTemplate.swift */,
 				8641A9371BA4E9F6001B89EB /* GameViewController.swift */,
@@ -322,6 +325,7 @@
 				861E59741BAA4B340055B334 /* ButtonTemplate.swift in Sources */,
 				8641A9361BA4E9F6001B89EB /* PlayScene.swift in Sources */,
 				8641A9381BA4E9F6001B89EB /* GameViewController.swift in Sources */,
+				86302FA51BE048C600F4298F /* Coin.swift in Sources */,
 				0987BE921BB9F36F0042C1B4 /* GCHelper.swift in Sources */,
 				090E55C11BA7B52F001B0982 /* MenuScene.swift in Sources */,
 				8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */,

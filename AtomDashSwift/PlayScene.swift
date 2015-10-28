@@ -16,6 +16,7 @@ enum ColliderObject: UInt32 {
     case playerCollider = 2
     case targetCollider = 4
     case enemyCollider = 8
+    case coinCollider = 16
 }
 
 class PlayScene: SKScene, SKPhysicsContactDelegate {
@@ -45,7 +46,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var updatesCalled: Int!
     var updateBuffer: Int!
-        
+    
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
         
@@ -104,7 +105,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         updatesCalled = 0
         updateBuffer = 5 //adjust this according to performance 
-                
+        
+        createCoins()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)
 
@@ -212,7 +215,6 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node!.removeActionForKey("moveEnemy")
             contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
             gameOver()
-            
         case ColliderObject.targetCollider.rawValue | ColliderObject.playerCollider.rawValue:
             if(updatesCalled > updateBuffer) {
                 scoreLabel.addScore(1) //only adds score if collision is called more than 1 frame after previous collision
@@ -222,6 +224,19 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node!.removeFromParent()
             newTarget = true
             updatesCalled = 0 //resets for next check
+        case ColliderObject.playerCollider.rawValue | ColliderObject.coinCollider.rawValue:
+            if(updatesCalled > updateBuffer) {
+                NSUserDefaults().setInteger(NSUserDefaults().integerForKey("coins") + 1, forKey: "coins")
+                print(NSUserDefaults().integerForKey("coins"))
+            }
+            
+            if(contact.bodyB.node!.name == "Coin") {
+                contact.bodyB.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyB.node!.removeFromParent()})
+            }else {
+                contact.bodyA.node!.runAction(SKAction.fadeOutWithDuration(0.1), completion: {contact.bodyA.node!.removeFromParent()})
+            }
+            
+            updatesCalled = 0
         default:
             print("Default collision")
         }
@@ -249,6 +264,21 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         target.moveToRandomPosition(self.frame)
         
         self.addChild(target)
+    }
+    
+    func createCoins() {
+        let newCoinTime = Int.random(5...10)
+        self.runAction(SKAction.waitForDuration(NSTimeInterval(newCoinTime)), completion: {
+            self.createCoins()
+        })
+        
+        let coin = Coin()
+        coin.moveToRandomPosition(self.frame)
+        
+        self.addChild(coin)
+        
+        coin.runAction(SKAction.fadeInWithDuration(0.1))
+        coin.destroyCoin()
     }
     
     func applyPauseFilter() {

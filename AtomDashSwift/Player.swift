@@ -32,7 +32,7 @@ class Player : SKShapeNode {
         self.physicsBody!.dynamic = true
         
         self.physicsBody!.categoryBitMask = ColliderObject.playerCollider.rawValue
-        self.physicsBody!.contactTestBitMask = ColliderObject.enemyCollider.rawValue | ColliderObject.targetCollider.rawValue
+        self.physicsBody!.contactTestBitMask = ColliderObject.enemyCollider.rawValue | ColliderObject.targetCollider.rawValue | ColliderObject.coinCollider.rawValue
         self.physicsBody!.collisionBitMask = ColliderObject.wallCollider.rawValue
         
         lastTouch = CGPoint()

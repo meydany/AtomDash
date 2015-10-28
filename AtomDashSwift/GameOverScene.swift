@@ -26,6 +26,9 @@ class GameOverScene: SKScene {
     var gameScore: Int!
     var highScore: Int!
     
+    var coinNode: Coin!
+    var coinTextNode: SKLabelNode!
+    
     //Global variables avaibible to all instances of GameOverScene
     static var currentViewController: UIViewController! = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
     static var adMobInterstitial: GADInterstitial = GADInterstitial(adUnitID:  "ca-app-pub-6617045441182490/7435571367")
@@ -75,7 +78,7 @@ class GameOverScene: SKScene {
         
         gameOverScoreText = SKLabelNode()
         gameOverScoreText.text = "Score: \(gameScore)"
-        gameOverScoreText.position = CGPoint(x: self.frame.midX, y: (6.3*self.frame.height)/10)
+        gameOverScoreText.position = CGPoint(x: self.frame.midX, y: (6.4*self.frame.height)/10)
         gameOverScoreText.fontName = "Helvetica-Light"
         gameOverScoreText.fontSize = 50 * Screen.screenWidthRatio
         gameOverScoreText.fontColor = UIColor.darkGrayColor()
@@ -83,11 +86,28 @@ class GameOverScene: SKScene {
         
         gameOverHighscoreText = SKLabelNode()
         gameOverHighscoreText.text = "High Score: \(highScore)"
-        gameOverHighscoreText.position = CGPoint(x: self.frame.midX, y: (5.2*self.frame.height)/10)
+        gameOverHighscoreText.position = CGPoint(x: self.frame.midX, y: (5.6*self.frame.height)/10)
         gameOverHighscoreText.fontName = "Helvetica-Light"
         gameOverHighscoreText.fontSize = 30 * Screen.screenWidthRatio
         gameOverHighscoreText.fontColor = UIColor.darkGrayColor()
         gameOverHighscoreText.zPosition = 1
+        
+        coinNode = Coin()
+        coinNode.alpha = 1
+        coinNode.zPosition = 1
+        
+        coinTextNode = SKLabelNode()
+        coinTextNode.text = String(NSUserDefaults().integerForKey("coins"))
+        coinTextNode.fontName = "Helvetica-Light"
+        coinTextNode.fontSize = 30 * Screen.screenWidthRatio
+        coinTextNode.fontColor = UIColor.darkGrayColor()
+        coinTextNode.zPosition = 1
+        
+        let buffer = (self.frame.width/150) * Screen.screenWidthRatio
+        let centerFactor = (coinTextNode.frame.width - coinNode.frame.width)/2
+        coinTextNode.position = CGPoint(x: ((self.frame.midX - (coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (5.1*self.frame.height)/10 - (coinTextNode.frame.height/2))
+        coinNode!.position = CGPoint(x: (self.frame.midX + (coinNode.frame.width/2)) + centerFactor + buffer, y: (5.09*self.frame.height)/10)
+
         
         self.addChild(gameOverNode)
         self.addChild(gameOverMenuButton)
@@ -95,6 +115,8 @@ class GameOverScene: SKScene {
         self.addChild(gameOverScoreNode)
         self.addChild(gameOverScoreText)
         self.addChild(gameOverHighscoreText)
+        self.addChild(coinNode)
+        self.addChild(coinTextNode)
         
         // A variable for determining whether the user has ads
         adsEnabled = true

@@ -71,4 +71,27 @@ extension UIColor {
     class func gamePurpleColor() -> UIColor {
         return UIColor(red: 0.87, green: 0.8, blue: 0.93, alpha: 1)
     }
+    
+    class func gameGoldColor() -> UIColor {
+        return UIColor(red: 1.0, green: 0.86, blue: 0.19, alpha: 1)
+    }
 }
+
+extension Int
+{
+    static func random(range: Range<Int> ) -> Int
+    {
+        var offset = 0
+        
+        if range.startIndex < 0   // allow negative ranges
+        {
+            offset = abs(range.startIndex)
+        }
+        
+        let mini = UInt32(range.startIndex + offset)
+        let maxi = UInt32(range.endIndex   + offset)
+        
+        return Int(mini + arc4random_uniform(maxi - mini)) - offset
+    }
+}
+
