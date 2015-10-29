@@ -85,7 +85,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         newTarget = false
         
         // Creating enemies
-        //runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
