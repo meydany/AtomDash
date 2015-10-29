@@ -85,7 +85,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         newTarget = false
         
         // Creating enemies
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
+        //runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.6),SKAction.runBlock(addEnemy)])))
         
         //Buffer for label's positition
         let labelBuffer: CGFloat = self.frame.width/20
@@ -145,22 +145,22 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         }
         
         updatesCalled!++
-        
         // Left
-        if ((currentPlayer.position.x - currentPlayer.frame.width/2) <= self.frame.minX){
-            currentPlayer.position.x = self.frame.minX
+        if ((currentPlayer.position.x + currentPlayer.frame.width/2) <= (view?.frame.minX)!){
+            currentPlayer.position.x = (view?.frame.minX)! + currentPlayer.frame.width/2
         }
         // Right
-        else if ((currentPlayer.position.x + currentPlayer.frame.width/2) >= self.frame.maxX){
-            currentPlayer.position.x = self.frame.maxX
+        else if ((currentPlayer.position.x + currentPlayer.frame.width/2) >= (view?.frame.maxX)!){
+            currentPlayer.position.x = (view?.frame.maxX)! - currentPlayer.frame.width/2
         }
         // Top
-        else if ((currentPlayer.position.y + currentPlayer.frame.height/2) >= self.frame.maxY){
-            currentPlayer.position.y = self.frame.maxY
+        else if ((currentPlayer.position.y + currentPlayer.frame.height/2) >= (view?.frame.maxY)!){
+            currentPlayer.position.y = (view?.frame.maxY)! - currentPlayer.frame.height/2
+            
         }
         // Bottom
-        else if ((currentPlayer.position.y - currentPlayer.frame.width/2) <= self.frame.minY){
-            currentPlayer.position.y = self.frame.minY
+        else if ((currentPlayer.position.y - currentPlayer.frame.width/2) <= (view?.frame.minY)!){
+            currentPlayer.position.y = (view?.frame.minY)! + currentPlayer.frame.height/2
         }
     }
     

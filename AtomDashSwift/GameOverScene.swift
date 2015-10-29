@@ -119,7 +119,7 @@ class GameOverScene: SKScene {
         self.addChild(coinTextNode)
         
         // A variable for determining whether the user has ads
-        adsEnabled = true
+        adsEnabled = false
         
         if adsEnabled == true{
             runAction(SKAction.waitForDuration(0.05), completion: {self.presentAds = true})
@@ -169,11 +169,11 @@ class GameOverScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(presentAds! && (GameOverScene.timesPlayed % 4 == 0)  && GameOverScene.currentViewController.requestInterstitialAdPresentation().boolValue) {
+        if(presentAds! && (GameOverScene.timesPlayed % 5 == 0)  && GameOverScene.currentViewController.requestInterstitialAdPresentation().boolValue) {
             self.presentiAdInterstitialAd()
-        }else if(presentAds! && (GameOverScene.timesPlayed % 4 == 0) && GameOverScene.adMobInterstitial.isReady) {
+        }else if(presentAds! && (GameOverScene.timesPlayed % 5 == 0) && GameOverScene.adMobInterstitial.isReady) {
             self.presentAdMobInterstitialAd()
-        }else if(presentAds! && (GameOverScene.timesPlayed % 4 == 0)) {
+        }else if(presentAds! && (GameOverScene.timesPlayed % 5 == 0)) {
             print("No ad availible")
             GameOverScene.loadiAdInterstitialAd()
             GameOverScene.adMobInterstitial = GameOverScene.loadAdMobInterstitialAd()
