@@ -39,6 +39,10 @@ class Player : SKShapeNode {
         deltaPosition = CGPoint()
     }
     
+    func setColor(color: UIColor) {
+        self.strokeColor = color
+    }
+    
     func startDrag(locationOfTouch: CGPoint){
         lastTouch = locationOfTouch
     }

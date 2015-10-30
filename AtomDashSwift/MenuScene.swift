@@ -17,6 +17,7 @@ class MenuScene: SKScene {
     var playButton: ButtonTemplate!
     var leaderboardsButton: ButtonTemplate!
     var instructionsButton: ButtonTemplate!
+    var shopButton: ButtonTemplate!
     
     var playerNode: Player!
     var enemyNode: Enemy!
@@ -57,6 +58,8 @@ class MenuScene: SKScene {
         
         instructionsButton = ButtonTemplate(name: "InstructionsButton",labelName: "INSTRUCTIONS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameBlueColor())
         
+        shopButton = ButtonTemplate(name: "ShopButton", labelName: "SHOP", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameGoldColor())
+        
         self.addChild(playerNode!)
         self.addChild(targetNode!)
         self.addChild(enemyNode!)
@@ -64,6 +67,7 @@ class MenuScene: SKScene {
         self.addChild(leaderboardsButton)
         self.addChild(instructionsButton)
         self.addChild(playButton)
+        self.addChild(shopButton)
         
         self.addChild(gameName)
         //self.addChild(copyRightNode)
@@ -111,6 +115,10 @@ class MenuScene: SKScene {
                     let instructionsScene = SingleplayerInstructionsScene(nextScene: MenuScene(size: (self.scene?.size)!), size: (self.scene?.size)!)
                     let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                     self.scene!.view?.presentScene(instructionsScene, transition: transition)
+                case "ShopButton":
+                    let shopScene = ShopScene()
+                    let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
+                    self.scene!.view?.presentScene(shopScene, transition: transition)
                 default:
                     break
                 }

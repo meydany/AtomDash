@@ -73,7 +73,7 @@ extension UIColor {
     }
     
     class func gameGoldColor() -> UIColor {
-        return UIColor(red: 1.0, green: 0.86, blue: 0.19, alpha: 1)
+        return UIColor(red: 1.0, green: 0.95, blue: 0.45, alpha: 1)
     }
 }
 
