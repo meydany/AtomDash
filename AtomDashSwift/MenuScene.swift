@@ -67,7 +67,7 @@ class MenuScene: SKScene {
         self.addChild(leaderboardsButton)
         self.addChild(instructionsButton)
         self.addChild(playButton)
-        self.addChild(shopButton)
+        //self.addChild(shopButton)
         
         self.addChild(gameName)
         //self.addChild(copyRightNode)
