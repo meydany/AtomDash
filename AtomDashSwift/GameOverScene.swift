@@ -78,7 +78,7 @@ class GameOverScene: SKScene {
         
         gameOverScoreText = SKLabelNode()
         gameOverScoreText.text = "Score: \(gameScore)"
-        gameOverScoreText.position = CGPoint(x: self.frame.midX, y: (6.3*self.frame.height)/10)
+        gameOverScoreText.position = CGPoint(x: self.frame.midX, y: (6.4*self.frame.height)/10)
         gameOverScoreText.fontName = "Helvetica-Light"
         gameOverScoreText.fontSize = 50 * Screen.screenWidthRatio
         gameOverScoreText.fontColor = UIColor.darkGrayColor()
@@ -86,7 +86,7 @@ class GameOverScene: SKScene {
         
         gameOverHighscoreText = SKLabelNode()
         gameOverHighscoreText.text = "High Score: \(highScore)"
-        gameOverHighscoreText.position = CGPoint(x: self.frame.midX, y: (5.2*self.frame.height)/10)
+        gameOverHighscoreText.position = CGPoint(x: self.frame.midX, y: (5.6*self.frame.height)/10)
         gameOverHighscoreText.fontName = "Helvetica-Light"
         gameOverHighscoreText.fontSize = 30 * Screen.screenWidthRatio
         gameOverHighscoreText.fontColor = UIColor.darkGrayColor()
@@ -115,8 +115,8 @@ class GameOverScene: SKScene {
         self.addChild(gameOverScoreNode)
         self.addChild(gameOverScoreText)
         self.addChild(gameOverHighscoreText)
-        //self.addChild(coinNode)
-        //self.addChild(coinTextNode)
+        self.addChild(coinNode)
+        self.addChild(coinTextNode)
         
         // A variable for determining whether the user has ads
         adsEnabled = true
