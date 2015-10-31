@@ -107,7 +107,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         updatesCalled = 0
         updateBuffer = 5 //adjust this according to performance 
         
-        createCoins()
+        //createCoins()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)

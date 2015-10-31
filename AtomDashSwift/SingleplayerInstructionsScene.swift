@@ -114,8 +114,20 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
     }
     
     func makeTextView(part1: String, part2: String, color: UIColor) -> UITextView{
+        var textView: UITextView
         
-        let textView = UITextView(frame: CGRectMake(CGFloat(slides!) * self.frame.width, 0, self.frame.width, self.frame.height))
+        let Device = UIDevice.currentDevice()
+        let iosVersion = NSString(string: Device.systemVersion).doubleValue
+        
+        let iOS8 = iosVersion < 9
+        
+        if(iOS8)
+        {
+            print("ios8")
+            textView = UITextView(frame: CGRectMake(CGFloat(slides!) * self.frame.width, self.frame.height - (3*self.frame.height/4), self.frame.width, self.frame.height))
+        }else {
+            textView = UITextView(frame: CGRectMake(CGFloat(slides!) * self.frame.width, 0, self.frame.width, self.frame.height))
+        }
         textView.attributedText = createAttributedString(part1, secondPart: part2, color: color)
         textView.font = UIFont(name: "DINCondensed-Bold", size: 50 * Screen.screenWidthRatio)
         textView.textAlignment = NSTextAlignment.Center
