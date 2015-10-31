@@ -43,7 +43,7 @@ class MenuScene: SKScene {
         copyRightNode.position = CGPoint(x: self.frame.midX, y: (self.frame.minY + copyRightNode.frame.height)*2)
         copyRightNode.fontColor = UIColor.darkGrayColor()
 
-        playerNode = Player()
+        playerNode = Player(color: UIColor.gameBlueColor())
         playerNode!.position = CGPoint(x: self.frame.width/4, y: (3.4*self.frame.height)/5)
         
         enemyNode = Enemy(side: SpawnSide.Right)
@@ -67,7 +67,7 @@ class MenuScene: SKScene {
         self.addChild(leaderboardsButton)
         self.addChild(instructionsButton)
         self.addChild(playButton)
-        //self.addChild(shopButton)
+        self.addChild(shopButton)
         
         self.addChild(gameName)
         //self.addChild(copyRightNode)

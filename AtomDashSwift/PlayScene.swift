@@ -19,21 +19,6 @@ enum ColliderObject: UInt32 {
     case coinCollider = 16
 }
 
-struct Players {
-    let defaultPlayer = Player()
-    
-    //put more players here
-    
-    func getCurrentPlayer () -> SKNode {
-        switch NSUserDefaults().objectForKey("player") as! String {
-            case "Default":
-                return defaultPlayer
-            default:
-                return defaultPlayer
-        }
-    }
-}
-
 class PlayScene: SKScene, SKPhysicsContactDelegate {
     
     var currentPlayer: Player!
@@ -122,7 +107,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         updatesCalled = 0
         updateBuffer = 5 //adjust this according to performance 
         
-        //createCoins()
+        createCoins()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnHomePress"), name:UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseSceneOnActive:"), name:UIApplicationDidBecomeActiveNotification, object: nil)

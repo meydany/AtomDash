@@ -14,7 +14,7 @@ class Player : SKShapeNode {
     var lastTouch: CGPoint!
     var deltaPosition: CGPoint!
     
-    override init() {
+    init(color: UIColor!) {
         
         super.init()
         
@@ -24,7 +24,7 @@ class Player : SKShapeNode {
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * Screen.screenWidthRatio), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
         self.lineWidth = 8 * Screen.screenWidthRatio
-        self.strokeColor = UIColor.gameBlueColor()
+        self.strokeColor = color
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
         self.physicsBody!.affectedByGravity = false
@@ -37,10 +37,6 @@ class Player : SKShapeNode {
         
         lastTouch = CGPoint()
         deltaPosition = CGPoint()
-    }
-    
-    func setColor(color: UIColor) {
-        self.strokeColor = color
     }
     
     func startDrag(locationOfTouch: CGPoint){

@@ -11,15 +11,13 @@ import SpriteKit
 
 class ShopItemTemplate: SKShapeNode {
     
-    var cost: Int!
-
-    //Initializer for different image player
+        //Initializer for different image player
     init(name: String, playerImage: String, cost: Int, size: CGSize, index: Int, sceneFrame: CGRect) {
         super.init()
         let rect = CGRect(origin: CGPointZero, size: size)
         self.path = CGPathCreateWithRoundedRect(rect, CGFloat(8 * Screen.screenWidthRatio), CGFloat(8 * Screen.screenWidthRatio), nil)
         
-        let initialHeight = (6.5*sceneFrame.maxY)/10
+        let initialHeight = (6.6*sceneFrame.maxY)/10
         
         var itemPosition = CGPoint(x: sceneFrame.midX, y: (initialHeight - ((CGFloat(index)) * (sceneFrame.width/4))))
         itemPosition.y -= ((self.frame.height/10) * CGFloat(index))
@@ -41,7 +39,7 @@ class ShopItemTemplate: SKShapeNode {
         let rect = CGRect(origin: CGPointZero, size: size)
         self.path = CGPathCreateWithRoundedRect(rect, CGFloat(8 * Screen.screenWidthRatio), CGFloat(8 * Screen.screenWidthRatio), nil)
         
-        let initialHeight = (6.5*sceneFrame.maxY)/10
+        let initialHeight = (6.6*sceneFrame.maxY)/10
         
         var itemPosition = CGPoint(x: sceneFrame.midX, y: (initialHeight - ((CGFloat(index)) * (sceneFrame.width/4))))
         itemPosition.y -= ((self.frame.height/10) * CGFloat(index))
@@ -55,8 +53,7 @@ class ShopItemTemplate: SKShapeNode {
         self.fillColor = UIColor.whiteColor()
         self.alpha = 1
         
-        let colorNode = Player()
-        colorNode.setColor(playerColor)
+        let colorNode = Player(color: playerColor)
         colorNode.position = CGPoint(x: self.frame.width/4, y: self.frame.height/2 - self.frame.height/40)
         
         //colorNode.position.x -= self.frame.width/2

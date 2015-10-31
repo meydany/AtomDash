@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AtomDashSwift/PlayScene.swift"
-            timestampString = "467692705.37325"
+            timestampString = "467871511.327551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "applyPauseFilter()"
             landmarkType = "5">
          </BreakpointContent>
