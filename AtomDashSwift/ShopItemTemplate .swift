@@ -12,11 +12,18 @@ import SpriteKit
 class ShopItemTemplate: SKShapeNode {
     
     var colorNode: SKNode!
+    
     var playerCost: Int!
+    var coinNode: Coin!
+    var coinTextNode: SKLabelNode!
     
     var owned: Bool!
+    var ownedNode: SKLabelNode!
     
     var tapped: Bool!
+    var selected: Bool!
+    
+    var selectedNode: SKLabelNode!
     
     //Initializer for different colored player
     init(name: String, player: SKNode, cost: Int, size: CGSize, index: Int, sceneFrame: CGRect) {
@@ -42,10 +49,10 @@ class ShopItemTemplate: SKShapeNode {
         
         tapped = false
 
-        let coinNode = Coin()
+        coinNode = Coin()
         coinNode.alpha = 1
         
-        let coinTextNode = SKLabelNode()
+        coinTextNode = SKLabelNode()
         coinTextNode.text = String(cost)
         coinTextNode.fontName = "Helvetica-Light"
         coinTextNode.fontSize = 30 * Screen.screenWidthRatio
@@ -56,25 +63,26 @@ class ShopItemTemplate: SKShapeNode {
         coinTextNode.position = CGPoint(x: (self.frame.width/2) - (coinTextNode.frame.width/2) + centerFactor - buffer, y: 0 - (coinTextNode.frame.height/2))
         coinNode.position = CGPoint(x: (self.frame.width/2) + (coinNode.frame.width/2) + centerFactor + buffer, y: 0)
         
-        let ownedNode = SKLabelNode()
+        ownedNode = SKLabelNode()
         ownedNode.text = "OWNED"
         ownedNode.fontName = "Helvetica-Light"
         ownedNode.fontSize = 20 * Screen.screenWidthRatio
         ownedNode.fontColor = UIColor.darkGrayColor()
-        ownedNode.position = CGPoint(x: colorNode.position.x, y: 0)
+        ownedNode.position = CGPoint(x: colorNode.position.x, y: -0.5 * ownedNode.frame.height)
         
-        let selectedNode = SKLabelNode()
+        selectedNode = SKLabelNode()
         selectedNode.text = "SELECTED"
         selectedNode.fontName = "Helvetica-Light"
         selectedNode.fontSize = 20 * Screen.screenWidthRatio
         selectedNode.fontColor = UIColor.gameGreenColor()
-        selectedNode.position = CGPoint(x: colorNode.position.x, y: 0 - (1.5 * selectedNode.frame.height))
+        selectedNode.position = CGPoint(x: colorNode.position.x, y: 0 - (2 * selectedNode.frame.height))
         
-        let ownedKey = "\(colorNode.name)Owned"
+        let ownedKey = "\(colorNode!.name)Owned"
         owned = NSUserDefaults().boolForKey(ownedKey)
         
-        let selected = (NSUserDefaults().objectForKey("player") as! String) == colorNode.name
-
+        let name: String! = colorNode!.name
+        let selectedName: String! = NSUserDefaults().objectForKey("player") as! String
+        selected = name == selectedName
         self.addChild(colorNode)
         
         if(owned! == true) {
@@ -84,7 +92,7 @@ class ShopItemTemplate: SKShapeNode {
             self.addChild(coinNode)
         }
         
-        if(selected) {
+        if(selected! == true) {
             self.addChild(selectedNode)
         }
         
@@ -95,6 +103,35 @@ class ShopItemTemplate: SKShapeNode {
     
     func adjustPlayerScale(scale: CGFloat) {
         colorNode.setScale(scale)
+    }
+    
+    func buyItem() {
+        NSUserDefaults().setInteger(NSUserDefaults().integerForKey("coins") - self.playerCost, forKey: "coins")
+        coinNode.removeFromParent()
+        coinTextNode.removeFromParent()
+        
+        NSUserDefaults().setBool(true, forKey: "\(colorNode!.name)Owned")
+        owned = true
+        
+        ownedNode.alpha = 0
+        self.addChild(ownedNode!)
+        ownedNode.runAction(SKAction.fadeInWithDuration(0.5))
+        selectItem()
+    }
+    
+    func selectItem() {
+        let name: String! = colorNode!.name
+        NSUserDefaults().setObject("\(name)", forKey: "player")
+        selected = true
+        selectedNode.alpha = 0
+        self.addChild(selectedNode)
+        selectedNode.runAction(SKAction.fadeInWithDuration(0.5))
+    }
+    
+    func unselectItem() {
+        selected = false
+        selectedNode.alpha = 1
+        selectedNode.runAction(SKAction.fadeOutWithDuration(0.5), completion: {self.selectedNode.removeFromParent()})
     }
 }
 

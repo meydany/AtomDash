@@ -30,7 +30,7 @@ class MenuScene: SKScene {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-                
+        
         gameName = SKLabelNode(text: "ATOM DASH")
         gameName.fontName = "DINCondensed-Bold"
         gameName.fontSize = 75 * Screen.screenWidthRatio

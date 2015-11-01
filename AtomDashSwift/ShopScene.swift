@@ -30,12 +30,16 @@ struct Players {
     //put more players here
     
     func getCurrentPlayer () -> SKNode {
-        switch NSUserDefaults().objectForKey("player") as! String {
-        case "GameBluePlayer":
-            return coloredPlayers[0]
-        default:
-            return coloredPlayers[0]
+        return getPlayerNodeWithName(NSUserDefaults().objectForKey("player") as! String)
+    }
+    
+    func getPlayerNodeWithName(playerName: String) -> Player{
+        for player in coloredPlayers {
+            if(player.name! == playerName) {
+                return player
+            }
         }
+        return defaultPlayer
     }
 }
 
@@ -189,7 +193,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                             alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
 
                             alert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
-                                //buy item
+                                selectedItem.buyItem()
                             }))
                             currentViewController.presentViewController(alert, animated: true, completion: nil)
                             
@@ -226,9 +230,17 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                 if(item.containsPoint(location)) {
                     item.colorNode.runAction(SKAction.scaleTo(1.2, duration: 0.5))
                     item.tapped = true
+                    
+                    if(item.owned!) {
+                        item.selectItem()
+                    }
                 }else {
                     item.colorNode.runAction(SKAction.scaleTo(1.0, duration: 0.5))
                     item.tapped = false
+                    
+                    if(item.selected!) {
+                        item.unselectItem()
+                    }
                 }
             }
         }
