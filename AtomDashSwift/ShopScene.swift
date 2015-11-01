@@ -72,7 +72,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
             
-        shopLabel = SKLabelNode(text: "SHOP")
+        shopLabel = SKLabelNode(text: "THEMES")
         shopLabel.fontName = "DINCondensed-Bold"
         shopLabel.fontSize = 75 * Screen.screenWidthRatio
         shopLabel.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - shopLabel.frame.height - ((1 * self.frame.height)/10)))

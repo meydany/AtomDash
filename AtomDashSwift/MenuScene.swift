@@ -58,7 +58,7 @@ class MenuScene: SKScene {
         
         instructionsButton = ButtonTemplate(name: "InstructionsButton",labelName: "INSTRUCTIONS",  size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameBlueColor())
         
-        shopButton = ButtonTemplate(name: "ShopButton", labelName: "SHOP", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameGoldColor())
+        shopButton = ButtonTemplate(name: "ShopButton", labelName: "THEMES", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameGoldColor())
         
         self.addChild(playerNode!)
         self.addChild(targetNode!)
