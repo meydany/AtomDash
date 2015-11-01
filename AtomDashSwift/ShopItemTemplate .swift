@@ -12,8 +12,11 @@ import SpriteKit
 class ShopItemTemplate: SKShapeNode {
     
     var colorNode: SKNode!
+    var playerCost: Int!
+    
     var owned: Bool!
-    var seelcted: Bool!
+    
+    var tapped: Bool!
     
     //Initializer for different colored player
     init(name: String, player: SKNode, cost: Int, size: CGSize, index: Int, sceneFrame: CGRect) {
@@ -34,7 +37,11 @@ class ShopItemTemplate: SKShapeNode {
         
         colorNode = player
         colorNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height - colorNode.frame.height/2)
-    
+        
+        playerCost = cost
+        
+        tapped = false
+
         let coinNode = Coin()
         coinNode.alpha = 1
         

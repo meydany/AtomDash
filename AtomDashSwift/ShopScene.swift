@@ -159,6 +159,30 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                         let menuScene = MenuScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(menuScene, transition: transition)
+                    case "BuyButton":
+                        var selectedItem: ShopItemTemplate!
+                        for item in shopItems {
+                            if(item.tapped == true) {
+                                selectedItem = item
+                            }
+                        }
+                        let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
+                        
+                        if(selectedItem != nil) {
+                            var alert = UIAlertController(title: "Buy Theme", message: "Buy this theme for \(selectedItem.playerCost) coins?", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+
+                            alert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
+                                //buy item
+                            }))
+                            currentViewController.presentViewController(alert, animated: true, completion: nil)
+                        }else {
+                            var alert = UIAlertController(title: "Oh No!", message: "Select a theme!", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                                //buy item
+                            }))
+                            currentViewController.presentViewController(alert, animated: true, completion: nil)
+                        }
                     default:
                         let menuScene = MenuScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
@@ -183,8 +207,10 @@ class ShopScene: SKScene, UIScrollViewDelegate{
             for item in shopItems {
                 if(item.containsPoint(location)) {
                     item.colorNode.runAction(SKAction.scaleTo(1.2, duration: 0.5))
+                    item.tapped = true
                 }else {
                     item.colorNode.runAction(SKAction.scaleTo(1.0, duration: 0.5))
+                    item.tapped = false
                 }
             }
         }
