@@ -15,8 +15,8 @@ struct Players {
     let defaultPlayer = Player()
 
     let coloredPlayers: [Player] = [Player(color: UIColor.gameBlueColor(), name: "GameBluePlayer", playerCost: 100),
-                                    Player(color: UIColor.gameRedColor(), name: "GameRedPlayer", playerCost: 100),
-                                    Player(color: UIColor.gameGreenColor(), name: "GameGreenPlayer", playerCost: 100),
+                                    Player(color: UIColor.gameRedColor(), name: "GameRedPlayer", playerCost: 1000),
+                                    Player(color: UIColor.gameGreenColor(), name: "GameGreenPlayer", playerCost: 2000),
                                     Player(color: UIColor.gamePurpleColor(), name: "GamePurplePlayer", playerCost: 100),
                                     Player(color: UIColor.gameGoldColor(), name: "GameGoldPlayer", playerCost: 100),
                                     Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
@@ -169,7 +169,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                         let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
                         
                         if(selectedItem != nil) {
-                            var alert = UIAlertController(title: "Buy Theme", message: "Buy this theme for \(selectedItem.playerCost) coins?", preferredStyle: UIAlertControllerStyle.Alert)
+                            let alert = UIAlertController(title: "Buy Theme", message: "Buy this theme for \(selectedItem.playerCost) coins?", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
 
                             alert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
@@ -177,7 +177,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                             }))
                             currentViewController.presentViewController(alert, animated: true, completion: nil)
                         }else {
-                            var alert = UIAlertController(title: "Oh No!", message: "Select a theme!", preferredStyle: UIAlertControllerStyle.Alert)
+                            let alert = UIAlertController(title: "Oh No!", message: "Select a theme!", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
                                 //buy item
                             }))
