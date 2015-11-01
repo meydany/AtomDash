@@ -13,20 +13,30 @@ import UIKit
 
 struct Players {
     let defaultPlayer = Player()
-
+    
+    static var pink = UIColor(red: 1, green: 0.61, blue: 0.93, alpha: 1)
+    static var orange = UIColor(red: 1, green: 0.74, blue: 0, alpha: 1)
+    static var lightBlue = UIColor(red: 0, green: 0.82, blue: 0.92, alpha: 1)
+    static var neonGreen = UIColor(red: 0, green: 0.92, blue: 0.10, alpha: 1)
+    static var neonYellow = UIColor(red: 0.92, green: 0.92, blue: 0, alpha: 1)
+    static var black = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    static var darkPink = UIColor(red: 1, green: 0, blue: 0.7, alpha: 1)
+    static var darkPurple = UIColor(red: 0.58, green: 0, blue: 1, alpha: 1)
+    static var brightRed = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
+    static var greenishBlue = UIColor(red: 0, green: 0.8, blue: 0.65, alpha: 1)
+    
     let coloredPlayers: [Player] = [Player(color: UIColor.gameBlueColor(), name: "GameBluePlayer", playerCost: 100),
-                                    Player(color: UIColor.gameRedColor(), name: "GameRedPlayer", playerCost: 1000),
-                                    Player(color: UIColor.gameGreenColor(), name: "GameGreenPlayer", playerCost: 2000),
+                                    Player(color: greenishBlue, name: "GreenishBluePlayer", playerCost: 100),
                                     Player(color: UIColor.gamePurpleColor(), name: "GamePurplePlayer", playerCost: 100),
-                                    Player(color: UIColor.gameGoldColor(), name: "GameGoldPlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
-                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100)]
-
+                                    Player(color: pink, name: "PinkPlayer", playerCost: 100),
+                                    Player(color: orange, name: "OrangePlayer", playerCost: 100),
+                                    Player(color: darkPink, name: "DarkPinkPlayer", playerCost: 100),
+                                    Player(color: darkPurple, name: "DarkPurplePlayer", playerCost: 100),
+                                    Player(color: brightRed, name: "BrightRedPlayer", playerCost: 100),
+                                    Player(color: UIColor.gameGoldColor(), name: "GameGoldPlayer", playerCost: 200),
+                                    Player(color: lightBlue, name: "LighBluePlayer", playerCost: 200),
+                                    Player(color: neonGreen, name: "NeonGreenPlayer", playerCost: 200),
+                                    Player(color: black, name: "BlackPlayer", playerCost: 500)]
     //put more players here
     
     func getCurrentPlayer () -> SKNode {
