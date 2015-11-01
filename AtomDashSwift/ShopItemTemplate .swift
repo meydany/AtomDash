@@ -94,6 +94,7 @@ class ShopItemTemplate: SKShapeNode {
         
         if(selected! == true) {
             self.addChild(selectedNode)
+            self.colorNode.setScale(1.2)
         }
         
     }

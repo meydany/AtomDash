@@ -61,6 +61,8 @@ class GameViewController: UIViewController {
         print("Setting defaults")
         NSUserDefaults().setObject("GameBluePlayer", forKey: "player") //default player is the blue circle
         
+        NSUserDefaults().setInteger(1000, forKey: "coins")
+        
         for coloredPlayer in Players().coloredPlayers {
             if(coloredPlayer.name != "GameBluePlayer") {
                 let key = "\(coloredPlayer.name)Owned"

@@ -193,7 +193,14 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                             alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
 
                             alert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
-                                selectedItem.buyItem()
+                                selectedItem.buyItem() //buys item
+                                self.coinTextNode.text = String(NSUserDefaults().integerForKey("coins")) //updates coins
+                                
+                                //updates coin and cointextnode position
+                                let buffer = (self.frame.width/150) * Screen.screenWidthRatio
+                                let centerFactor = (self.coinTextNode.frame.width - self.coinNode.frame.width)/2
+                                self.coinTextNode.position = CGPoint(x: ((self.frame.midX - (self.coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (7.75*self.frame.height)/10 - (self.coinTextNode.frame.height/2))
+                                self.coinNode!.position = CGPoint(x: (self.frame.midX + (self.coinNode.frame.width/2)) + centerFactor + buffer, y: (7.75*self.frame.height)/10)
                             }))
                             currentViewController.presentViewController(alert, animated: true, completion: nil)
                             
@@ -206,9 +213,9 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                             
                         }
                     default:
-                        let menuScene = MenuScene(size: self.scene!.size)
-                        let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
-                        self.scene!.view?.presentScene(menuScene, transition: transition)
+                        //do nothing
+
+                        break
                 }
             }
         }
