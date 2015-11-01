@@ -168,7 +168,23 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                         }
                         let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
                         
-                        if(selectedItem != nil) {
+                        if((selectedItem != nil) && selectedItem.owned == true) {
+                            
+                            let alert = UIAlertController(title: "Theme Owned", message: "You already own this theme!", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                            currentViewController.presentViewController(alert, animated: true, completion: nil)
+                            
+                        }else if ((selectedItem != nil) && (NSUserDefaults().integerForKey("coins") < selectedItem.playerCost)) {
+                            
+                            let alert = UIAlertController(title: "Not enough money", message: "You need \(selectedItem.playerCost - NSUserDefaults().integerForKey("coins")) more coins to buy this theme", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                            alert.addAction(UIAlertAction(title: "Earn Coins", style: .Default, handler: { (action: UIAlertAction!) in
+                                //earn coins
+                            }))
+                            currentViewController.presentViewController(alert, animated: true, completion: nil)
+                            
+                        }else if(selectedItem != nil) {
+                            
                             let alert = UIAlertController(title: "Buy Theme", message: "Buy this theme for \(selectedItem.playerCost) coins?", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
 
@@ -176,12 +192,14 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                                 //buy item
                             }))
                             currentViewController.presentViewController(alert, animated: true, completion: nil)
+                            
                         }else {
+                            
                             let alert = UIAlertController(title: "Oh No!", message: "Select a theme!", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-                                //buy item
-                            }))
+                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+
                             currentViewController.presentViewController(alert, animated: true, completion: nil)
+                            
                         }
                     default:
                         let menuScene = MenuScene(size: self.scene!.size)
