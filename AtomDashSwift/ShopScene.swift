@@ -58,7 +58,6 @@ class ShopScene: SKScene, UIScrollViewDelegate{
     var coinTextNode: SKLabelNode!
     
     var shopItems: [ShopItemTemplate]!
-    var nodesToScroll: SKNode!
     
     var scrollView: UIScrollView!
     var previousOffset: CGFloat!
@@ -67,9 +66,6 @@ class ShopScene: SKScene, UIScrollViewDelegate{
     var menuButton: ButtonTemplate!
     var buyButton: ButtonTemplate!
     var videoButton: ButtonTemplate!
-    
-    var currentScale: CGFloat!
-    var previousScale: CGFloat!
     
     override func didMoveToView(view: SKView) {
         self.scaleMode = .AspectFill
@@ -118,6 +114,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         let leftMostItemPos = leftMostItem.position.x
         let rightMostItemPos = rightMostItem.position.x
         let scrollViewContentWidth = (rightMostItemPos - leftMostItemPos) + 1.15*leftMostItem.frame.width
+        
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 0.3*self.frame.height, width: self.frame.width, height: self.frame.height/5))
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.clearColor()
@@ -135,9 +132,6 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         tapGesture.enabled = true
         tapGesture.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGesture)
-        
-        currentScale = 1
-        previousScale = currentScale
         
         self.view!.addSubview(scrollView)
         self.addChild(shopLabel)

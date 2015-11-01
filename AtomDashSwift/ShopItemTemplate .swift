@@ -17,13 +17,12 @@ class ShopItemTemplate: SKShapeNode {
     var coinNode: Coin!
     var coinTextNode: SKLabelNode!
     
-    var owned: Bool!
     var ownedNode: SKLabelNode!
-    
+    var selectedNode: SKLabelNode!
+ 
+    var owned: Bool!
     var tapped: Bool!
     var selected: Bool!
-    
-    var selectedNode: SKLabelNode!
     
     //Initializer for different colored player
     init(name: String, player: SKNode, cost: Int, size: CGSize, index: Int, sceneFrame: CGRect) {
@@ -45,10 +44,6 @@ class ShopItemTemplate: SKShapeNode {
         colorNode = player
         colorNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height - colorNode.frame.height/2)
         
-        playerCost = cost
-        
-        tapped = false
-
         coinNode = Coin()
         coinNode.alpha = 1
         
@@ -83,6 +78,10 @@ class ShopItemTemplate: SKShapeNode {
         let name: String! = colorNode!.name
         let selectedName: String! = NSUserDefaults().objectForKey("player") as! String
         selected = name == selectedName
+        
+        playerCost = cost
+        tapped = false
+
         self.addChild(colorNode)
         
         if(owned! == true) {
@@ -100,10 +99,6 @@ class ShopItemTemplate: SKShapeNode {
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func adjustPlayerScale(scale: CGFloat) {
-        colorNode.setScale(scale)
     }
     
     func buyItem() {
