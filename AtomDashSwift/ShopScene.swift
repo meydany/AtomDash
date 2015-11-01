@@ -182,7 +182,9 @@ class ShopScene: SKScene, UIScrollViewDelegate{
             location.y = self.frame.height - location.y
             for item in shopItems {
                 if(item.containsPoint(location)) {
-                    print(item.name)
+                    item.colorNode.runAction(SKAction.scaleTo(1.2, duration: 0.5))
+                }else {
+                    item.colorNode.runAction(SKAction.scaleTo(1.0, duration: 0.5))
                 }
             }
         }
