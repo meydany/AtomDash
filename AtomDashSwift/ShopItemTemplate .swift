@@ -106,32 +106,36 @@ class ShopItemTemplate: SKShapeNode {
     }
     
     func buyItem() {
+        owned = true
+
         NSUserDefaults().setInteger(NSUserDefaults().integerForKey("coins") - self.playerCost, forKey: "coins")
         coinNode.removeFromParent()
         coinTextNode.removeFromParent()
         
         NSUserDefaults().setBool(true, forKey: "\(colorNode!.name)Owned")
-        owned = true
         
         ownedNode.alpha = 0
         self.addChild(ownedNode!)
-        ownedNode.runAction(SKAction.fadeInWithDuration(0.5))
+        ownedNode.runAction(SKAction.fadeInWithDuration(0.25))
+        
         selectItem()
     }
     
     func selectItem() {
+        selected = true
+
         let name: String! = colorNode!.name
         NSUserDefaults().setObject("\(name)", forKey: "player")
-        selected = true
+        
         selectedNode.alpha = 0
         self.addChild(selectedNode)
-        selectedNode.runAction(SKAction.fadeInWithDuration(0.5))
+        selectedNode.runAction(SKAction.fadeInWithDuration(0.25))
     }
     
     func unselectItem() {
         selected = false
         selectedNode.alpha = 1
-        selectedNode.runAction(SKAction.fadeOutWithDuration(0.5), completion: {self.selectedNode.removeFromParent()})
+        selectedNode.runAction(SKAction.fadeOutWithDuration(0.25), completion: {self.selectedNode.removeFromParent()})
     }
 }
 

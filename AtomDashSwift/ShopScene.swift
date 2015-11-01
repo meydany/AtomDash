@@ -231,14 +231,14 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                     item.colorNode.runAction(SKAction.scaleTo(1.2, duration: 0.5))
                     item.tapped = true
                     
-                    if(item.owned!) {
+                    if(item.owned! && !item.selected!) {
                         item.selectItem()
                     }
                 }else {
                     item.colorNode.runAction(SKAction.scaleTo(1.0, duration: 0.5))
                     item.tapped = false
                     
-                    if(item.selected!) {
+                    if(item.owned! && item.selected!) {
                         item.unselectItem()
                     }
                 }
