@@ -43,7 +43,7 @@ class MenuScene: SKScene {
         copyRightNode.position = CGPoint(x: self.frame.midX, y: (self.frame.minY + copyRightNode.frame.height)*2)
         copyRightNode.fontColor = UIColor.darkGrayColor()
 
-        playerNode = Player(color: UIColor.gameBlueColor())
+        playerNode = Player()
         playerNode!.position = CGPoint(x: self.frame.width/4, y: (3.4*self.frame.height)/5)
         
         enemyNode = Enemy(side: SpawnSide.Right)
@@ -85,29 +85,18 @@ class MenuScene: SKScene {
                 
                 switch name {
                 case "PlayButton":
-                    if(NSUserDefaults().boolForKey("instructionsScene")) {
-                        if(NSUserDefaults().objectForKey("player") == nil) {
-                            NSUserDefaults().setObject("Default", forKey: "player") //default player is the blue circle
-                        }
+                    if(NSUserDefaults().boolForKey("NotFirstTime")) {
                         let playScene = PlayScene(size: self.scene!.size)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
                         self.scene!.view?.presentScene(playScene, transition: transition)
-                        /*
-                        GCHelper.sharedInstance.reportLeaderboardIdentifier("AtomDashLeaderboardID", score: NSUserDefaults().integerForKey("highScore"))
-                        print("Reported HighScore")
-                        print(NSUserDefaults().integerForKey("highScore"))
-                        */
                     }
                     else {
-                        print("hello")
-
-                        NSUserDefaults().setObject("Default", forKey: "player") //default player is the blue circle
-                        
-                        NSUserDefaults().setBool(true, forKey: "instructionsScene")
                         let instructionsScene = SingleplayerInstructionsScene(nextScene: PlayScene(size: (self.scene?.size)!), size: (self.scene?.size)!)
                         let transition = SKTransition.fadeWithColor(UIColor.whiteColor(), duration: 0.7)
 
                         self.scene!.view?.presentScene(instructionsScene, transition: transition)
+                        
+                        NSUserDefaults().setBool(true, forKey: "NotFirstTime")
                     }
                 case "LeaderboardsButton":
                     GCHelper.sharedInstance.showGameCenter((self.view!.window?.rootViewController!)!, viewState: GKGameCenterViewControllerState.Leaderboards)
@@ -126,5 +115,4 @@ class MenuScene: SKScene {
             }
         }
     }
-    
 }

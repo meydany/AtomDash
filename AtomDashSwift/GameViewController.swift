@@ -51,6 +51,27 @@ class GameViewController: UIViewController {
         self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic
         GameOverScene.loadAdMobInterstitialAd()
         GameOverScene.loadiAdInterstitialAd()
+        
+        if(NSUserDefaults().boolForKey("NotFirstTime") == false) {            
+            createNSUserDefaults()
+        }
+    }
+    
+    func createNSUserDefaults() {
+        print("Setting defaults")
+        NSUserDefaults().setObject("GameBluePlayer", forKey: "player") //default player is the blue circle
+        
+        for coloredPlayer in Players().coloredPlayers {
+            if(coloredPlayer.name != "GameBluePlayer") {
+                let key = "\(coloredPlayer.name)Owned"
+                NSUserDefaults().setBool(false, forKey: key)
+            }else {
+                let key = "\(coloredPlayer.name)Owned"
+                NSUserDefaults().setBool(true, forKey: key)
+                print("BluePlayer set true: \(NSUserDefaults().boolForKey(key))")
+            }
+        }
+        
     }
     
     override func shouldAutorotate() -> Bool {

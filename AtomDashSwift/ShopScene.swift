@@ -12,16 +12,29 @@ import UIKit
 
 
 struct Players {
-    let defaultPlayer = Player(color: UIColor.gameBlueColor())
+    let defaultPlayer = Player()
+
+    let coloredPlayers: [Player] = [Player(color: UIColor.gameBlueColor(), name: "GameBluePlayer", playerCost: 100),
+                                    Player(color: UIColor.gameRedColor(), name: "GameRedPlayer", playerCost: 100),
+                                    Player(color: UIColor.gameGreenColor(), name: "GameGreenPlayer", playerCost: 100),
+                                    Player(color: UIColor.gamePurpleColor(), name: "GamePurplePlayer", playerCost: 100),
+                                    Player(color: UIColor.gameGoldColor(), name: "GameGoldPlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100),
+                                    Player(color: UIColor.blueColor(), name: "BluePlayer", playerCost: 100)]
 
     //put more players here
     
     func getCurrentPlayer () -> SKNode {
         switch NSUserDefaults().objectForKey("player") as! String {
-        case "Default":
-            return defaultPlayer
+        case "GameBluePlayer":
+            return coloredPlayers[0]
         default:
-            return defaultPlayer
+            return coloredPlayers[0]
         }
     }
 }
@@ -32,6 +45,7 @@ public struct ShopLayers {
     static var viewLayer = CGFloat(2)
     static var buttonLayer = CGFloat(1)
 }
+
 class ShopScene: SKScene, UIScrollViewDelegate{
     
     var shopLabel: SKLabelNode!
@@ -46,19 +60,18 @@ class ShopScene: SKScene, UIScrollViewDelegate{
     var previousOffset: CGFloat!
     var currentOffset: CGFloat!
     
-    var changeOffset: Bool!
-    
     var menuButton: ButtonTemplate!
+    var buyButton: ButtonTemplate!
+    var videoButton: ButtonTemplate!
     
-    var topBackgroundFilterNode: SKSpriteNode!
-    var bottomBackgroundFilterNode: SKSpriteNode!
-
+    var currentScale: CGFloat!
+    var previousScale: CGFloat!
     
     override func didMoveToView(view: SKView) {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-    
+            
         shopLabel = SKLabelNode(text: "SHOP")
         shopLabel.fontName = "DINCondensed-Bold"
         shopLabel.fontSize = 75 * Screen.screenWidthRatio
@@ -82,42 +95,36 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         coinTextNode.position = CGPoint(x: ((self.frame.midX - (coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (7.75*self.frame.height)/10 - (coinTextNode.frame.height/2))
         coinNode!.position = CGPoint(x: (self.frame.midX + (coinNode.frame.width/2)) + centerFactor + buffer, y: (7.75*self.frame.height)/10)
         
-        menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (0.6*self.frame.height)/10), color: UIColor.gameGoldColor())
+        menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameBlueColor())
         menuButton.zPosition = ShopLayers.labelLayer
-
-        let itemSize = CGSize(width: self.frame.width/1.5, height: self.frame.width/4)
+        
+        buyButton = ButtonTemplate(name: "BuyButton", labelName: "BUY", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameGreenColor())
+        buyButton.zPosition = ShopLayers.labelLayer
+        
+        videoButton = ButtonTemplate(name: "VideoButton", labelName: "EARN COINS", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameGoldColor())
+        videoButton.zPosition = ShopLayers.labelLayer
 
         shopItems = []
-        shopItems.append(ShopItemTemplate(name: "bluePlayer", playerColor: UIColor.gameBlueColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "greenPlayer", playerColor: UIColor.gameGreenColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "redPlayer", playerColor: UIColor.gameRedColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "goldPlayer", playerColor: UIColor.gameGoldColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "redPlayer", playerColor: UIColor.redColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "redPlayer", playerColor: UIColor.redColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "redPlayer", playerColor: UIColor.redColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "redPlayer", playerColor: UIColor.redColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
-        shopItems.append(ShopItemTemplate(name: "redPlayer", playerColor: UIColor.redColor(), cost: 100, size: itemSize, index: shopItems.count, sceneFrame: self.frame))
+        
+        addColoredPlayers()
 
-        let initialHeight = (2.6*self.frame.maxY)/10
-        let topItem = shopItems[0]
-        let bottomItem = shopItems[shopItems.count-1]
-        let scrollViewHeight = (topItem.position.y + topItem.frame.height/2) - (bottomItem.position.y - bottomItem.frame.height/2)
-        print(scrollViewHeight)
-        print(shopItems[0].frame.height * CGFloat(shopItems.count))
+        let leftMostItem = shopItems[0]
+        let rightMostItem = shopItems[shopItems.count-1]
 
-        scrollView = UIScrollView(frame: CGRectMake(0, initialHeight, view.frame.width, 4.2*self.frame.height/7))
+        let leftMostItemPos = leftMostItem.position.x
+        let rightMostItemPos = rightMostItem.position.x
+        let scrollViewContentWidth = (rightMostItemPos - leftMostItemPos) + 1.15*leftMostItem.frame.width
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0.3*self.frame.height, width: self.frame.width, height: self.frame.height/5))
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.clearColor()
         scrollView.directionalLockEnabled = true
         scrollView.pagingEnabled = false
-        scrollView.indicatorStyle = UIScrollViewIndicatorStyle.Black
-        scrollView.contentSize = CGSize(width: itemSize.width, height: scrollViewHeight)
+        scrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
+        scrollView.contentSize = CGSize(width: scrollViewContentWidth, height: scrollView.frame.height)
         scrollView.alpha = 1
         
-        currentOffset = scrollView.contentOffset.y
+        currentOffset = scrollView.contentOffset.x
         previousOffset = currentOffset
-        
-        changeOffset = false
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
         tapGesture.numberOfTapsRequired = 1
@@ -125,25 +132,16 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         tapGesture.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGesture)
         
-        topBackgroundFilterNode = SKSpriteNode(color: UIColor.whiteColor(), size: self.view!.frame.size)
-        topBackgroundFilterNode.position = CGPoint(x: self.frame.midX, y: (initialHeight - self.frame.height/40) + topBackgroundFilterNode.frame.height)
-        topBackgroundFilterNode.zPosition = ShopLayers.whiteLayer
-        topBackgroundFilterNode.alpha = 1
+        currentScale = 1
+        previousScale = currentScale
         
-        bottomBackgroundFilterNode = SKSpriteNode(color: UIColor.whiteColor(), size: self.view!.frame.size)
-        bottomBackgroundFilterNode.position = CGPoint(x: self.frame.midX, y: (menuButton.position.y + 2*self.frame.height/20) - bottomBackgroundFilterNode.frame.height/2)
-        bottomBackgroundFilterNode.zPosition = ShopLayers.whiteLayer
-        bottomBackgroundFilterNode.alpha = 1
-        
-        addShopItems()
+        self.view!.addSubview(scrollView)
         self.addChild(shopLabel)
         self.addChild(coinTextNode)
         self.addChild(coinNode)
         self.addChild(menuButton)
-        self.addChild(topBackgroundFilterNode)
-        self.addChild(bottomBackgroundFilterNode)
-        
-        self.view!.addSubview(scrollView)
+        self.addChild(buyButton)
+        self.addChild(videoButton)
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -172,8 +170,8 @@ class ShopScene: SKScene, UIScrollViewDelegate{
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         for item in shopItems  {
-            currentOffset = scrollView.contentOffset.y
-            item.position.y += (currentOffset - previousOffset)
+            currentOffset = scrollView.contentOffset.x
+            item.position.x -= (currentOffset - previousOffset)
         }
         previousOffset = currentOffset
     }
@@ -190,10 +188,10 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         }
     }
     
-    func addShopItems() {
-        for item in shopItems {
-            item.zPosition = ShopLayers.buttonLayer
-            self.addChild(item)
+    func addColoredPlayers() {
+        for player in Players().coloredPlayers {
+            shopItems.append(ShopItemTemplate(name: player.name!, player: player, cost: player.cost!, size: CGSize(width: 4*Players().defaultPlayer.frame.width/3, height: 4*Players().defaultPlayer.frame.height/3), index: shopItems.count, sceneFrame: self.frame))
+            self.addChild(shopItems[shopItems.count-1])
         }
     }
     

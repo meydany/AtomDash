@@ -41,13 +41,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AtomDashSwift/MenuScene.swift"
-            timestampString = "467847205.785887"
+            filePath = "AtomDashSwift/ShopItemTemplate .swift"
+            timestampString = "468038541.281704"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "touchesBegan(_:withEvent:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "init(name:player:cost:size:index:sceneFrame:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AtomDashSwift/ShopItemTemplate .swift"
+            timestampString = "468038541.281704"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "init(name:player:cost:size:index:sceneFrame:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

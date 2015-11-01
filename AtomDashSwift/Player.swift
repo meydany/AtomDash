@@ -14,11 +14,23 @@ class Player : SKShapeNode {
     var lastTouch: CGPoint!
     var deltaPosition: CGPoint!
     
-    init(color: UIColor!) {
-        
+    public var cost: Int?
+    
+    override init() {
         super.init()
         
-        self.name = "Player"
+        createPlayer(UIColor.gameBlueColor(), name: "DefaultPlayer")
+    }
+    
+    init(color: UIColor!, name: String!, playerCost: Int!) {
+        super.init()
+        
+        self.cost = playerCost
+        createPlayer(color, name: name)
+    }
+    
+    func createPlayer(color: UIColor, name: String) {
+        self.name = name
         
         let mutablePath: CGMutablePathRef = CGPathCreateMutable()
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * Screen.screenWidthRatio), CGFloat(0), CGFloat(M_PI*2), true)
