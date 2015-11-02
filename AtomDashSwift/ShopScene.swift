@@ -34,7 +34,7 @@ struct Players {
                                     Player(color: darkPurple, name: "DarkPurplePlayer", playerCost: 100),
                                     Player(color: brightRed, name: "BrightRedPlayer", playerCost: 100),
                                     Player(color: UIColor.gameGoldColor(), name: "GameGoldPlayer", playerCost: 200),
-                                    Player(color: lightBlue, name: "LighBluePlayer", playerCost: 200),
+                                    Player(color: lightBlue, name: "LighBluePlayer", playerCost: 1000),
                                     Player(color: neonGreen, name: "NeonGreenPlayer", playerCost: 200),
                                     Player(color: black, name: "BlackPlayer", playerCost: 500)]
     //put more players here
@@ -77,11 +77,15 @@ class ShopScene: SKScene, UIScrollViewDelegate{
     var buyButton: ButtonTemplate!
     var videoButton: ButtonTemplate!
     
+    var buyable: Bool!
+    
     override func didMoveToView(view: SKView) {
         self.scaleMode = .AspectFill
         self.size = view.bounds.size
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-            
+        
+        NSUserDefaults().setBool(true, forKey: "NotFirstTime")
+        
         shopLabel = SKLabelNode(text: "THEMES")
         shopLabel.fontName = "DINCondensed-Bold"
         shopLabel.fontSize = 75 * Screen.screenWidthRatio
@@ -143,6 +147,8 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         tapGesture.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGesture)
         
+        buyable = false
+        
         self.view!.addSubview(scrollView)
         self.addChild(shopLabel)
         self.addChild(coinTextNode)
@@ -174,47 +180,21 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                                 selectedItem = item
                             }
                         }
-                        let currentViewController: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController!)!
-                        
-                        if((selectedItem != nil) && selectedItem.owned == true) {
+                        if(selectedItem != nil && selectedItem.owned == false && buyable!) {
+                            selectedItem.buyItem()
                             
-                            let alert = UIAlertController(title: "Theme Owned", message: "You already own this theme!", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                            currentViewController.presentViewController(alert, animated: true, completion: nil)
+                            let currentCoins = NSUserDefaults().integerForKey("coins")
+                            coinTextNode.text = String(NSUserDefaults().integerForKey("coins"))
                             
-                        }else if ((selectedItem != nil) && (NSUserDefaults().integerForKey("coins") < selectedItem.playerCost)) {
-                            
-                            let alert = UIAlertController(title: "Not enough money", message: "You need \(selectedItem.playerCost - NSUserDefaults().integerForKey("coins")) more coins to buy this theme", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                            alert.addAction(UIAlertAction(title: "Earn Coins", style: .Default, handler: { (action: UIAlertAction!) in
-                                //earn coins
-                            }))
-                            currentViewController.presentViewController(alert, animated: true, completion: nil)
-                            
-                        }else if(selectedItem != nil) {
-                            
-                            let alert = UIAlertController(title: "Buy Theme", message: "Buy this theme for \(selectedItem.playerCost) coins?", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
-
-                            alert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
-                                selectedItem.buyItem() //buys item
-                                self.coinTextNode.text = String(NSUserDefaults().integerForKey("coins")) //updates coins
-                                
-                                //updates coin and cointextnode position
-                                let buffer = (self.frame.width/150) * Screen.screenWidthRatio
-                                let centerFactor = (self.coinTextNode.frame.width - self.coinNode.frame.width)/2
-                                self.coinTextNode.position = CGPoint(x: ((self.frame.midX - (self.coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (7.75*self.frame.height)/10 - (self.coinTextNode.frame.height/2))
-                                self.coinNode!.position = CGPoint(x: (self.frame.midX + (self.coinNode.frame.width/2)) + centerFactor + buffer, y: (7.75*self.frame.height)/10)
-                            }))
-                            currentViewController.presentViewController(alert, animated: true, completion: nil)
+                            let buffer = (self.frame.width/150) * Screen.screenWidthRatio
+                            let centerFactor = (coinTextNode.frame.width - coinNode.frame.width)/2
+                            coinTextNode.position = CGPoint(x: ((self.frame.midX - (coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (7.75*self.frame.height)/10 - (coinTextNode.frame.height/2))
+                            coinNode!.position = CGPoint(x: (self.frame.midX + (coinNode.frame.width/2)) + centerFactor + buffer, y: (7.75*self.frame.height)/10)
                             
                         }else {
-                            
-                            let alert = UIAlertController(title: "Oh No!", message: "Select a theme!", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-
-                            currentViewController.presentViewController(alert, animated: true, completion: nil)
-                            
+                            print(selectedItem != nil)
+                            print(selectedItem.owned == false)
+                            print(buyButton.fillColor == UIColor.gameGreenColor())
                         }
                     default:
                         //do nothing
@@ -241,6 +221,14 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                 if(item.containsPoint(location)) {
                     item.colorNode.runAction(SKAction.scaleTo(1.2, duration: 0.5))
                     item.tapped = true
+                    
+                    if(item.playerCost > NSUserDefaults().integerForKey("coins") || item.owned == true) {
+                        buyButton.fillColor = UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1)
+                        buyable = false //unable to buy
+                    }else {
+                        buyButton.fillColor = UIColor.gameGreenColor()
+                        buyable = true
+                    }
                     
                     if(item.owned! && !item.selected!) {
                         item.selectItem()
