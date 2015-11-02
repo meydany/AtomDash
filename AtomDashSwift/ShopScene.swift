@@ -112,7 +112,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameBlueColor())
         menuButton.zPosition = ShopLayers.labelLayer
         
-        buyButton = ButtonTemplate(name: "BuyButton", labelName: "BUY", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color: UIColor.gameGreenColor())
+        buyButton = ButtonTemplate(name: "BuyButton", labelName: "BUY", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color:  UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1))
         buyButton.zPosition = ShopLayers.labelLayer
         
         videoButton = ButtonTemplate(name: "VideoButton", labelName: "EARN COINS", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameGoldColor())
@@ -191,10 +191,9 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                             coinTextNode.position = CGPoint(x: ((self.frame.midX - (coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (7.75*self.frame.height)/10 - (coinTextNode.frame.height/2))
                             coinNode!.position = CGPoint(x: (self.frame.midX + (coinNode.frame.width/2)) + centerFactor + buffer, y: (7.75*self.frame.height)/10)
                             
-                        }else {
-                            print(selectedItem != nil)
-                            print(selectedItem.owned == false)
-                            print(buyButton.fillColor == UIColor.gameGreenColor())
+                            buyButton.fillColor = UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1)
+                        }else if(selectedItem == nil) {
+                            buyButton.fillColor = UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1)
                         }
                     default:
                         //do nothing
