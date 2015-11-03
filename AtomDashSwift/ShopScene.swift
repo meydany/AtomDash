@@ -9,7 +9,9 @@
 import Foundation
 import SpriteKit
 import UIKit
-
+import iAd
+import MediaPlayer
+import AVKit
 
 struct Players {
     let defaultPlayer = Player()
@@ -195,6 +197,49 @@ class ShopScene: SKScene, UIScrollViewDelegate{
                         }else if(selectedItem == nil) {
                             buyButton.fillColor = UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1)
                         }
+                    case "VideoButton":
+                        
+                        print("1")
+                        let player = AVPlayer(URL: NSURL(string:"https://www.youtube.com/watch?v=5LlQNty_C8s")!)
+                        let playerController = AVPlayerViewController()
+                        AVPlayerViewController.preparePrerollAds()
+                        playerController.view.frame = (self.view?.bounds)!
+                        playerController.player = player
+                        
+                        /*
+                        print("2")
+                        UIApplication.sharedApplication().keyWindow?.rootViewController?.addChildViewController(playerController)
+                        self.view?.addSubview(playerController.view)
+                        
+                        print("3")
+                        playerController.playPrerollAdWithCompletionHandler({(error) -> Void in
+                            if (error != nil){
+                                print("error printing video: \(error)")
+                            }
+                            player.play()
+                        })
+                        print("4")
+                        */
+                        
+                        MPMoviePlayerController.preparePrerollAds()
+                        
+                        let moviePlayer = MPMoviePlayerController(contentURL: NSURL(string:"https://www.youtube.com/watch?v=5LlQNty_C8s")!)
+                        moviePlayer.view.frame = (self.view?.bounds)!
+                        moviePlayer.setFullscreen(true, animated: true)
+                        
+                        self.view?.addSubview(moviePlayer.view)
+                        
+                        moviePlayer.prepareToPlay()
+                        moviePlayer.playPrerollAdWithCompletionHandler({(error) -> Void in
+                            if (error != nil){
+                                print("error: \(error)")
+                            }
+                            moviePlayer.play()
+                        })
+                        
+                        
+                        
+                        break
                     default:
                         //do nothing
 
