@@ -8,8 +8,30 @@
 
 import Foundation
 import SpriteKit
+import ObjectiveC
+
+private var lastTouch: CGPoint = CGPoint(x: 0, y: 0)
+private var deltaPosition: CGPoint! = CGPoint(x: 0, y: 0)
 
 extension SKNode {
+    
+    func startDrag(locationOfTouch: CGPoint){
+        lastTouch = locationOfTouch
+    }
+    
+    func updatePositionForDragMovement(locationOfTouch: CGPoint){
+        
+        //let currentTouch:CGPoint = locationOfTouch
+        
+        
+        deltaPosition.x = locationOfTouch.x - lastTouch.x
+        deltaPosition.y = locationOfTouch.y - lastTouch.y
+        
+        self.position.x += deltaPosition.x
+        self.position.y += deltaPosition.y
+        
+        lastTouch = locationOfTouch
+    }
     
     enum MoveType {
         case Smooth

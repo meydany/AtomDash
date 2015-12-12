@@ -9,36 +9,26 @@
 import Foundation
 import SpriteKit
 
-class Player : SKShapeNode {
+class ImagePlayer : SKSpriteNode {
     
     //var lastTouch: CGPoint!
     //var deltaPosition: CGPoint!
     
     public var cost: Int?
     
-    override init() {
-        super.init()
-        
-        createPlayer(UIColor.gameBlueColor(), name: "DefaultPlayer")
-    }
-    
-    init(color: UIColor!, name: String!, playerCost: Int!) {
-        super.init()
-        
+    init(image: String!, name: String!, playerCost: Int!) {
+        super.init(texture: SKTexture(imageNamed: name), color: UIColor.blackColor(), size: SKTexture(imageNamed: image).size())
         self.cost = playerCost
-        createPlayer(color, name: name)
+        
+        let scale = (Player().frame.width / self.frame.width)
+        self.xScale = scale
+        self.yScale = scale
+        createPlayer(name)
+
     }
     
-    func createPlayer(color: UIColor, name: String) {
+    func createPlayer(name: String) {
         self.name = name
-        
-        let mutablePath: CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(35 * Screen.screenWidthRatio), CGFloat(0), CGFloat(M_PI*2), true)
-        self.path = mutablePath
-        self.lineWidth = 8 * Screen.screenWidthRatio
-        self.strokeColor = color
-        
-        print("Hello \(Screen.screenWidthRatio)")
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)
         self.physicsBody!.affectedByGravity = false

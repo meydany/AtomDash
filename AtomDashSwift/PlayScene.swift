@@ -21,7 +21,7 @@ enum ColliderObject: UInt32 {
 
 class PlayScene: SKScene, SKPhysicsContactDelegate {
     
-    var currentPlayer: Player!
+    var currentPlayer: SKNode!
     var enemy: Enemy!
     var target: Target!
     
@@ -61,7 +61,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         //currentPlayer instantiation
         
-        currentPlayer = Players().getCurrentPlayer() as! Player
+        currentPlayer = Players().getCurrentPlayer() as! SKNode!
         currentPlayer.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         //Target instantiation

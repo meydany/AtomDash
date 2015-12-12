@@ -39,14 +39,21 @@ struct Players {
                                     Player(color: lightBlue, name: "LighBluePlayer", playerCost: 1000),
                                     Player(color: neonGreen, name: "NeonGreenPlayer", playerCost: 200),
                                     Player(color: black, name: "BlackPlayer", playerCost: 500)]
+    
+    let imagePlayers: [ImagePlayer] = [ImagePlayer(image: "WorldPlayer", name: "WorldPlayer", playerCost: 100)]
     //put more players here
     
     func getCurrentPlayer () -> SKNode {
         return getPlayerNodeWithName(NSUserDefaults().objectForKey("player") as! String)
     }
     
-    func getPlayerNodeWithName(playerName: String) -> Player{
+    func getPlayerNodeWithName(playerName: String) -> SKNode{
         for player in coloredPlayers {
+            if(player.name! == playerName) {
+                return player
+            }
+        }
+        for player in imagePlayers {
             if(player.name! == playerName) {
                 return player
             }
@@ -291,6 +298,11 @@ class ShopScene: SKScene, UIScrollViewDelegate{
     
     func addColoredPlayers() {
         for player in Players().coloredPlayers {
+            shopItems.append(ShopItemTemplate(name: player.name!, player: player, cost: player.cost!, size: CGSize(width: 4*Players().defaultPlayer.frame.width/3, height: 4*Players().defaultPlayer.frame.height/3), index: shopItems.count, sceneFrame: self.frame))
+            self.addChild(shopItems[shopItems.count-1])
+        }
+        
+        for player in Players().imagePlayers {
             shopItems.append(ShopItemTemplate(name: player.name!, player: player, cost: player.cost!, size: CGSize(width: 4*Players().defaultPlayer.frame.width/3, height: 4*Players().defaultPlayer.frame.height/3), index: shopItems.count, sceneFrame: self.frame))
             self.addChild(shopItems[shopItems.count-1])
         }

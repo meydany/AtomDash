@@ -29,6 +29,7 @@
 		8641A9581BA4ED04001B89EB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9571BA4ED04001B89EB /* Player.swift */; };
 		8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A9591BA4F5C8001B89EB /* Enemy.swift */; };
 		864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */; };
+		865F50961C17A76B00592EDB /* ImagePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865F50951C17A76B00592EDB /* ImagePlayer.swift */; };
 		866513FA1BC5C4F1001BD0C8 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866513F91BC5C4F1001BD0C8 /* iAd.framework */; };
 		866F553A1BCC76F300870908 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866F55391BCC76F300870908 /* GoogleMobileAds.framework */; };
 		86D4EB2C1BCC66A80049C150 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D4EB2B1BCC66A80049C150 /* AdSupport.framework */; };
@@ -80,6 +81,7 @@
 		8641A9571BA4ED04001B89EB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8641A9591BA4F5C8001B89EB /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		864705371BAD03BB00222756 /* SingleplayerInstructionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleplayerInstructionsScene.swift; sourceTree = "<group>"; };
+		865F50951C17A76B00592EDB /* ImagePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePlayer.swift; sourceTree = "<group>"; };
 		86604E971BB8C9500030DD5E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		866513F91BC5C4F1001BD0C8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		866F55391BCC76F300870908 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "GoogleMobileAdsSdkiOS-7.5.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				8641A9571BA4ED04001B89EB /* Player.swift */,
 				8641A9591BA4F5C8001B89EB /* Enemy.swift */,
 				86DDC8CD1BA686C700F444FB /* Target.swift */,
+				865F50951C17A76B00592EDB /* ImagePlayer.swift */,
 				0958C8871BA623AD00DFF781 /* ScoreLabel.swift */,
 				86302FA41BE048C600F4298F /* Coin.swift */,
 				090E55BE1BA787EC001B0982 /* TimeLabel.swift */,
@@ -338,6 +341,7 @@
 				8641A95A1BA4F5C8001B89EB /* Enemy.swift in Sources */,
 				090E55BF1BA787EC001B0982 /* TimeLabel.swift in Sources */,
 				8603D3321BE2CC0900660DA7 /* ShopItemTemplate .swift in Sources */,
+				865F50961C17A76B00592EDB /* ImagePlayer.swift in Sources */,
 				8641A9561BA4EC69001B89EB /* GameExtensions.swift in Sources */,
 				864705381BAD03BB00222756 /* SingleplayerInstructionsScene.swift in Sources */,
 				0958C8881BA623AD00DFF781 /* ScoreLabel.swift in Sources */,

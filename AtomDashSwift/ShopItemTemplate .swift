@@ -122,6 +122,7 @@ class ShopItemTemplate: SKShapeNode {
 
         let name: String! = colorNode!.name
         NSUserDefaults().setObject("\(name)", forKey: "player")
+        print(NSUserDefaults().stringForKey("player"))
         
         selectedNode.alpha = 0
         self.addChild(selectedNode)
