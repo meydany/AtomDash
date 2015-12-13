@@ -40,7 +40,9 @@ struct Players {
                                     Player(color: neonGreen, name: "NeonGreenPlayer", playerCost: 200),
                                     Player(color: black, name: "BlackPlayer", playerCost: 500)]
     
-    let imagePlayers: [ImagePlayer] = [ImagePlayer(image: "WorldPlayer", name: "WorldPlayer", playerCost: 100)]
+    let imagePlayers: [ImagePlayer] =
+    [ImagePlayer(image: "WorldPlayer", name: "WorldPlayer", playerCost: 100),
+    ImagePlayer(image: "BlackHole", name: "BlackHole", playerCost: 100)]
     //put more players here
     
     func getCurrentPlayer () -> SKNode {

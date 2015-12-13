@@ -119,7 +119,7 @@ class GameOverScene: SKScene {
         self.addChild(coinTextNode)
         
         // A variable for determining whether the user has ads
-        adsEnabled = true
+        adsEnabled = false
         
         if adsEnabled == true{
             runAction(SKAction.waitForDuration(0.05), completion: {self.presentAds = true})

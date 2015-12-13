@@ -20,7 +20,8 @@ class ImagePlayer : SKSpriteNode {
         super.init(texture: SKTexture(imageNamed: name), color: UIColor.blackColor(), size: SKTexture(imageNamed: image).size())
         self.cost = playerCost
         
-        let scale = (Player().frame.width / self.frame.width)
+        let scale = Screen.screenWidthRatio
+        //(Player().frame.width / self.frame.width)
         self.xScale = scale
         self.yScale = scale
         createPlayer(name)
