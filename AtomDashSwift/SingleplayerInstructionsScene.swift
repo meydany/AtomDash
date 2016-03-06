@@ -49,11 +49,11 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.directionalLockEnabled = true
         scrollView.pagingEnabled = true
         scrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
-        scrollView.contentSize = CGSize(width: view.frame.width * 4, height: view.frame.height)
+        scrollView.contentSize = CGSize(width: view.frame.width * 3, height: view.frame.height)
         scrollView.alpha = 0
         
         pageControl = UIPageControl(frame: CGRectMake((3*view.frame.width)/8,view.frame.height/1.25,scrollView.frame.width/4, scrollView.frame.height/8))
-        pageControl.numberOfPages = 4
+        pageControl.numberOfPages = 3
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor.redColor()
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
@@ -66,11 +66,11 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
         firstLabelView = makeTextView("You are the ", part2: "BLUE", color: UIColor.gameBlueColor())
         secondLabelView = makeTextView("Avoid the ", part2: "RED", color: UIColor.gameRedColor())
         thirdLabelView = makeTextView("Get the ", part2: "GREEN", color: UIColor.gameGreenColor())
-        fourthLabelView = makeTextView("Collect the ", part2: "COINS", color: UIColor.gameGoldColor())
+        //fourthLabelView = makeTextView("Collect the ", part2: "COINS", color: UIColor.gameGoldColor())
 
         //Button frame
         gotItButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width/2.5, height: self.frame.width/7))
-        gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*7 - gotItButton.frame.width/2, y: self.frame.height/1.5)
+        gotItButton.frame.origin = CGPoint(x: (self.frame.midX)*5 - gotItButton.frame.width/2, y: self.frame.height/1.5)
         gotItButton.layer.cornerRadius = 10
         gotItButton.backgroundColor = UIColor(red: 0.59, green: 0.89, blue: 0.56, alpha: 1)
         gotItButton.setTitle("GOT IT", forState: UIControlState.Normal)
@@ -86,7 +86,7 @@ class SingleplayerInstructionsScene: SKScene, UIScrollViewDelegate{
         scrollView.addSubview(firstLabelView)
         scrollView.addSubview(secondLabelView)
         scrollView.addSubview(thirdLabelView)
-        scrollView.addSubview(fourthLabelView)
+        //scrollView.addSubview(fourthLabelView)
         scrollView.addSubview(gotItButton)
         
         self.view?.addSubview(scrollView)

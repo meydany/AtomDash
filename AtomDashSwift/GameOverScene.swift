@@ -97,6 +97,7 @@ class GameOverScene: SKScene {
         coinNode.zPosition = 1
         
         coinTextNode = SKLabelNode()
+        NSUserDefaults().setInteger(NSUserDefaults().integerForKey("coins") + gameScore, forKey: "coins")
         coinTextNode.text = String(NSUserDefaults().integerForKey("coins"))
         coinTextNode.fontName = "Helvetica-Light"
         coinTextNode.fontSize = 30 * Screen.screenWidthRatio

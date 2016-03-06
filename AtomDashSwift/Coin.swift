@@ -20,7 +20,7 @@ class Coin : SKShapeNode {
         CGPathAddArc(mutablePath, nil, 0, 0, CGFloat(10 * Screen.screenWidthRatio), CGFloat(0), CGFloat(M_PI*2), true)
         self.path = mutablePath
         self.lineWidth = 4 * Screen.screenWidthRatio
-        self.strokeColor = UIColor.gameGoldColor()
+        self.strokeColor = UIColor.gameGreenColor()
         self.alpha = 0
         
         physicsBody = SKPhysicsBody(circleOfRadius: self.frame.width/2)

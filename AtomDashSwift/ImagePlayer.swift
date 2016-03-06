@@ -16,14 +16,20 @@ class ImagePlayer : SKSpriteNode {
     
     public var cost: Int?
     
-    init(image: String!, name: String!, playerCost: Int!) {
+    init(image: String!, name: String!, playerCost: Int!, scale: CGFloat) {
         super.init(texture: SKTexture(imageNamed: name), color: UIColor.blackColor(), size: SKTexture(imageNamed: image).size())
         self.cost = playerCost
         
-        let scale = Screen.screenWidthRatio
+        let screenScale = Screen.screenWidthRatio
         //(Player().frame.width / self.frame.width)
-        self.xScale = scale
-        self.yScale = scale
+        self.xScale = screenScale * scale
+        self.yScale = screenScale * scale
+        
+        //self.xScale = scale
+        //self.yScale = scale
+        
+        print("scaele: \(scale) \(screenScale)" )
+        
         createPlayer(name)
 
     }

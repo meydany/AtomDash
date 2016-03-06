@@ -27,22 +27,27 @@ struct Players {
     static var brightRed = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
     static var greenishBlue = UIColor(red: 0, green: 0.8, blue: 0.65, alpha: 1)
     
-    let coloredPlayers: [Player] = [Player(color: UIColor.gameBlueColor(), name: "GameBluePlayer", playerCost: 100),
-                                    Player(color: greenishBlue, name: "GreenishBluePlayer", playerCost: 100),
-                                    Player(color: UIColor.gamePurpleColor(), name: "GamePurplePlayer", playerCost: 100),
-                                    Player(color: pink, name: "PinkPlayer", playerCost: 100),
-                                    Player(color: orange, name: "OrangePlayer", playerCost: 100),
-                                    Player(color: darkPink, name: "DarkPinkPlayer", playerCost: 100),
-                                    Player(color: darkPurple, name: "DarkPurplePlayer", playerCost: 100),
-                                    Player(color: brightRed, name: "BrightRedPlayer", playerCost: 100),
-                                    Player(color: UIColor.gameGoldColor(), name: "GameGoldPlayer", playerCost: 200),
-                                    Player(color: lightBlue, name: "LighBluePlayer", playerCost: 1000),
-                                    Player(color: neonGreen, name: "NeonGreenPlayer", playerCost: 200),
-                                    Player(color: black, name: "BlackPlayer", playerCost: 500)]
+    let coloredPlayers: [Player] =
+    [
+        Player(color: pink, name: "PinkPlayer", playerCost: 100),
+        Player(color: darkPurple, name: "DarkPurplePlayer", playerCost: 100),
+        Player(color: UIColor.gameBlueColor(), name: "GameBluePlayer", playerCost: 100),
+        Player(color: orange, name: "OrangePlayer", playerCost: 100),
+        Player(color: brightRed, name: "BrightRedPlayer", playerCost: 100),
+        
+        
+        
+        
+        Player(color: black, name: "BlackPlayer", playerCost: 250)
+    ]
     
     let imagePlayers: [ImagePlayer] =
-    [ImagePlayer(image: "WorldPlayer", name: "WorldPlayer", playerCost: 100),
-    ImagePlayer(image: "BlackHole", name: "BlackHole", playerCost: 100)]
+    [
+        ImagePlayer(image: "WorldPlayer", name: "WorldPlayer", playerCost: 500, scale: 1),
+        ImagePlayer(image: "BlackHole", name: "BlackHole", playerCost: 500, scale: 1),
+        ImagePlayer(image: "8Ball", name: "8Ball", playerCost: 500, scale: 1)
+    
+    ]
     //put more players here
     
     func getCurrentPlayer () -> SKNode {
@@ -97,7 +102,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         
         NSUserDefaults().setBool(true, forKey: "NotFirstTime")
         
-        shopLabel = SKLabelNode(text: "THEMES")
+        shopLabel = SKLabelNode(text: "SHOP")
         shopLabel.fontName = "DINCondensed-Bold"
         shopLabel.fontSize = 75 * Screen.screenWidthRatio
         shopLabel.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - shopLabel.frame.height - ((1 * self.frame.height)/10)))
@@ -120,15 +125,17 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         coinTextNode.position = CGPoint(x: ((self.frame.midX - (coinTextNode.frame.width/2)) + centerFactor) - buffer, y: (7.75*self.frame.height)/10 - (coinTextNode.frame.height/2))
         coinNode!.position = CGPoint(x: (self.frame.midX + (coinNode.frame.width/2)) + centerFactor + buffer, y: (7.75*self.frame.height)/10)
         
-        menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2*self.frame.height)/10), color: UIColor.gameBlueColor())
-        menuButton.zPosition = ShopLayers.labelLayer
         
-        buyButton = ButtonTemplate(name: "BuyButton", labelName: "BUY", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (4*self.frame.height)/10), color:  UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1))
+        
+        buyButton = ButtonTemplate(name: "BuyButton", labelName: "BUY", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3.5*self.frame.height)/10), color:  UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1))
         buyButton.zPosition = ShopLayers.labelLayer
         
         videoButton = ButtonTemplate(name: "VideoButton", labelName: "EARN COINS", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (3*self.frame.height)/10), color: UIColor.gameGoldColor())
         videoButton.zPosition = ShopLayers.labelLayer
 
+        menuButton = ButtonTemplate(name: "MenuButton", labelName: "MENU", size: CGSize(width: self.frame.width/2, height: self.frame.width/7), position: CGPoint(x: self.frame.midX, y: (2.5*self.frame.height)/10), color: UIColor.gameBlueColor())
+        menuButton.zPosition = ShopLayers.labelLayer
+        
         shopItems = []
         
         addColoredPlayers()
@@ -166,7 +173,7 @@ class ShopScene: SKScene, UIScrollViewDelegate{
         self.addChild(coinNode)
         self.addChild(menuButton)
         self.addChild(buyButton)
-        self.addChild(videoButton)
+        //self.addChild(videoButton)
     }
     
     override func update(currentTime: CFTimeInterval) {
